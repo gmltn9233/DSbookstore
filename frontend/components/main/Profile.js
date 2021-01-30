@@ -2,10 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { StyleSheet, View, Text, Image, FlatList, Button, TouchableOpacity, Alert,} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import MyBookItem from "./Profile/MyBookItem";
+import * as MailComposer from 'expo-mail-composer';
+import {WebView} from "react-native-webview";
 
 import firebase from 'firebase'
 require('firebase/firestore')
 import { connect } from 'react-redux'
+
+
 
 function Profile(props) {
     const [userPosts, setUserPosts] = useState([]);
@@ -88,6 +92,26 @@ function Profile(props) {
     const onLogout = () => {
         firebase.auth().signOut();
     }
+
+    const getemail = async() => {
+      try{
+        await MailComposer.isAvailableAsync();
+        console.log("help-outline");
+        MailComposer.composeAsync({
+          recipients:['dskminj@naver.com'],
+          subject:'데사책방문의',
+          body:'문의내용'
+        });
+      }catch(error){
+        Alert.alert("mail 기능 사용 불가", "ㅠ-ㅠ");
+      }
+    };
+
+    /*const Noti=()=>{
+      return(
+        <webview source={{uri:'https://naver.com'}}/>
+      )
+    };*/
 
     if (user === null) {
         return <View />
@@ -214,9 +238,7 @@ function Profile(props) {
               <Ionicons
                 name="alert-outline"
                 size={26}
-                onPress={() => {
-                  console.log("alert-outline");
-                }}
+                onPress={()=>{console.log("alert-outline")}}
               />
             </TouchableOpacity>
             <Text>이용안내</Text>
@@ -238,9 +260,7 @@ function Profile(props) {
               <Ionicons
                 name="help-outline"
                 size={26}
-                onPress={() => {
-                  console.log("help-outline");
-                }}
+                onPress={()=>getemail()}
               />
             </TouchableOpacity>
             <Text>Q&A</Text>
