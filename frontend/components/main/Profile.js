@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, View, Text, Image, FlatList, Button, TouchableOpacity, Alert,} from "react-native";
+import { StyleSheet, View, Text, Image, FlatList, Button, TouchableOpacity, Alert, Linking,} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import MyBookItem from "./Profile/MyBookItem";
 import * as MailComposer from 'expo-mail-composer';
@@ -8,7 +8,6 @@ import {WebView} from "react-native-webview";
 import firebase from 'firebase'
 require('firebase/firestore')
 import { connect } from 'react-redux'
-
 
 
 function Profile(props) {
@@ -107,11 +106,7 @@ function Profile(props) {
       }
     };
 
-    /*const Noti=()=>{
-      return(
-        <webview source={{uri:'https://naver.com'}}/>
-      )
-    };*/
+
 
     if (user === null) {
         return <View />
@@ -238,7 +233,7 @@ function Profile(props) {
               <Ionicons
                 name="alert-outline"
                 size={26}
-                onPress={()=>{console.log("alert-outline")}}
+                onPress={()=>Linking.openURL('https://naver.com')}
               />
             </TouchableOpacity>
             <Text>이용안내</Text>
