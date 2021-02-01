@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import { Ionicons } from '@expo/vector-icons';
 import firebase from 'firebase'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -25,11 +25,16 @@ export class Main extends Component {
     }
     render() {
         return (
-            <Tab.Navigator initialRouteName="Home" labeled={false}>
+            <Tab.Navigator
+                initialRouteName="Home"
+                labeled={false}
+                activeColor='#303D74'
+                inactiveColor='#d1cece'
+                barStyle={{ backgroundColor: 'white', borderTopWidth:0.2, borderTopColor:'lightgray'}}>
                 <Tab.Screen name="Home" component={HomeScreen}
                     options={{
                         tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="home" color={color} size={26} />
+                            <Ionicons name = 'ios-home' size = {26} style = {{color: color}}/>
                         ),
                     }} />
                 
@@ -42,13 +47,13 @@ export class Main extends Component {
                     })}
                     options={{
                         tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="plus-box" color={color} size={26} />
+                            <Ionicons name = 'add-outline' size = {26} style = {{color:color}}/>
                         ),
                     }} />
                 <Tab.Screen name="Like" component={LikeScreen} navigation={this.props.navigation}
                     options={{
                         tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="heart-outline" color={color} size={26} />
+                            <Ionicons name = 'heart-outline' size = {26} style = {{color:color}}/>
                         ),
                     }} />
                 <Tab.Screen name="Profile" component={ProfileScreen} 
@@ -59,7 +64,7 @@ export class Main extends Component {
                     }})}
                     options={{
                         tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="account-circle" color={color} size={26} />
+                            <Ionicons name = 'person' size = {26} style = {{color:color}}/>
                         ),
                     }} />
             </Tab.Navigator>
