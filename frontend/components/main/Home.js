@@ -51,11 +51,13 @@ function Home(props) {
     return (
       <Container>
         <Header searchBar style={styles.header}>
+          <Left>
+              <Button transparent onPress = {props.navigation.openDrawer}>
+                  <Ionicons name="reorder-four-outline" size={30} style={{color:"#303D74"}}/>
+              </Button>
+          </Left>
           <Item style={styles.search}>
-            <Ionicons
-              name="search-outline"
-              style={{ marginLeft: 10 }}
-            ></Ionicons>
+            <Ionicons name="search-outline" style={{ marginLeft: 10 }} />
             <Input
               style={{ marginLeft: 3 }}
               placeholder="검색"
@@ -151,6 +153,7 @@ const styles = StyleSheet.create({
   search: {
     marginRight: 10,
     backgroundColor: "#ededed",
+    flex:2
   },
   content: {
     paddingLeft: 10,

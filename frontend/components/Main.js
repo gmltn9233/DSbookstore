@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { fetchUser, fetchUserPosts, fetchUserAll, clearData } from '../redux/actions/index'
 
-import HomeScreen from './main/Home'
+import HomeScreen from './main/HomeMain'
 import ProfileScreen from './main/Profile'
 import LikeScreen from './main/Like'
 
