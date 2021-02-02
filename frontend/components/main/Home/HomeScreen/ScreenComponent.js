@@ -3,71 +3,25 @@ import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity, RefreshContr
 import {Container, Header, Button, Left, Body, Right} from 'native-base'
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 
-import BookDetail from "../../BookDetail";
-import BookItem from '..//BookItem';
+const ScreenComponent = (
+    openDrawer,
+    setModalVisible,
+    posts,
+    onLikePress,
+    onDislikePress,
+    handleRefresh,
+    refreshing
 
-import firebase from 'firebase'
-require('firebase/firestore')
-import { connect } from 'react-redux'
-
-function NonMajorScreen(props) {
-    const [text, setText] = useState();
-    const [posts, setPosts] = useState([]);
-    const [modalVisible, setModalVisible] = useState(false);
-    const [refreshing,setrefreshing]=useState(false);
-    
-    const handleRefresh=()=>{
-      setrefreshing(refreshing==true),
-      /*문법상 setrefresing(true)가 맞는것같은데 저렇게 둘 경우 무한으로 빙글빙글돔..*/
-      ()=>{componentDidMount};
-    }
+) => {
     const componentDidMound=()=>{
-      //데이터불러오기
-      //setrefreshing(false);
-    }
-
-    useEffect(() => {
-      if (
-        props.usersAllLoaded == props.userAll.length &&
-        props.userAll.length !== 0
-      ) {
-        props.feed.sort(function (x, y) {
-          return x.creation - y.creation;
-        });
-        
-        const feedObjArray = props.feed.filter(
-            feedObj => feedObj.category === "비전공"
-        )
-        setPosts(feedObjArray);
-        //console.log("출력", posts);
+        console.log(posts);
       }
-    }, [props.usersAllLoaded, props.feed]);
 
-    const onLikePress = (userId, postId) => {
-        firebase.firestore()
-            .collection("posts")
-            .doc(userId)
-            .collection("userPosts")
-            .doc(postId)
-            .collection("likes")
-            .doc(firebase.auth().currentUser.uid)
-            .set({})
-    }
-    const onDislikePress = (userId, postId) => {
-        firebase.firestore()
-            .collection("posts")
-            .doc(userId)
-            .collection("userPosts")
-            .doc(postId)
-            .collection("likes")
-            .doc(firebase.auth().currentUser.uid)
-            .delete()
-    }
-    return (
-      <Container>
+    return(
+        <Container>
         <Header searchBar style={styles.header}>
             <Left>
-                <Button transparent onPress={props.navigation.openDrawer}>
+                <Button transparent onPress={openDrawer}>
                     <Ionicons name = "reorder-four-outline" 
                         size = {30}
                         style = {{color:"#303D74"}}/>
@@ -142,77 +96,49 @@ function NonMajorScreen(props) {
           />
         </View>
       </Container>
-    );
+    )
 }
 
 const styles = StyleSheet.create({
-  containerInfo: {
-    margin: 20,
-  },
-  containerList: {
-    marginTop:20,
-    flex: 1,
-  },
-  containerImage: {
-    flex: 1 / 3,
-  },
-  image: {
-    flex: 1,
-    aspectRatio: 1 / 1,
-  },
-  header: {
-    backgroundColor: "gray",
-  },
-  search: {
-    marginRight: 10,
-    backgroundColor: "#ededed",
-    flex:2
-  },
-  content: {
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 30,
-    //backgroundColor: '#d6ca1a',
-  },
-  ItemStyle: {
-    // borderBottomColor:'lightgrey',
-    // borderBottomWidth:1,
-    alignItems: "center",
-    justifyContent: "flex-start",
-    flexDirection: "row",
-    paddingLeft: 10,
-  },
-  bookImage: {
-    width: 90,
-    marginBottom: 5,
-    height: 120,
-  },
-  bookDescribe: {
-    paddingLeft: 20,
-    flexDirection: "column",
-    fontSize: 20,
-  },
-  bookDescribe2: {
-    fontSize: 20,
-    marginBottom: 10,
-  },
-  bookDescribe3: {
-    marginLeft: 10,
-    fontSize: 15,
-    marginBottom: 3,
-  },
-  button: {
-    flex: 0.9,
-    alignItems: "flex-end",
-  },
-  icontext: {
-    flexDirection: "row",
-  },
-});
-const mapStateToProps = (store) => ({
-  currentUser: store.userState.currentUser,
-  userAll: store.userState.userAll,
-  feed: store.usersState.feed,
-  usersAllLoaded: store.usersState.usersAllLoaded,
-});
-export default connect(mapStateToProps, null)(NonMajorScreen);
+    containerList: {
+      marginTop:20,
+      flex: 1,
+    },
+    header: {
+      backgroundColor: "gray",
+    },
+    ItemStyle: {
+      alignItems: "center",
+      justifyContent: "flex-start",
+      flexDirection: "row",
+      paddingLeft: 10,
+    },
+    bookImage: {
+      width: 90,
+      marginBottom: 5,
+      height: 120,
+    },
+    bookDescribe: {
+      paddingLeft: 20,
+      flexDirection: "column",
+      fontSize: 20,
+    },
+    bookDescribe2: {
+      fontSize: 20,
+      marginBottom: 10,
+    },
+    bookDescribe3: {
+      marginLeft: 10,
+      fontSize: 15,
+      marginBottom: 3,
+    },
+    button: {
+      flex: 0.9,
+      alignItems: "flex-end",
+    },
+    icontext: {
+      flexDirection: "row",
+    },
+  });
+
+export default ScreenComponent;
