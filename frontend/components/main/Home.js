@@ -5,7 +5,7 @@ import { Ionicons, FontAwesome } from "@expo/vector-icons";
 
 import BookDetail from "./BookDetail";
 import BookItem from './Home/BookItem';
-
+import _ from 'lodash';
 import firebase from 'firebase'
 require('firebase/firestore')
 import { connect } from 'react-redux'
@@ -15,7 +15,7 @@ function Home(props) {
     const [posts, setPosts] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
     const [refreshing,setrefreshing]=useState(false);
-    
+    const [nul,setnul]=useState('');
     const handleRefresh=()=>{
       setrefreshing(refreshing==true),
       /*문법상 setrefresing(true)가 맞는것같은데 저렇게 둘 경우 무한으로 빙글빙글돔..*/
@@ -25,6 +25,29 @@ function Home(props) {
       //데이터불러오기
       //setrefreshing(false);
     }
+    useEffect(() => {
+      if (
+        props.usersAllLoaded == props.userAll.length &&
+        props.userAll.length !== 0
+      ) {
+        props.feed.sort(function (x, y) {
+          return x.creation - y.creation;
+        });
+        if(text!==nul){
+          
+        const feedObjArray=props.feed.filter(
+          feedObj=>_.includes(feedObj,text)
+        );
+          setPosts(feedObjArray);
+          console.log(text+"검색중");
+        }
+        else{
+          setPosts(props.feed);
+          console.log("검색중아님")
+        }
+        //console.log(posts);
+      }
+    }, [text]);
 
     useEffect(() => {
       if (
@@ -38,6 +61,7 @@ function Home(props) {
         //console.log(posts);
       }
     }, [props.usersAllLoaded, props.feed]);
+
 
     const onLikePress = (userId, postId) => {
         firebase.firestore()
