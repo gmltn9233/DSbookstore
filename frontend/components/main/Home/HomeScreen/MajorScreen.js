@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity, RefreshControl,} from "react-native";
+import { StyleSheet, View, FlatList, RefreshControl,} from "react-native";
 import {Container, Header, Button, Left, Body, Right} from 'native-base'
-import { Ionicons, FontAwesome } from "@expo/vector-icons";
+import { Ionicons} from "@expo/vector-icons";
 
-import BookDetail from "../../BookDetail";
 import BookItem from '..//BookItem';
 
 import firebase from 'firebase'
@@ -11,9 +10,7 @@ require('firebase/firestore')
 import { connect } from 'react-redux'
 
 function MajorScreen(props) {
-    const [text, setText] = useState();
     const [posts, setPosts] = useState([]);
-    const [modalVisible, setModalVisible] = useState(false);
     const [refreshing,setrefreshing]=useState(false);
     
     const handleRefresh=()=>{
@@ -39,7 +36,6 @@ function MajorScreen(props) {
             feedObj => feedObj.category === "전공"
         )
         setPosts(feedObjArray);
-        //console.log("출력", posts);
       }
     }, [props.usersAllLoaded, props.feed]);
 
@@ -83,58 +79,16 @@ function MajorScreen(props) {
             horizontal={false}
             data={posts}
             renderItem={({ item }) => (
-              <View
-                style={{
-                  borderBottomColor: "lightgrey",
-                  borderBottomWidth: 1,
-                }}
-              >
-                <TouchableOpacity
-                  style={styles.ItemStyle}
-                  onPress={() => setModalVisible(true)}
-                >
-                  <BookDetail
-                    visible={modalVisible}
-                    closeModal={() => setModalVisible(false)}
-                    bookName={item.title}
-                    className={"item.className"}
-                    price={item.price}
-                    publisher={"this.props.publisher"}
-                    bookCondition={"this.props.bookCondition"}
-                    img={{ uri: item.downloadURL }}
-                    phone={"item.user.phone"}
-                    category={item.category}
-                  />
-                  <Image
-                    style={styles.bookImage}
-                    source={{ uri: item.downloadURL }}
-                  />
-                  <View style={styles.bookDescribe}>
-                    <Text style={styles.bookDescribe2}>{item.title}</Text>
-                    <View style={styles.icontext}>
-                      <FontAwesome name="book" paddingRight="10" />
-                      <Text style={styles.bookDescribe3}>{item.category}</Text>
-                    </View>
-                    <View style={styles.icontext}>
-                      <FontAwesome name="won" paddingRight="10" />
-                      <Text style={styles.bookDescribe3}>{item.price}</Text>
-                    </View>
-                  </View>
-                  <View style={styles.button}>
-                    {item.currentUserLike ? (
-                      <Button
-                        title="Dislike"
-                        onPress={() => onDislikePress(item.user.uid, item.id)}
-                      />
-                    ) : (
-                      <Button
-                        title="Like"
-                        onPress={() => onLikePress(item.user.uid, item.id)}
-                      />
-                    )}
-                  </View>
-                </TouchableOpacity>
-              </View>
+                <BookItem
+                bookName = {item.title}
+                className = {item.lecture}
+                price = {item.price}
+                publisher = {item.publisher}
+                bookCondition = {item.damage}
+                img = {item.downloadURL}
+                phone = {item.phoneNumber}
+                category = {item.category}
+               />
             )}
             refreshControl={<RefreshControl refreshing={refreshing}
                                             onRefresh={handleRefresh}/>}
@@ -146,68 +100,13 @@ function MajorScreen(props) {
 }
 
 const styles = StyleSheet.create({
-  containerInfo: {
-    margin: 20,
-  },
   containerList: {
     marginTop:20,
     flex: 1,
   },
-  containerImage: {
-    flex: 1 / 3,
-  },
-  image: {
-    flex: 1,
-    aspectRatio: 1 / 1,
-  },
   header: {
     backgroundColor: "gray",
-  },
-  search: {
-    marginRight: 10,
-    backgroundColor: "#ededed",
-    flex:2
-  },
-  content: {
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 30,
-    //backgroundColor: '#d6ca1a',
-  },
-  ItemStyle: {
-    // borderBottomColor:'lightgrey',
-    // borderBottomWidth:1,
-    alignItems: "center",
-    justifyContent: "flex-start",
-    flexDirection: "row",
-    paddingLeft: 10,
-  },
-  bookImage: {
-    width: 90,
-    marginBottom: 5,
-    height: 120,
-  },
-  bookDescribe: {
-    paddingLeft: 20,
-    flexDirection: "column",
-    fontSize: 20,
-  },
-  bookDescribe2: {
-    fontSize: 20,
-    marginBottom: 10,
-  },
-  bookDescribe3: {
-    marginLeft: 10,
-    fontSize: 15,
-    marginBottom: 3,
-  },
-  button: {
-    flex: 0.9,
-    alignItems: "flex-end",
-  },
-  icontext: {
-    flexDirection: "row",
-  },
+  }
 });
 const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser,

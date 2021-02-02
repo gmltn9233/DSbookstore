@@ -3,25 +3,29 @@ import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity, RefreshContr
 import {Container, Header, Button, Left, Body, Right} from 'native-base'
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 
-const ScreenComponent = (
-    openDrawer,
-    setModalVisible,
-    posts,
-    onLikePress,
-    onDislikePress,
-    handleRefresh,
-    refreshing
+const ScreenComponent = (props, posts) => {
+    const [modalVisible, setModalVisible] = useState(false);
+    const [refreshing,setrefreshing]=useState(false);
 
-) => {
-    const componentDidMound=()=>{
+    useEffect(() => {
         console.log(posts);
+    }, []);
+
+    const handleRefresh=()=>{
+      setrefreshing(refreshing==true),
+      /*문법상 setrefresing(true)가 맞는것같은데 저렇게 둘 경우 무한으로 빙글빙글돔..*/
+      ()=>{componentDidMount};
+    }
+    const componentDidMound=()=>{
+        //데이터불러오기
+        //setrefreshing(false);
       }
 
     return(
         <Container>
         <Header searchBar style={styles.header}>
             <Left>
-                <Button transparent onPress={openDrawer}>
+                <Button transparent onPress={props.openDrawer}>
                     <Ionicons name = "reorder-four-outline" 
                         size = {30}
                         style = {{color:"#303D74"}}/>
