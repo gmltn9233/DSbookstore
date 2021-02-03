@@ -29,7 +29,17 @@ function Profile(props) {
     const onLogout = () => {
         firebase.auth().signOut();
     }
+    const EmptyListMessage=()=>{
+      return(
 
+          <View style={{alignItems:'center'}}>
+          <Ionicons name="camera-outline"
+                size={100}/>
+          <Text style={{fontSize:30}}>게시물 없음</Text>
+        </View>
+
+      )
+    }
     const getemail = async() => {
       try{
         await MailComposer.isAvailableAsync();
@@ -111,6 +121,7 @@ function Profile(props) {
             )}
             ListHeaderComponent={<Text></Text>}
             ListFooterComponent={<Text></Text>}
+            ListEmptyComponent={EmptyListMessage}
           />
         </View>
         <View

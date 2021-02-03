@@ -21,6 +21,18 @@ function Like(props) {
   const [posts, setPosts] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
 
+  const EmptyListMessage=()=>{
+    return(
+
+        <View style={{alignItems:'center'}}>
+        <Ionicons name="camera-outline"
+              size={100}/>
+        <Text style={{fontSize:30}}>게시물 없음</Text>
+      </View>
+
+    )
+  }
+
   useEffect(() => {
     if (true) {
       props.feed.sort(function (x, y) {
@@ -55,6 +67,7 @@ function Like(props) {
           numColumns={1}
           horizontal={false}
           data={posts}
+          ListEmptyComponent={EmptyListMessage}
           renderItem={({ item }) => (
             <View
               style={{

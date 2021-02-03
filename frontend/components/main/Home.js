@@ -17,6 +17,18 @@ function Home(props) {
     const [refreshing,setrefreshing]=useState(false);
     const [nul,setnul]=useState('');
 
+    const EmptyListMessage=()=>{
+      return(
+
+          <View style={{alignItems:'center'}}>
+          <Ionicons name="camera-outline"
+                size={100}/>
+          <Text style={{fontSize:30}}>게시물 없음</Text>
+        </View>
+
+      )
+    }
+
     const handleRefresh=()=>{
       setrefreshing(refreshing==true),
       /*문법상 setrefresing(true)가 맞는것같은데 저렇게 둘 경우 무한으로 빙글빙글돔..*/
@@ -159,7 +171,7 @@ function Home(props) {
             )}
             refreshControl={<RefreshControl refreshing={refreshing}
                                             onRefresh={handleRefresh}/>}
-
+            ListEmptyComponent={EmptyListMessage}
           />
         </View>
       </Container>
