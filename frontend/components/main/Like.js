@@ -22,40 +22,32 @@ function Like(props) {
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
-    if (
-      props.usersAllLoaded == props.userAll.length &&
-      props.userAll.length !== 0
-    ) {
+    if (true) {
       props.feed.sort(function (x, y) {
         return x.creation - y.creation;
       });
       setPosts(props.feed);
-      //console.log(posts);
     }
-  }, [props.usersAllLoaded, props.feed]);
+  }, [props.feed]);
 
-  const onLikePress = (userId, postId) => {
-    firebase
-      .firestore()
-      .collection("posts")
-      .doc(userId)
-      .collection("userPosts")
-      .doc(postId)
-      .collection("likes")
-      .doc(firebase.auth().currentUser.uid)
-      .set({});
-  };
-  const onDislikePress = (userId, postId) => {
-    firebase
-      .firestore()
-      .collection("posts")
-      .doc(userId)
-      .collection("userPosts")
-      .doc(postId)
-      .collection("likes")
-      .doc(firebase.auth().currentUser.uid)
-      .delete();
-  };
+    const onLikePress = (postId) => {
+      firebase
+        .firestore()
+        .collection("posts")
+        .doc(postId)
+        .collection("likes")
+        .doc(firebase.auth().currentUser.uid)
+        .set({});
+    };
+    const onDislikePress = (postId) => {
+      firebase
+        .firestore()
+        .collection("posts")
+        .doc(postId)
+        .collection("likes")
+        .doc(firebase.auth().currentUser.uid)
+        .delete();
+    };
   return (
     <View style={styles.container}>
       <View style={styles.containerList}>
@@ -191,8 +183,6 @@ const styles = StyleSheet.create({
 });
 const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser,
-  userAll: store.userState.userAll,
   feed: store.usersState.feed,
-  usersAllLoaded: store.usersState.usersAllLoaded,
 });
 export default connect(mapStateToProps, null)(Like);

@@ -1,9 +1,8 @@
-import { USER_STATE_CHANGE, USER_POSTS_STATE_CHANGE, USER_ALL_STATE_CHANGE, CLEAR_DATA } from "../constants"
+import { USER_STATE_CHANGE, USER_POSTS_STATE_CHANGE, CLEAR_DATA } from "../constants"
 
 const initialState = {
     currentUser: null,
     posts: [],
-    userAll: [],
 }
 
 export const user = (state = initialState, action) => {
@@ -18,11 +17,6 @@ export const user = (state = initialState, action) => {
                 ...state,
                 posts: action.posts
             }
-        case USER_ALL_STATE_CHANGE:
-            return {
-                ...state,
-                userAll: action.userAll
-            } 
         case CLEAR_DATA:
             return initialState
         default:

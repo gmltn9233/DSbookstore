@@ -13,7 +13,6 @@ import { connect } from 'react-redux'
 function Profile(props) {
     const [userPosts, setUserPosts] = useState([]);
     const [user, setUser] = useState(null);
-    /* const [following, setFollowing] = useState(false) */
 
     useEffect(() => {
         const { currentUser, posts } = props;
@@ -23,71 +22,10 @@ function Profile(props) {
             setUserPosts(posts)
         }
         else {
-            firebase.firestore()
-                .collection("users")
-                .doc(props.route.params.uid)
-                .get()
-                .then((snapshot) => {
-                    if (snapshot.exists) {
-                        setUser(snapshot.data());
-                    }
-                    else {
-                        console.log('profile does not exist')
-                    }
-                })
-            firebase.firestore()
-                .collection("posts")
-                .doc(props.route.params.uid)
-                .collection("userPosts")
-                .orderBy("creation", "asc")
-                .get()
-                .then((snapshot) => {
-                    let posts = snapshot.docs.map(doc => {
-                        const data = doc.data();
-                        const id = doc.id;
-                        return { id, ...data }
-                    })
-                    setUserPosts(posts)
-                })
+          console.log("ProfileError")
         }
+    }, [props.route.params.uid])
 
-       /*  if (props.following.indexOf(props.route.params.uid) > -1) {
-            setFollowing(true);
-        } else {
-            setFollowing(false);
-        } */
-
-    }, [props.route.params.uid /* , props.following */])
-
-    /* const onFollow = () => {
-        firebase.firestore()
-            .collection("following")
-            .doc(firebase.auth().currentUser.uid)
-            .collection("userFollowing")
-            .doc(props.route.params.uid)
-            .set({})
-    }
-    const onUnfollow = () => {
-        firebase.firestore()
-            .collection("following")
-            .doc(firebase.auth().currentUser.uid)
-            .collection("userFollowing")
-            .doc(props.route.params.uid)
-            .delete()
-    } */
-
-    /* const onChangeName = () => {
-      Alert.alert(
-        "이름바꾸기",
-        "이름을 수정하시겠습니까?",
-        [
-          { text: "아니오", onPress: () => null },
-          { text: "예", onPress: () => null },
-        ],
-        { cancelable: true }
-      );
-    };
-     */
     const onLogout = () => {
         firebase.auth().signOut();
     }
@@ -105,8 +43,6 @@ function Profile(props) {
         Alert.alert("mail 기능 사용 불가", "ㅠ-ㅠ");
       }
     };
-
-
 
     if (user === null) {
         return <View />
@@ -158,17 +94,6 @@ function Profile(props) {
               <Text style={{ marginLeft: 5 }}>내가 쓴 글</Text>
             </View>
           </View>
-          {/* {props.route.params.uid !== firebase.auth().currentUser.uid ? (
-            <View>
-              {following ? (
-                <Button title="Following" onPress={() => onUnfollow()} />
-              ) : (
-                <Button title="Follow" onPress={() => onFollow()} />
-              )}
-            </View>
-          ) : (
-            <Button title="이름 바꾸기" onPress={() => onChangeName()} />
-          )} */}
         </View>
         <View style={{ flex: 1 }}>
           <FlatList
@@ -287,6 +212,5 @@ const styles = StyleSheet.create({
 const mapStateToProps = (store) => ({
     currentUser: store.userState.currentUser,
     posts: store.userState.posts,
-    /* following: store.userState.following */
 })
 export default connect(mapStateToProps, null)(Profile);

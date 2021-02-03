@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import firebase from 'firebase'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { fetchUser, fetchUserPosts, fetchUserAll, clearData } from '../redux/actions/index'
+import { fetchUser, fetchUserPosts, fetchUsersPosts, clearData } from '../redux/actions/index'
 
 import HomeScreen from './main/HomeMain'
 import ProfileScreen from './main/Profile'
@@ -21,7 +21,7 @@ export class Main extends Component {
         this.props.clearData();
         this.props.fetchUser();
         this.props.fetchUserPosts();
-        this.props.fetchUserAll();
+        this.props.fetchUsersPosts();
     }
     render() {
         return (
@@ -77,7 +77,7 @@ const mapStateToProps = (store) => ({
 })
 const mapDispatchProps = (dispatch) =>
   bindActionCreators(
-    { fetchUser, fetchUserPosts, fetchUserAll, clearData },
+    { fetchUser, fetchUserPosts, fetchUsersPosts,clearData },
     dispatch
   );
 

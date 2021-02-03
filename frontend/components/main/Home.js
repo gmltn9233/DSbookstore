@@ -16,6 +16,7 @@ function Home(props) {
     const [modalVisible, setModalVisible] = useState(false);
     const [refreshing,setrefreshing]=useState(false);
     const [nul,setnul]=useState('');
+
     const handleRefresh=()=>{
       setrefreshing(refreshing==true),
       /*문법상 setrefresing(true)가 맞는것같은데 저렇게 둘 경우 무한으로 빙글빙글돔..*/
@@ -32,10 +33,7 @@ function Home(props) {
       return text.toString().toLowerCase();
     }
     useEffect(() => {
-      if (
-        props.usersAllLoaded == props.userAll.length &&
-        props.userAll.length !== 0
-      ) {
+      if (true) {
         props.feed.sort(function (x, y) {
           return x.creation - y.creation;
         });
@@ -55,34 +53,27 @@ function Home(props) {
     }, [text]);
 
     useEffect(() => {
-      if (
-        props.usersAllLoaded == props.userAll.length &&
-        props.userAll.length !== 0
-      ) {
+      if (true) {
         props.feed.sort(function (x, y) {
           return x.creation - y.creation;
         });
         setPosts(props.feed);
         //console.log(posts);
       }
-    }, [props.usersAllLoaded, props.feed]);
+    }, [props.feed]);
 
 
-    const onLikePress = (userId, postId) => {
+    const onLikePress = (postId) => {
         firebase.firestore()
             .collection("posts")
-            .doc(userId)
-            .collection("userPosts")
             .doc(postId)
             .collection("likes")
             .doc(firebase.auth().currentUser.uid)
             .set({})
     }
-    const onDislikePress = (userId, postId) => {
+    const onDislikePress = (postId) => {
         firebase.firestore()
             .collection("posts")
-            .doc(userId)
-            .collection("userPosts")
             .doc(postId)
             .collection("likes")
             .doc(firebase.auth().currentUser.uid)
@@ -154,12 +145,12 @@ function Home(props) {
                     {item.currentUserLike ? (
                       <Button
                         title="Dislike"
-                        onPress={() => onDislikePress(item.user.uid, item.id)}
+                        onPress={() => onDislikePress(item.id)}
                       />
                     ) : (
                       <Button
                         title="Like"
-                        onPress={() => onLikePress(item.user.uid, item.id)}
+                        onPress={() => onLikePress(item.id)}
                       />
                     )}
                   </View>
@@ -241,8 +232,6 @@ const styles = StyleSheet.create({
 });
 const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser,
-  userAll: store.userState.userAll,
   feed: store.usersState.feed,
-  usersAllLoaded: store.usersState.usersAllLoaded,
 });
 export default connect(mapStateToProps, null)(Home);

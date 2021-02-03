@@ -29,10 +29,7 @@ function NonMajorScreen(props) {
     }
 
     useEffect(() => {
-      if (
-        props.usersAllLoaded == props.userAll.length &&
-        props.userAll.length !== 0
-      ) {
+      if (true) {
         props.feed.sort(function (x, y) {
           return x.creation - y.creation;
         });

@@ -53,10 +53,8 @@ export default function Add({navigation}) {
         const uri = image;
         const childPath = `post/${firebase.auth().currentUser.uid}/${Math.random().toString(36)}`;
         //console.log(childPath)
-
         const response = await fetch(uri);
         const blob = await response.blob();
-
         const task = firebase
             .storage()
             .ref()
@@ -66,7 +64,6 @@ export default function Add({navigation}) {
         const taskProgress = snapshot => {
             console.log(`transferred: ${snapshot.bytesTransferred}`)
         }
-
         const taskCompleted = () => {
             task.snapshot.ref.getDownloadURL().then((snapshot) => {
                 savePostData(snapshot);
@@ -74,38 +71,39 @@ export default function Add({navigation}) {
                 console.log("Task Completed")
             })
         }
-
         const taskError = snapshot => {
             console.log(snapshot)
         }
-
         task.on("state_changed", taskProgress, taskError, taskCompleted);
     }
 
     const savePostData = (downloadURL) => {
-
         firebase
           .firestore()
           .collection("posts")
-          .doc(firebase.auth().currentUser.uid)
-          .collection("userPosts")
           .add({
-            downloadURL,
-            title,
-            category,
-            price,
-            publisher,
-            lecture,
-            damage,
-            phoneNumber,
-            likesCount: 0,
+            userId: firebase.auth().currentUser.uid,
+            downloadURL,title,category,price,publisher,lecture,damage,phoneNumber,likesCount: 0,
             creation: firebase.firestore.FieldValue.serverTimestamp(),
           })
-          .then(function () {
-            navigation.navigate("Main");
-          })
-          .then(alertDone());
+          .then(saveUsersPostData(downloadURL));
     }
+    const saveUsersPostData = (downloadURL) => {
+      firebase
+        .firestore()
+        .collection("users")
+        .doc(firebase.auth().currentUser.uid)
+        .collection("userPosts")
+        .add({
+          userId: firebase.auth().currentUser.uid,
+          downloadURL,title,category,price,publisher,lecture,damage,phoneNumber,likesCount: 0,
+          creation: firebase.firestore.FieldValue.serverTimestamp(),
+        })
+        .then(function () {
+          navigation.navigate("Main");
+        })
+        .then(alertDone());
+    };
 
   if (hasGalleryPermission === false) {
     return <Text>No access to Gallery</Text>;
