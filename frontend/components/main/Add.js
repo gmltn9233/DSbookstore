@@ -29,6 +29,14 @@ export default function Add({navigation}) {
     })();
   }, []);
 
+  const alertDone = () => {
+     Alert.alert(
+       "축하합니다!",
+       "게시글이 정상적으로 업로드 되었습니다.",
+       [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+       { cancelable: false }
+     );
+  }
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -76,24 +84,27 @@ export default function Add({navigation}) {
 
     const savePostData = (downloadURL) => {
 
-        firebase.firestore()
-            .collection('posts')
-            .doc(firebase.auth().currentUser.uid)
-            .collection("userPosts")
-            .add({
-                downloadURL,
-                title,
-                category,
-                price,
-                publisher,
-                lecture,
-                damage,
-                phoneNumber,
-                likesCount: 0,
-                creation: firebase.firestore.FieldValue.serverTimestamp()
-            }).then((function () {
-                props.navigation.popToTop()
-            }))
+        firebase
+          .firestore()
+          .collection("posts")
+          .doc(firebase.auth().currentUser.uid)
+          .collection("userPosts")
+          .add({
+            downloadURL,
+            title,
+            category,
+            price,
+            publisher,
+            lecture,
+            damage,
+            phoneNumber,
+            likesCount: 0,
+            creation: firebase.firestore.FieldValue.serverTimestamp(),
+          })
+          .then(function () {
+            navigation.navigate("Main");
+          })
+          .then(alertDone());
     }
 
   if (hasGalleryPermission === false) {

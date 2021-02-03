@@ -19,7 +19,7 @@ function Home(props) {
     const handleRefresh=()=>{
       setrefreshing(refreshing==true),
       /*문법상 setrefresing(true)가 맞는것같은데 저렇게 둘 경우 무한으로 빙글빙글돔..*/
-      ()=>{componentDidMount};
+      console.log("handleRefresh")
     }
     const componentDidMound=()=>{
       //데이터불러오기
