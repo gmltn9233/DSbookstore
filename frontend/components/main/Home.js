@@ -25,6 +25,12 @@ function Home(props) {
       //데이터불러오기
       //setrefreshing(false);
     }
+    function toUpperText(text){
+      return text.toString().toUpperCase();
+    }
+    function toLowerText(text){
+      return text.toString().toLowerCase();
+    }
     useEffect(() => {
       if (
         props.usersAllLoaded == props.userAll.length &&
@@ -34,12 +40,11 @@ function Home(props) {
           return x.creation - y.creation;
         });
         if(text!==nul){
-          
         const feedObjArray=props.feed.filter(
-          feedObj=>_.includes(feedObj,text)
+          feedObj=>_.includes(_.toLower(feedObj.title),_.toLower(text))
         );
           setPosts(feedObjArray);
-          console.log(text+"검색중");
+          console.log(text);
         }
         else{
           setPosts(props.feed);
