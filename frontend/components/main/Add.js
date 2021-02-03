@@ -132,7 +132,7 @@ export default function Add({navigation}) {
 
               containerStyle={{height: 45}}
               itemStyle={{justifyContent: 'flex-start'}}
-              onChangeItem={(category) => setCategory(category)}
+              onChangeItem={(category) => setCategory(category.label)}
             />
 
             <TextInput
