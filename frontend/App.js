@@ -4,7 +4,7 @@ LogBox.ignoreAllLogs();
 
 import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
-import { View, Text } from 'react-native'
+import { View, Text, Image } from 'react-native'
 import * as firebase from 'firebase'
 
 import { Provider } from 'react-redux'
@@ -61,7 +61,11 @@ export class App extends Component {
     if (!loaded) {
       return (
         <View style={{ flex: 1, justifyContent: 'center' }}>
-          <Text>Loading</Text>
+          <Image
+            source={require("./assets/DS_white.png")}
+            size={50}
+            style={{backgroundcolor: '#303D74'}}
+          />
         </View>
       )
     }
