@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Button, TextInput, Image, Alert, ScrollView} from "react-native";
 import { Header, Left, Body } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
-//import DropDownPicker from "react-native-dropdown-picker";
+import DropDownPicker from "react-native-dropdown-picker";
 
 import { Camera } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
@@ -78,15 +78,15 @@ export default function Add({navigation}) {
     }
 
     const savePostData = (downloadURL) => {
-        firebase
-          .firestore()
-          .collection("posts")
-          .add({
-            userId: firebase.auth().currentUser.uid,
-            downloadURL,title,category,price,publisher,lecture,damage,phoneNumber,likesCount: 0,
-            creation: firebase.firestore.FieldValue.serverTimestamp(),
-          })
-          .then(saveUsersPostData(downloadURL));
+      firebase
+        .firestore()
+        .collection("posts")
+        .add({
+          userId: firebase.auth().currentUser.uid,
+          downloadURL,title,category,price,publisher,lecture,damage,phoneNumber,likesCount: 0,
+          creation: firebase.firestore.FieldValue.serverTimestamp(),
+        })
+        .then(saveUsersPostData(downloadURL));
     }
     const saveUsersPostData = (downloadURL) => {
       firebase
@@ -110,7 +110,7 @@ export default function Add({navigation}) {
   }
 
   return (
-    <View>
+    <View style={{backgroundColor: 'white'}}>
       <Header style={styles.header}>
         <Left>
           <Text style={styles.headertext}>글쓰기</Text>
@@ -120,11 +120,21 @@ export default function Add({navigation}) {
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.formArea}>
-            <TextInput
-              style={styles.textForm}
-              placeholder={"카테고리"}
-              onChangeText={(category) => setCategory(category)}
+            <DropDownPicker
+              items={[
+                {label: '전공', value: 'item1'},
+                {label: '비전공', value: 'item2'},
+                {label: '기타', value: 'item3'},
+              ]}
+
+              placeholder="카테고리"
+              placeholderStyle={{color: '#888'}}
+
+              containerStyle={{height: 45}}
+              itemStyle={{justifyContent: 'flex-start'}}
+              onChangeItem={(category) => setCategory(category)}
             />
+
             <TextInput
               style={styles.textForm}
               placeholder={"도서명"}
@@ -165,7 +175,7 @@ export default function Add({navigation}) {
             <Button
               title="갤러리에서 이미지 가져오기"
               onPress={() => pickImage()}
-              color="#888"
+              color="#a8a8a8"
             />
           </View>
 
@@ -197,11 +207,13 @@ const styles = StyleSheet.create({
   },
   textForm: {
     borderWidth: 0.5,
-    borderColor: "#888",
+    borderColor: "#c4c4c4",
     width: "100%",
     height: 45,
     paddingLeft: 5,
     marginTop: 12,
+    borderRadius: 3,
+
   },
   buttonclick: {
     flexDirection: "row",

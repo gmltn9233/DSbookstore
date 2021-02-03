@@ -204,10 +204,6 @@ const styles = StyleSheet.create({
   containerImage: {
     flex: 1 / 3,
   },
-  image: {
-    flex: 1,
-    aspectRatio: 1 / 1,
-  },
 });
 const mapStateToProps = (store) => ({
     currentUser: store.userState.currentUser,
