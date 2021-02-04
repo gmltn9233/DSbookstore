@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    backgroundColor: "gray",
+    backgroundColor: "white",
   }
 });
 const mapStateToProps = (store) => ({
