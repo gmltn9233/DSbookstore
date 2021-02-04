@@ -24,7 +24,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import LandingScreen from './components/auth/Landing'
 import RegisterScreen from './components/auth/Register'
-import LoginScreen from './components/auth/Login'
+//import LoginScreen from './components/auth/Login'
 import MainScreen from './components/Main'
 import AddScreen from './components/main/Add'
 import CommentScreen from './components/main/Home/Comment'
@@ -60,11 +60,10 @@ export class App extends Component {
     const { loggedIn, loaded } = this.state;
     if (!loaded) {
       return (
-        <View style={{ flex: 1, justifyContent: 'center' }}>
+        <View style={{ flex: 1, justifyContent: 'center', backgroundColor: '#303D74'}}>
           <Image
             source={require("./assets/DS_white.png")}
-            size={50}
-            style={{backgroundcolor: '#303D74'}}
+            size={10}
           />
         </View>
       )
@@ -76,7 +75,6 @@ export class App extends Component {
           <Stack.Navigator initialRouteName="Landing">
             <Stack.Screen name="Landing" component={LandingScreen} options={{ headerShown: false }} />
             <Stack.Screen name="Register" component={RegisterScreen} />
-            <Stack.Screen name="Login" component={LoginScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       );
@@ -97,3 +95,5 @@ export class App extends Component {
 }
 
 export default App
+export const dbFirebase = firebase.firestore();
+export const authFirebase = firebase.auth();
