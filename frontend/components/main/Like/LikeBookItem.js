@@ -1,15 +1,11 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Alert,
-  TouchableOpacity,
-  Image,
-} from "react-native";
+import {View,Text,Button,StyleSheet,Alert,TouchableOpacity,Image,} from "react-native";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import * as SMS from "expo-sms";
 import BookDetail from "../BookDetail";
+
+import firebase from "firebase";
+require("firebase/firestore");
 
 export default class BookItem extends React.Component {
   constructor() {
@@ -19,6 +15,26 @@ export default class BookItem extends React.Component {
       modalVisible: false,
     };
   }
+
+  onLikePress = (postId) => {
+      firebase
+        .firestore()
+        .collection("posts")
+        .doc(postId)
+        .collection("likes")
+        .doc(firebase.auth().currentUser.uid)
+        .set({});
+  };
+  onDislikePress = (postId) => {
+      firebase
+        .firestore()
+        .collection("posts")
+        .doc(postId)
+        .collection("likes")
+        .doc(firebase.auth().currentUser.uid)
+        .delete();
+  };
+
   updateHeartColor = () => {
     if (this.state.heartColor === "#F15F5F") {
       this.setState({
@@ -70,25 +86,29 @@ export default class BookItem extends React.Component {
   render() {
     return (
       <View style={{ borderBottomColor: "lightgrey", borderBottomWidth: 1 }}>
-        <TouchableOpacity style={styles.ItemStyle}>
+        <View style={styles.ItemStyle}>
           <BookDetail
             visible={this.state.modalVisible}
             closeModal={this.closeModal.bind(this)}
-            bookName={this.props.name}
-            className={this.props.className}
+            title={this.props.title}
+            lecture={this.props.lecture}
             price={this.props.price}
-            publisher={this.props.publisher}
-            bookCondition={this.props.bookCondition}
             img={this.props.img}
-            phone={this.props.phone}
-            category={this.props.category}
+            phoneNumber={this.props.phoneNumber}
+            publisher={this.props.publisher}
+            damage={this.props.damage}
           />
-          <Image style={styles.bookImage} source={this.props.img} />
+          <TouchableOpacity
+            onPress={this.openModal.bind(this)}
+            disabled={this.state.ds}
+          >
+            <Image style={styles.bookImage} source={this.props.img} />
+          </TouchableOpacity>
           <View style={styles.bookDescribe}>
-            <Text style={styles.bookDescribe2}>{this.props.name}</Text>
+            <Text style={styles.bookDescribe2}>{this.props.title}</Text>
             <View style={styles.icontext}>
               <FontAwesome name="book" paddingRight="10" />
-              <Text style={styles.bookDescribe3}>{this.props.className}</Text>
+              <Text style={styles.bookDescribe3}>{this.props.lecture}</Text>
             </View>
             <View style={styles.icontext}>
               <FontAwesome name="won" paddingRight="10" />
@@ -96,16 +116,16 @@ export default class BookItem extends React.Component {
             </View>
           </View>
           <View style={styles.button}>
-            <TouchableOpacity>
-              <Ionicons
-                name="heart"
-                color={this.state.heartColor}
-                size={30}
-                onPress={this.updateHeartColor.bind(this)}
+            {this.props.currentUserLike ? (
+              <Button
+                title="Dislike"
+                onPress={this.onDislikePress(this.props.id)}
               />
-            </TouchableOpacity>
+            ) : (
+              <Button title="Like" onPress={this.onLikePress(this.props.id)} />
+            )}
           </View>
-        </TouchableOpacity>
+        </View>
       </View>
     );
   }

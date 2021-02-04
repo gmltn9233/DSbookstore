@@ -55,11 +55,14 @@ export function fetchUsersPosts() {
           const id = doc.id;
           return { id, ...data };
         });
+        for (let i = 0; i < posts.length; i++) {
+          dispatch(fetchUsersLikes(firebase.auth().currentUser.uid, posts[i].id));
+        }
         dispatch({ type: USERS_POSTS_STATE_CHANGE, posts});
       });
   };
 }
-export function fetchUsersFollowingLikes(uid, postId) {
+export function fetchUsersLikes(uid, postId) {
     return ((dispatch, getState) => {
         firebase.firestore()
             .collection("posts")
@@ -69,7 +72,7 @@ export function fetchUsersFollowingLikes(uid, postId) {
             .collection("likes")
             .doc(firebase.auth().currentUser.uid)
             .onSnapshot((snapshot) => {
-                console.log("fetchUsersFollowingLikes");
+                console.log("fetchUsersLikes");
                //const postId = snapshot.ZE.path.segments[3];
 
                 let currentUserLike = false;
