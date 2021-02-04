@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Button, TextInput, Image, Alert, ScrollView} from "react-native";
-import { Header, Left, Body } from "native-base";
-import { Ionicons } from "@expo/vector-icons";
+import { StyleSheet, Text, View, Button, TextInput, Alert, ScrollView} from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 
-import { Camera } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
 
 import firebase from "firebase";
@@ -110,9 +107,8 @@ export default function Add({navigation}) {
   }
 
   return (
-    <View style={{backgroundColor: 'white'}}>
-
-      <ScrollView>
+    <View style={{backgroundColor: 'white', flex:1}}>
+      <ScrollView justifyContent='center'>
         <View style={styles.container}>
           <View style={styles.formArea}>
             <DropDownPicker
