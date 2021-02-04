@@ -5,6 +5,8 @@ import { Ionicons,FontAwesome } from '@expo/vector-icons';
 import BookDetail from '../BookDetail';
 
 const BookItem = ({
+  uid,
+  postId,
   bookName,
   className,
   price,
@@ -42,6 +44,8 @@ const BookItem = ({
         <View style={{ borderBottomColor:'lightgrey', borderBottomWidth:0.5}}>                
             <TouchableOpacity style={styles.ItemStyle} onPress={() => setModalVisible(true)}>
                 <BookDetail
+                    uid = {uid}
+                    postId = {postId}
                     visible={modalVisible}
                     closeModal={() => setModalVisible(false)}
                     bookName={bookName}

@@ -82,6 +82,8 @@ function NonMajorScreen(props) {
             data={posts}
             renderItem={({ item }) => (
               <BookItem
+                uid = {item.userId}
+                postId = {item.id}
                 bookName = {item.title}
                 className = {item.lecture}
                 price = {item.price}

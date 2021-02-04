@@ -56,6 +56,9 @@ function MajorScreen(props) {
             .doc(firebase.auth().currentUser.uid)
             .delete()
     }
+
+    console.log(firebase.auth().User)
+
     return (
       <Container>
         <Header searchBar style={styles.header}>
@@ -77,6 +80,8 @@ function MajorScreen(props) {
             data={posts}
             renderItem={({ item }) => (
                 <BookItem
+                uid = {item.userId}
+                postId = {item.id}
                 bookName = {item.title}
                 className = {item.lecture}
                 price = {item.price}

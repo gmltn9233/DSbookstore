@@ -4,13 +4,18 @@ import { Header, Left,  Body, Button, Right} from 'native-base'
 import { Ionicons } from '@expo/vector-icons';
 import * as SMS from 'expo-sms';
 
+import {authFirebase} from '../../App';
+
+import BookEdit from './Home/BookEdit';
+
 export default class BookTab extends React.Component{
 
     constructor() {
         super();
         this.state = {
             heartColor:'lightgray',
-            modalVisible:false
+            modalVisible:false,
+            modalVisibleEdit:false
         };
     }
 
@@ -26,6 +31,18 @@ export default class BookTab extends React.Component{
             })
             this.alertAdd()
         }
+    }
+
+    openModalEdit = () => {
+        this.setState({ 
+            modalVisibleEdit:true
+        })
+    }
+
+    closeModalEdit = () => {
+        this.setState({ 
+            modalVisibleEdit:false
+        })
     }
 
     getSMS = async() => {
@@ -58,9 +75,28 @@ export default class BookTab extends React.Component{
                 </Left>
                 <Body>
                 </Body>
+                {this.props.uid === authFirebase.currentUser.uid ? //책 올린 사람만 Edit 버튼이 보이도록 했음
+                <Right>
+                    <TouchableOpacity onPress={this.openModalEdit.bind(this)}>
+                        <Text>수정</Text>
+                    </TouchableOpacity>
+                </Right> :
+                <Right/>}
             </Header>
 
             <View style={styles.Container}>
+                <BookEdit 
+                    postId = {this.props.postId}
+                    visible = {this.state.modalVisibleEdit}
+                    closeModal = {this.closeModalEdit.bind(this)}
+                    bookName = {this.props.bookName}
+                    className = {this.props.className}
+                    value = {this.props.price}
+                    company = {this.props.publisher}
+                    bookCondition = {this.props.bookCondition}
+                    phone = {this.props.phone}
+                    domain = {this.props.category}
+                />
                 <View style={styles.UpperContainer}>
                     <View style={styles.Imgborder}>
                         <Image style={styles.bookImage} source = {this.props.img}/>

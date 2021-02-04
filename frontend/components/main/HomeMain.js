@@ -22,6 +22,7 @@ const SideBar = (props) => {
 
 const HomeMain = () => {
 
+
     return (
         <Drawer.Navigator initialRouteName="전체" drawerContent={props => <SideBar {...props} />}>
             <Drawer.Screen name = '전체' component={HomeScreen}/>
