@@ -82,8 +82,7 @@ export class App extends Component {
 
     return (
       <StatusBar backgroundColor='#303D74'/>,
-      <Provider store={store}>
-        
+      <Provider store={store}>        
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Main">
             <Stack.Screen name="Main" component={MainScreen} options={{ headerShown: false }}/>
