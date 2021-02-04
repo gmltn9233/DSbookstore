@@ -111,12 +111,7 @@ export default function Add({navigation}) {
 
   return (
     <View style={{backgroundColor: 'white'}}>
-      <Header style={styles.header}>
-        <Left>
-          <Text style={styles.headertext}>글쓰기</Text>
-        </Left>
-        <Body></Body>
-      </Header>
+
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.formArea}>

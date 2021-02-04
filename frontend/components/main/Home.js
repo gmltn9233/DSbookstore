@@ -98,7 +98,7 @@ function Home(props) {
         <Header searchBar style={styles.header}>
           <Left>
               <Button transparent onPress = {props.navigation.openDrawer}>
-                  <Ionicons name="reorder-four-outline" size={30} style={{color:"#303D74"}}/>
+                  <Ionicons name="reorder-four-outline" size={33} style={{color:"#303D74"}}/>
               </Button>
           </Left>
           <Item style={styles.search}>
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
     aspectRatio: 1 / 1,
   },
   header: {
-    backgroundColor: "gray",
+    backgroundColor: "white",
   },
   search: {
     marginRight: 10,

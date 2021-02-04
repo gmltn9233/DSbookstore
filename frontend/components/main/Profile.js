@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Image, FlatList, Button, TouchableOpacity, Aler
 import { Ionicons } from "@expo/vector-icons";
 import MyBookItem from "./Profile/MyBookItem";
 import * as MailComposer from 'expo-mail-composer';
+import {Container, Header,  Left, Item, Input,Body} from 'native-base'
 import {WebView} from "react-native-webview";
 
 import firebase from 'firebase'
@@ -34,8 +35,8 @@ function Profile(props) {
 
           <View style={{alignItems:'center'}}>
           <Ionicons name="camera-outline"
-                size={100}/>
-          <Text style={{fontSize:30}}>게시물 없음</Text>
+                size={50}/>
+          <Text style={{fontSize:17}}>게시물 없음</Text>
         </View>
 
       )
@@ -59,6 +60,12 @@ function Profile(props) {
     }
     return (
       <View style={styles.container}>
+        <Header style={styles.header}>
+            <Left>
+                <Text style={styles.headertext}>마이페이지</Text>
+            </Left>
+            <Body></Body>
+        </Header>
         <View style={styles.containerInfo}>
           <View
             style={{ height: 150, flexDirection: "row", alignItems: "center" }}
@@ -66,18 +73,15 @@ function Profile(props) {
             <View style={{ width: 100 }}>
               <View style={{ width: 100, height: 100 }}>
                 <Image
-                  source={require("../../assets/profileImage/sadfrog.png")}
-                  style={{ width: 100, height: 100 }}
+                  source={require("../../assets/DS_Logo.png")}
+                  style={{ width: 70, height: 70 ,marginLeft:20, marginTop:10}}
                 />
               </View>
             </View>
             <View style={{ flex: 1, marginLeft: 10 }}>
               <Text style={{ fontSize: 30 }}>{user.name}</Text>
-              <Text style={{ color: "gray", fontSize: 15 }}>
-                이름: {user.name}
-              </Text>
-              <Text style={{ color: "gray", fontSize: 15 }}>
-                학번: {user.email}
+              <Text style={{ color: "gray", fontSize: 15, marginTop:10 }}>
+                E-mail | {user.email}
               </Text>
             </View>
           </View>
@@ -96,12 +100,8 @@ function Profile(props) {
                 alignItems: "center",
                 justifyContent: "center",
               }}
-            >
-              <Image
-                source={require("../../assets/profileImage/list.png")}
-                style={{ width: 30, height: 25 }}
-              />
-              <Text style={{ marginLeft: 5 }}>내가 쓴 글</Text>
+            >    
+              <Text style={{ marginLeft: 5, fontSize:15 }}>판매내역</Text>
             </View>
           </View>
         </View>
@@ -215,9 +215,19 @@ const styles = StyleSheet.create({
   containerImage: {
     flex: 1 / 3,
   },
+  header:{
+    backgroundColor:'white',
+  },
+  headertext:{
+    marginLeft:10,
+    color:'#303D74',
+    fontSize:19,
+  }
 });
+
 const mapStateToProps = (store) => ({
     currentUser: store.userState.currentUser,
     posts: store.userState.posts,
 })
+
 export default connect(mapStateToProps, null)(Profile);

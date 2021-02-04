@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import {StyleSheet,View,Text,Image,FlatList,Button,TouchableOpacity,} from "react-native";
+import {StyleSheet,View,Text, FlatList} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import {Header, Left, Body} from 'native-base'
 
 import LikeBookItem from "./Like/LikeBookItem";
 
@@ -31,6 +32,12 @@ function Like(props) {
 
   return (
     <View style={styles.container}>
+      <Header style={styles.header}>
+        <Left>
+          <Text style={styles.headertext}>관심 목록</Text>
+        </Left>
+        <Body></Body>
+      </Header>
       <View style={styles.containerList}>
         <FlatList
           numColumns={1}
@@ -62,6 +69,14 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop:20,
   },
+  header:{
+    backgroundColor:'white',
+  },
+  headertext:{
+    marginLeft:10 ,
+    color:'#303D74',
+    fontSize:19,
+}
 });
 
 const mapStateToProps = (store) => ({
