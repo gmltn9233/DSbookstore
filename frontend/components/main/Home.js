@@ -93,6 +93,7 @@ function Home(props) {
             .doc(firebase.auth().currentUser.uid)
             .delete()
     }
+
     return (
       <Container>
         <Header searchBar style={styles.header}>
@@ -128,16 +129,16 @@ function Home(props) {
                   style={styles.ItemStyle}
                   onPress={() => setModalVisible(true)}
                 >
-                  <BookDetail
+                  <BookDetail                  
                     visible={modalVisible}
                     closeModal={() => setModalVisible(false)}
                     bookName={item.title}
-                    className={"item.className"}
+                    className={item.className}
                     price={item.price}
-                    publisher={"this.props.publisher"}
-                    bookCondition={"this.props.bookCondition"}
+                    publisher={item.publisher}
+                    bookCondition={item.bookCondition}
                     img={{ uri: item.downloadURL }}
-                    phone={"item.user.phone"}
+                    phone={item.phoneNumber}
                     category={item.category}
                   />
                   <Image
