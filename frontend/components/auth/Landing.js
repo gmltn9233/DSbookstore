@@ -80,12 +80,8 @@ export class Login extends Component {
                             color='#4c66a8'
                         />
                     </View>
-
-
                 </View>  
-            </View>
-                   
-                   
+            </View>             
     )}
 }
 

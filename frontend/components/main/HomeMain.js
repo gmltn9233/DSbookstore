@@ -15,14 +15,12 @@ const SideBar = (props) => {
             <View style = {styles.container}>
                 <Image style={styles.LogoImage} source = {require('../../assets/DS_Logo.png')}/>
             </View>
-            <DrawerItemList {...props} />
+            <DrawerItemList {...props}/>
         </DrawerContentScrollView>
     )
 }
 
 const HomeMain = () => {
-
-
     return (
         <Drawer.Navigator initialRouteName="전체" drawerContent={props => <SideBar {...props} />}>
             <Drawer.Screen name = '전체' component={HomeScreen}/>
@@ -36,7 +34,7 @@ const HomeMain = () => {
 const styles = StyleSheet.create({
     container: {
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
     },
     LogoImage:{
       width: 100,
