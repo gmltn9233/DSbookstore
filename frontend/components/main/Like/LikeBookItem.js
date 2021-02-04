@@ -17,22 +17,22 @@ export default class BookItem extends React.Component {
   }
 
   onLikePress = (postId) => {
-      firebase
+      /* firebase
         .firestore()
         .collection("posts")
         .doc(postId)
         .collection("likes")
         .doc(firebase.auth().currentUser.uid)
-        .set({});
+        .set({}); */
   };
   onDislikePress = (postId) => {
-      firebase
+      /* firebase
         .firestore()
         .collection("posts")
         .doc(postId)
         .collection("likes")
         .doc(firebase.auth().currentUser.uid)
-        .delete();
+        .delete(); */
   };
 
   updateHeartColor = () => {

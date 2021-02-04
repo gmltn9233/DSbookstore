@@ -72,7 +72,6 @@ export function fetchUsersLikes(uid, postId) {
             .collection("likes")
             .doc(firebase.auth().currentUser.uid)
             .onSnapshot((snapshot) => {
-                console.log("fetchUsersLikes");
                //const postId = snapshot.ZE.path.segments[3];
 
                 let currentUserLike = false;

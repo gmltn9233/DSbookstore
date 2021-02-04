@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity, RefreshControl,} from "react-native";
 import {Container, Header, Button, Left, Item, Input} from 'native-base'
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
+import { Restart } from "fiction-expo-restart";
 
 import BookDetail from "./BookDetail";
 import BookItem from './Home/BookItem';
@@ -33,6 +34,7 @@ function Home(props) {
       setrefreshing(refreshing==true),
       /*문법상 setrefresing(true)가 맞는것같은데 저렇게 둘 경우 무한으로 빙글빙글돔..*/
       console.log("handleRefresh")
+      Restart();
     }
     const componentDidMound=()=>{
       //데이터불러오기
