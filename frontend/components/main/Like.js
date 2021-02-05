@@ -22,7 +22,6 @@ function Like(props) {
       setPosts(likePosts);
     }
   }
-  
   const onDislikePress = (postId) => {
       firebase
         .firestore()
@@ -68,14 +67,14 @@ function Like(props) {
       </View>
     );
   };
-  useEffect(() => {
+  /* useEffect(() => {
     if (true) {
       props.feed.sort(function (x, y) {
         return x.creation - y.creation;
       });
       //setPosts(likePosts);
     }
-  }, [props.feed]);
+  }, [props.feed]); */
 
   return (
     <View style={styles.container}>
