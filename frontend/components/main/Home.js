@@ -53,7 +53,7 @@ function Home(props) {
         });
         if(text!==nul){
         const feedObjArray=props.feed.filter(
-          feedObj=>_.includes(_.toLower(feedObj.title),_.toLower(text))
+          feedObj=>_.includes(_.toLower(feedObj.title),_.toLower(text))||_.includes(_.toLower(feedObj.lecture),_.toLower(text))
         );
           setPosts(feedObjArray);
           console.log(text);
