@@ -49,7 +49,6 @@ export default function Add({navigation}) {
   const uploadImage = async () => {
         const uri = image;
         const childPath = `post/${firebase.auth().currentUser.uid}/${Math.random().toString(36)}`;
-        //console.log(childPath)
         const response = await fetch(uri);
         const blob = await response.blob();
         const task = firebase
@@ -59,13 +58,11 @@ export default function Add({navigation}) {
             .put(blob);
 
         const taskProgress = snapshot => {
-            console.log(`transferred: ${snapshot.bytesTransferred}`)
+            //console.log(`transferred: ${snapshot.bytesTransferred}`)
         }
         const taskCompleted = () => {
             task.snapshot.ref.getDownloadURL().then((snapshot) => {
                 savePostData(snapshot);
-                //console.log(snapshot)
-                console.log("Task Completed")
             })
         }
         const taskError = snapshot => {

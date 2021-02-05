@@ -57,8 +57,6 @@ function MajorScreen(props) {
             .delete()
     }
 
-    console.log(firebase.auth().User)
-
     return (
       <Container>
         <Header searchBar style={styles.header}>

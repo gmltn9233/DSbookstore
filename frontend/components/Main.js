@@ -17,8 +17,6 @@ const EmptyScreen = () => {
 }
 
 export class Main extends Component {
-    
-    
     componentDidMount() {
         this.props.clearData();
         this.props.fetchUser();

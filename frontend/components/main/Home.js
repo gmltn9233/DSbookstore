@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity, RefreshControl,} from "react-native";
 import {Container, Header,Left, Button, Item, Input} from 'native-base'
@@ -45,11 +46,6 @@ function Home(props) {
   const handleRefresh = () => {
     setrefreshing(refreshing == true);
     fetchUsersPostsUpdate();
-    //setPosts(newposts);
-  };
-  const componentDidMound = () => {
-    //데이터불러오기
-    //setrefreshing(false);
   };
   function toUpperText(text) {
     return text.toString().toUpperCase();
@@ -69,12 +65,9 @@ function Home(props) {
             _.includes(_.toLower(feedObj.lecture), _.toLower(text))
         );
         setPosts(feedObjArray);
-        console.log(text);
       } else {
         setPosts(props.feed);
-        console.log("검색중아님");
       }
-      //console.log(posts);
     }
   }, [text]);
 
@@ -84,7 +77,6 @@ function Home(props) {
         return x.creation - y.creation;
       });
       setPosts(props.feed);
-      //console.log(posts);
     }
   }, [props.feed]);
 
@@ -141,10 +133,10 @@ function Home(props) {
                 visible={modalVisible}
                 closeModal={() => setModalVisible(false)}
                 bookName={item.title}
-                className={item.className}
+                className={item.lecture}
                 price={item.price}
                 publisher={item.publisher}
-                bookCondition={item.bookCondition}
+                bookCondition={item.damage}
                 img={{ uri: item.downloadURL }}
                 phone={item.phoneNumber}
                 category={item.category}
