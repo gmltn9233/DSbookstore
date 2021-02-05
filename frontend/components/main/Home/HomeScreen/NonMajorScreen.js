@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, View, FlatList, RefreshControl} from "react-native";
-import {Container, Header, Button, Left, Body, Right} from 'native-base'
+import {Container, Header, Button, Left, Body, Right, Text} from 'native-base'
 import { Ionicons} from "@expo/vector-icons";
 
 import BookItem from '../BookItem';
@@ -71,8 +71,9 @@ function NonMajorScreen(props) {
                         style = {{color:"#303D74"}}/>
                 </Button>
             </Left>
-            <Body/>
-            {/* 카테고리Bar를 왼쪽에 두기 위한 trick */}
+            <Body>
+              <Text style={styles.headertext}>비전공</Text>
+            </Body>
             <Right/>
         </Header>
         <View style={styles.containerList}>
@@ -110,6 +111,10 @@ const styles = StyleSheet.create({
     },
     header: {
       backgroundColor: "white",
+    },
+    headertext:{
+      color:'#303D74',
+      fontSize:19,
     }
   });
 
