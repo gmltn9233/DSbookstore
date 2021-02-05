@@ -91,13 +91,14 @@ function Profile(props) {
             data={userPosts}
             renderItem={({ item }) => (
               <MyBookItem
-                name={"item.title"}
-                className={"item.className"}
-                price={"item.price"}
+                name={item.title}
+                className={item.lecture}
+                price={item.price}
                 img={{ uri: item.downloadURL }}
-                phone={"item.phone"}
-                publisher={"item.publisher"}
-                bookCondition={"item.bookCondition"}
+                phone={item.phone}
+                publisher={item.publisher}
+                category={item.category}
+                bookCondition={item.damage}
               />
             )}
             ListHeaderComponent={<Text></Text>}
