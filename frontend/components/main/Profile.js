@@ -67,42 +67,23 @@ function Profile(props) {
             <Body></Body>
         </Header>
         <View style={styles.containerInfo}>
-          <View
-            style={{ height: 150, flexDirection: "row", alignItems: "center" }}
-          >
-            <View style={{ width: 100 }}>
-              <View style={{ width: 100, height: 100 }}>
+          <View  style={{ height: 120, flexDirection: "row", alignItems: "center", marginBottom : 10}}>
+            <View style={{ width: 110 }}>
+              <View style={{ width: 100, height: 100, justifyContent:'center' }}>
                 <Image
                   source={require("../../assets/DS_Logo.png")}
-                  style={{ width: 70, height: 70 ,marginLeft:20, marginTop:10}}
-                />
+                  style={{ width: 70, height: 70 ,marginLeft:20, marginTop:10}}/>
               </View>
             </View>
-            <View style={{ flex: 1, marginLeft: 10 }}>
+            <View style={{ flex: 1, marginLeft: 10, justifyContent:'center'}}>
               <Text style={{ fontSize: 30 }}>{user.name}</Text>
               <Text style={{ color: "gray", fontSize: 15, marginTop:10 }}>
                 E-mail | {user.email}
               </Text>
             </View>
           </View>
-          <View
-            style={{ height: 50, flexDirection: "row", alignItems: "center" }}
-          >
-            <View
-              style={{
-                flex: 1,
-                height: 50,
-                flexDirection: "row",
-                borderWidth: 0.5,
-                borderLeftWidth: 0,
-                borderRightWidth: 0,
-                borderColor: "gray",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >    
-              <Text style={{ marginLeft: 5, fontSize:15 }}>판매내역</Text>
-            </View>
+          <View style={styles.list}>
+            <Text style={{color: 'white', fontSize: 17}}>판매내역</Text>
           </View>
         </View>
         <View style={{ flex: 1 }}>
@@ -124,77 +105,24 @@ function Profile(props) {
             ListEmptyComponent={EmptyListMessage}
           />
         </View>
-        <View
-          style={{
-            height: 50,
-            flexDirection: "row",
-            alignItems: "center",
-            margin: 15,
-          }}
-        >
-          <View
-            style={{
-              flex: 1,
-              height: 50,
-              flexDirection: "column",
-              borderWidth: 0.5,
-              borderLeftWidth: 0,
-              borderRightWidth: 0,
-              borderColor: "gray",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <TouchableOpacity>
-              <Ionicons
-                name="log-out-outline"
-                size={26}
-                onPress={() => onLogout()}
-              />
-            </TouchableOpacity>
-            <Text>로그아웃</Text>
+        <View style={styles.bottombar}>
+          <View style={styles.bottomitem}>
+            <Ionicons name = 'log-out-outline' size = {23} sytle={{alignItems: 'center'}}
+              onPress={() => onLogout()}/>
+            <Text style={{fontSize: 13}, {alignItems: 'center'}}
+              onPress={() => onLogout()}>로그아웃</Text>
           </View>
-          <View
-            style={{
-              flex: 1,
-              height: 50,
-              flexDirection: "column",
-              borderWidth: 0.5,
-              borderColor: "gray",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <TouchableOpacity>
-              <Ionicons
-                name="alert-outline"
-                size={26}
-                onPress={()=>Linking.openURL('https://naver.com')}
-              />
-            </TouchableOpacity>
-            <Text>이용안내</Text>
+          <View style={styles.bottomitem} >
+            <Ionicons name = 'information-circle-outline' size = {23} sytle={{alignItems: 'center'}}
+              onPress={() => Linking.openURL('https://naver.com')}/>
+            <Text style={{fontSize: 13}, {alignItems: 'center'}}
+              onPress={() => Linking.openURL('https://naver.com')}>이용안내</Text>
           </View>
-          <View
-            style={{
-              flex: 1,
-              height: 50,
-              flexDirection: "column",
-              borderWidth: 0.5,
-              borderLeftWidth: 0,
-              borderRightWidth: 0,
-              borderColor: "gray",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <TouchableOpacity>
-              <Ionicons
-                name="help-outline"
-                size={26}
-                onPress={()=>getemail()}
-              />
-            </TouchableOpacity>
-            <Text>Q&A</Text>
+          <View style={styles.bottomitem}>
+            <Ionicons name = 'help-outline'  size = {23} sytle={{alignItems: 'center'}}
+              onPress={()=>getemail()}/>
+            <Text style={{fontSize: 13}, {alignItems: 'center'}}
+              onPress={()=>getemail()}>Q&A</Text>
           </View>
         </View>
       </View>
@@ -204,6 +132,7 @@ function Profile(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white'
   },
   containerInfo: {
     margin: 15,
@@ -222,6 +151,30 @@ const styles = StyleSheet.create({
     marginLeft:10,
     color:'#303D74',
     fontSize:19,
+  },
+  bottombar: {
+    height: 50, 
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderColor : '#d6d6d6',
+    borderWidth: 0.5, 
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+    borderBottomWidth: 0,
+  },
+  bottomitem:{
+    flex: 1,
+    height: 40, 
+    flexDirection: 'column', 
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  list:{
+    height: 40,
+    alignItems: 'center', 
+    backgroundColor: '#303D74',
+    justifyContent: 'center',
+    flexDirection: 'row',
   }
 });
 

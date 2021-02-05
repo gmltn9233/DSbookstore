@@ -29,8 +29,8 @@ export default class BookScreen extends React.Component {
     if (this.state.seg == 1) {
       this.setState({
         seg: 2,
-        backgroundColor: "#b3b3b3",
-        btbc: "#b3b3b3",
+        backgroundColor: "#cfcfcf",
+        btbc:'transparent',
         opacity: 0.5,
         ds: true,
       });
@@ -97,41 +97,21 @@ export default class BookScreen extends React.Component {
             </View>
           </View>
           <View style={styles.buttoncontent}>
-            <Segment style={{ backgroundColor: this.state.btbc }}>
-              <Button
-                style={{
-                  backgroundColor: this.state.seg === 1 ? "#303D74" : "white",
-                  borderColor: "#303D74",
-                }}
+            <Segment style={{backgroundColor:this.state.btbc}} >
+              <Button style={{backgroundColor: this.state.seg === 1 ? "#303D74" : 'white', borderColor: "#303D74"}}
                 disabled={this.state.ds}
-                first
-                active={this.state.seg === 1 ? true : false}
-              >
-                <Text
-                  style={{ color: this.state.seg === 1 ? "white" : "#303D74" }}
-                >
-                  {" "}
-                  판매중{" "}
-                </Text>
+								first
+								active={this.state.seg === 1 ? true : false}>
+                <Text style={{ color: this.state.seg === 1 ? "white" : "#303D74" }}>  판매중  </Text>
               </Button>
-              <Button
-                last
-                style={{
-                  backgroundColor: this.state.seg === 2 ? "#303D74" : "white",
-                  borderColor: "#303D74",
-                }}
+              <Button last
+								style={{backgroundColor: this.state.seg === 2 ? "#303D74" : 'white',borderColor: "#303D74"}}
                 disabled={this.state.ds}
-                active={this.state.seg === 2 ? true : false}
-                onPress={this.alertSave}
-              >
-                <Text
-                  style={{ color: this.state.seg === 1 ? "#303D74" : "white" }}
-                >
-                  {" "}
-                  판매완료{" "}
-                </Text>
+								active={this.state.seg === 2 ? true : false}
+								onPress={this.alertSave}>
+                <Text style={{ color: this.state.seg === 1 ? "#303D74" : "white" }}>  판매완료  </Text>
               </Button>
-            </Segment>
+            </Segment> 
           </View>
         </View>
       </View>
