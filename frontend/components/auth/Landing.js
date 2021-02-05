@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, Button, TextInput, Image,StyleSheet, StatusBar } from 'react-native'
+import { Text, View, Button, TextInput, Image,StyleSheet, StatusBar,Alert } from 'react-native'
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 
 import firebase from 'firebase'
@@ -23,8 +23,12 @@ export class Login extends Component {
                 console.log('Login Success')
             })
             .catch((error) => {
-                console.log(error)
+                this.alertError()
             })
+    }
+
+    alertError = () => {
+        Alert.alert("로그인 실패", "아이디 혹은 비밀번호를 잘못 입력하였습니다.")
     }
 
     render() {
