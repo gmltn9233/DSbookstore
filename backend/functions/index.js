@@ -5,13 +5,11 @@ admin.initializeApp();
 
 const db = admin.firestore();
 
-exports.addLike = functions.firestore
-  .document("/posts/{creatorId}/userPosts/{postId}/likes/{userId}")
+/* exports.addLike = functions.firestore
+  .document("/posts/{postId}/likes/{userId}")
   .onCreate((snap, context) => {
     return db
       .collection("posts")
-      .doc(context.params.creatorId)
-      .collection("userPosts")
       .doc(context.params.postId)
       .update({
         likesCount: admin.firestore.FieldValue.increment(1),
@@ -19,14 +17,12 @@ exports.addLike = functions.firestore
   });
 
 exports.removeLike = functions.firestore
-  .document("/posts/{creatorId}/userPosts/{postId}/likes/{userId}")
+  .document("/posts/{postId}/likes/{userId}")
   .onDelete((snap, context) => {
     return db
       .collection("posts")
-      .doc(context.params.creatorId)
-      .collection("userPosts")
       .doc(context.params.postId)
       .update({
         likesCount: admin.firestore.FieldValue.increment(-1),
       });
-  });
+  }); */

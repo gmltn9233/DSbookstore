@@ -56,23 +56,20 @@ export function fetchUsersPosts() {
           return { id, ...data };
         });
         for (let i = 0; i < posts.length; i++) {
-          dispatch(fetchUsersLikes(firebase.auth().currentUser.uid, posts[i].id));
+          dispatch(fetchUsersLikes(posts[i].id));
         }
         dispatch({ type: USERS_POSTS_STATE_CHANGE, posts});
       });
   };
 }
-export function fetchUsersLikes(uid, postId) {
+export function fetchUsersLikes(postId) {
     return ((dispatch, getState) => {
         firebase.firestore()
             .collection("posts")
-            .doc(uid)
-            .collection("userPosts")
             .doc(postId)
             .collection("likes")
             .doc(firebase.auth().currentUser.uid)
             .onSnapshot((snapshot) => {
-               //const postId = snapshot.ZE.path.segments[3];
 
                 let currentUserLike = false;
                 if(snapshot.exists){

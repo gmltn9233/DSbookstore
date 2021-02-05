@@ -15,26 +15,6 @@ export default class BookItem extends React.Component {
       modalVisible: false,
     };
   }
-
-  onLikePress = (postId) => {
-      /* firebase
-        .firestore()
-        .collection("posts")
-        .doc(postId)
-        .collection("likes")
-        .doc(firebase.auth().currentUser.uid)
-        .set({}); */
-  };
-  onDislikePress = (postId) => {
-      /* firebase
-        .firestore()
-        .collection("posts")
-        .doc(postId)
-        .collection("likes")
-        .doc(firebase.auth().currentUser.uid)
-        .delete(); */
-  };
-
   updateHeartColor = () => {
     if (this.state.heartColor === "#F15F5F") {
       this.setState({
@@ -115,16 +95,6 @@ export default class BookItem extends React.Component {
               <Text style={styles.bookDescribe3}>{this.props.price}</Text>
             </View>
           </View>
-          <View style={styles.button}>
-            {this.props.currentUserLike ? (
-              <Button
-                title="Dislike"
-                onPress={this.onDislikePress(this.props.id)}
-              />
-            ) : (
-              <Button title="Like" onPress={this.onLikePress(this.props.id)} />
-            )}
-          </View>
         </View>
       </View>
     );
@@ -175,10 +145,6 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontSize: 15,
     marginBottom: 3,
-  },
-  button: {
-    flex: 0.9,
-    alignItems: "flex-end",
   },
   icontext: {
     flexDirection: "row",
