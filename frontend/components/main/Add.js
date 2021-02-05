@@ -80,7 +80,7 @@ export default function Add({navigation}) {
         .collection("posts")
         .add({
           userId: firebase.auth().currentUser.uid,
-          downloadURL,title,category,price,publisher,lecture,damage,phoneNumber,likesCount: 0,
+          downloadURL,title,category,price,publisher,lecture,damage,phoneNumber,likesCount: 0,selling:false,
           creation: firebase.firestore.FieldValue.serverTimestamp(),
         })
         .then(saveUsersPostData(downloadURL));
@@ -93,7 +93,7 @@ export default function Add({navigation}) {
         .collection("userPosts")
         .add({
           userId: firebase.auth().currentUser.uid,
-          downloadURL,title,category,price,publisher,lecture,damage,phoneNumber,likesCount: 0,
+          downloadURL,title,category,price,publisher,lecture,damage,phoneNumber,likesCount: 0,selling:false,
           creation: firebase.firestore.FieldValue.serverTimestamp(),
         })
         .then(function () {
