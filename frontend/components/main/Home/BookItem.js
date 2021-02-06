@@ -14,7 +14,8 @@ const BookItem = ({
   bookCondition,
   img,
   phone,
-  category
+  category,
+  selling,
 }) => {
     
     const [heartColor, setHeartColor] = useState('lightgray'); 
@@ -39,44 +40,84 @@ const BookItem = ({
     }
 
 
-    
-    return (
-        <View style={{ borderBottomColor:'lightgrey', borderBottomWidth:0.5}}>                
-            <TouchableOpacity style={styles.ItemStyle} onPress={() => setModalVisible(true)}>
-                <BookDetail
-                    uid = {uid}
-                    postId = {postId}
-                    visible={modalVisible}
-                    closeModal={() => setModalVisible(false)}
-                    bookName={bookName}
-                    className={className}
-                    price={price}
-                    publisher={publisher}
-                    bookCondition={bookCondition}
-                    img={{ uri: img }}
-                    phone={phone}
-                    category={category}
-                  />
-                <Image style={styles.bookImage} source={{ uri: img }} />
-                <View style={{ width:180,  flexDirection:'column'}}>
-                    <Text style={styles.bookDescribeTitle}>{bookName}</Text>
-                    <View style={styles.icontext}>
-                        <FontAwesome name = 'book'  paddingRight='10'/>
-                        <Text style={ styles.bookDescribe}>  {className}</Text>
+    if(selling===false){
+        return (
+            <View style={{ borderBottomColor:'lightgrey', borderBottomWidth:0.5}}>                
+                <TouchableOpacity style={styles.ItemStyle} onPress={() => setModalVisible(true)}>
+                    <BookDetail
+                        uid = {uid}
+                        postId = {postId}
+                        visible={modalVisible}
+                        closeModal={() => setModalVisible(false)}
+                        bookName={bookName}
+                        className={className}
+                        price={price}
+                        publisher={publisher}
+                        bookCondition={bookCondition}
+                        img={{ uri: img }}
+                        phone={phone}
+                        category={category}
+                      />
+                    <Image style={styles.bookImage} source={{ uri: img }} />
+                    <View style={{ width:180,  flexDirection:'column'}}>
+                        <Text style={styles.bookDescribeTitle}>{bookName}</Text>
+                        <View style={styles.icontext}>
+                            <FontAwesome name = 'book'  paddingRight='10'/>
+                            <Text style={ styles.bookDescribe}>  {className}</Text>
+                        </View>
+                        <View style={styles.icontext}>
+                            <FontAwesome name = 'won'  paddingRight='10'/> 
+                            <Text style={ styles.bookDescribe}>  {price}</Text>
+                        </View>
                     </View>
-                    <View style={styles.icontext}>
-                        <FontAwesome name = 'won'  paddingRight='10'/> 
-                        <Text style={ styles.bookDescribe}>  {price}</Text>
+                    <View style={styles.button}>
+                        <TouchableOpacity>
+                            <Ionicons name = 'heart' color = {heartColor} size = {30} onPress={updateHeartColor}/>
+                        </TouchableOpacity>
                     </View>
-                </View>
-                <View style={styles.button}>
-                    <TouchableOpacity>
-                        <Ionicons name = 'heart' color = {heartColor} size = {30} onPress={updateHeartColor}/>
-                    </TouchableOpacity>
-                </View>
-            </TouchableOpacity>
-       </View>
-    );
+                </TouchableOpacity>
+           </View>
+        );
+    }
+    else{
+        return (
+            <View style={{ borderBottomColor:'lightgrey', borderBottomWidth:0.5}}>                
+                <TouchableOpacity style={styles.ItemStyle1} onPress={() => setModalVisible(true)}disabled={true}>
+                    <BookDetail
+                        uid = {uid}
+                        postId = {postId}
+                        visible={modalVisible}
+                        closeModal={() => setModalVisible(false)}
+                        bookName={bookName}
+                        className={className}
+                        price={price}
+                        publisher={publisher}
+                        bookCondition={bookCondition}
+                        img={{ uri: img }}
+                        phone={phone}
+                        category={category}
+                      />
+                    <Image style={styles.bookImage} source={{ uri: img }} />
+                    <View style={{ width:180,  flexDirection:'column'}}>
+                        <Text style={styles.bookDescribeTitle}>{bookName}</Text>
+                        <View style={styles.icontext}>
+                            <FontAwesome name = 'book'  paddingRight='10'/>
+                            <Text style={ styles.bookDescribe}>  {className}</Text>
+                        </View>
+                        <View style={styles.icontext}>
+                            <FontAwesome name = 'won'  paddingRight='10'/> 
+                            <Text style={ styles.bookDescribe}>  {price}</Text>
+                        </View>
+                    </View>
+                    <View style={styles.button}>
+                        <TouchableOpacity>
+                            <Ionicons name = 'heart' color = {heartColor} size = {30} onPress={updateHeartColor}/>
+                        </TouchableOpacity>
+                    </View>
+                </TouchableOpacity>
+           </View>
+        );
+    }
     
 }
 
@@ -87,7 +128,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         paddingLeft: 10,
-    },    
+    },
+    ItemStyle1:{
+        borderBottomColor:'lightgrey',
+        borderBottomWidth:0.5,
+        alignItems: 'center',
+        flexDirection: 'row',
+        paddingLeft: 10,
+        backgroundColor:"#cfcfcf"
+    },       
     bookImage:{
         marginRight:20,
         width: 90,

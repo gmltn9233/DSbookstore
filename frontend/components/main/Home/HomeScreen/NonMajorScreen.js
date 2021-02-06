@@ -93,6 +93,7 @@ function NonMajorScreen(props) {
                 img = {item.downloadURL}
                 phone = {item.phoneNumber}
                 category = {item.category}
+                selling={item.selling}
                />
             )}
             refreshControl={<RefreshControl refreshing={refreshing}

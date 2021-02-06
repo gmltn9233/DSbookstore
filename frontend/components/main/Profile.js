@@ -21,6 +21,7 @@ function Profile(props) {
         if (props.route.params.uid === firebase.auth().currentUser.uid) {
             setUser(currentUser)
             setUserPosts(posts)
+            console.log(posts)
         }
         else {
           console.log("ProfileError")
@@ -99,6 +100,8 @@ function Profile(props) {
                 publisher={item.publisher}
                 category={item.category}
                 bookCondition={item.damage}
+                seliing={item.selling}
+                id={item.id}
               />
             )}
             ListHeaderComponent={<Text></Text>}

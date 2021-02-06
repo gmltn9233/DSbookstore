@@ -4,6 +4,8 @@ import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Con
 import { Ionicons,FontAwesome } from '@expo/vector-icons';
 
 import BookDetail from '../BookDetail';
+import {dbFirebase} from '../../../App';
+
 
 
 export default class BookScreen extends React.Component {
@@ -37,7 +39,10 @@ export default class BookScreen extends React.Component {
     }
   };
 
-  alertSave = () => {
+  alertSave = async() => {
+    await dbFirebase.collection('post').doc(this.props.id).update({
+      selling:true
+  });
     Alert.alert(
       "판매완료",
       "상태를 수정하시겠습니까?\n \n 주의) 수정할 수 없습니다.",
@@ -77,6 +82,7 @@ export default class BookScreen extends React.Component {
             bookCondition={this.props.bookCondition}
             category={this.props.category}
             img={this.props.img}
+            selling={this.props.selling}
           />
           <TouchableOpacity
             onPress={this.openModal.bind(this)}
