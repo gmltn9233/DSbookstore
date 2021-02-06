@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { View, Button, TextInput,StyleSheet,Image } from 'react-native'
+import { View, Button, TextInput,StyleSheet,Image,ActivityIndicator } from 'react-native'
+import Toast, {DURATION} from 'react-native-easy-toast'
 
 import firebase from 'firebase'
 
@@ -10,7 +11,8 @@ export class Register extends Component {
         this.state = {
             email: '',
             password: '',
-            name: ''
+            name: '',
+            loading:false,
         }
 
         this.onSignUp = this.onSignUp.bind(this)
@@ -18,8 +20,10 @@ export class Register extends Component {
 
     onSignUp() {
         const { email, password, name } = this.state;
+        this.setState({loading:true})
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((result) => {
+                this.setState({loading:false})
                 firebase.firestore().collection("users")
                     .doc(firebase.auth().currentUser.uid)
                     .set({
@@ -29,7 +33,8 @@ export class Register extends Component {
                 console.log('SignUp Success')
             })
             .catch((error) => {
-                console.log(error)
+                this.setState({loading:false})
+                this.toast.show('이메일 형식을 확인해주세요.\n 비밀번호가 6자 이상인지 확인하세요.',1000);
             })
     }
 
@@ -56,11 +61,17 @@ export class Register extends Component {
                     onChangeText={(password) => this.setState({ password })}
                     style={{marginBottom:20, borderBottomWidth:0.5, borderBottomColor:'gray', width:180, marginBottom:50}}
                 />
-                <Button style={styles.button}
+                {
+                    this.state.loading
+                    ? <ActivityIndicator style={styles.button} size="large"  color="#d1d6e9"/>
+                    :<Button style={styles.button}
                     onPress={() => this.onSignUp()}
                     color='gray'
                     title="저장"
                 />
+                }    
+                
+                <Toast ref={ref => { this.toast = ref; }} />
             </View>
         )
     }

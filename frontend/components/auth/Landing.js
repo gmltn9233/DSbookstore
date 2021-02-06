@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Text, View, Button, TextInput, Image,StyleSheet, StatusBar,Alert } from 'react-native'
+import { Text, View, Button, TextInput, Image,StyleSheet, StatusBar,Alert, ActivityIndicator } from 'react-native'
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
+import Toast, {DURATION} from 'react-native-easy-toast'
 
 import firebase from 'firebase'
 
@@ -11,6 +12,7 @@ export class Login extends Component {
         this.state = {
             email: '',
             password: '',
+            loading:false,
         }
 
         this.onSignUp = this.onSignUp.bind(this)
@@ -18,18 +20,21 @@ export class Login extends Component {
 
     onSignUp() {
         const { email, password } = this.state;
+        this.setState({loading:true})
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then((result) => {
+                this.setState({loading:false})
                 console.log('Login Success')
             })
             .catch((error) => {
-                this.alertError()
+                this.setState({loading:false})
+                this.toast.show('아이디 혹은 비밀번호를 잘못 입력하였습니다',1000);
             })
     }
 
-    alertError = () => {
-        Alert.alert("로그인 실패", "아이디 혹은 비밀번호를 잘못 입력하였습니다.")
-    }
+    /*alertError = () => {
+        Alert.alert("로그인 실패", "이메일 형식을 확인하세요.")
+    }*/
 
     render() {
         return (
@@ -70,13 +75,17 @@ export class Login extends Component {
                     </View>
                 </View>
                 <View marginTop={30} marginBottom={30}>
-                    <View style={styles.button}>
+                    {
+                        this.state.loading
+                        ? <ActivityIndicator style={styles.button} size="large"  color="#d1d6e9"/>
+                        :<View style={styles.button}>
                         <Button 
                             onPress={() => this.onSignUp()}
                             title="로그인"
                             color='#819ccc'
                         />
                     </View>
+                    }
                     <View style={styles.button}>
                         <Button
                             onPress={() => this.props.navigation.navigate("Register")}
@@ -85,6 +94,7 @@ export class Login extends Component {
                         />
                     </View>
                 </View>  
+                <Toast ref={ref => { this.toast = ref; }} />
             </View>             
     )}
 }

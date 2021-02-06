@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Button, TextInput, Alert, ScrollView} from "react-native";
+import { StyleSheet, Text, View, Button, TextInput, Alert, ScrollView,ActivityIndicator} from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 
 import * as ImagePicker from "expo-image-picker";
@@ -102,6 +102,7 @@ export default function Add({navigation}) {
   if (hasGalleryPermission === false) {
     return <Text>No access to Gallery</Text>;
   }
+  
 
   return (
     <View style={{backgroundColor: 'white', flex:1}}>
