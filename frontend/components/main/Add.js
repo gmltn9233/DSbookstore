@@ -183,7 +183,7 @@ export default function Add({navigation}) {
               color="#a8a8a8"
             />
           </View>
-          <Text style={{color:'#a8a8a8'}}>주의 : 부적절한 게시글의 경우 삭제 조치 될 수 있습니다.</Text>
+          <Text style={{color:'#a8a8a8'}}>주의 : 부적절한 게시글의 경우 삭제 될 수 있습니다.</Text>
           <ActivityIndicator style={styles.button} size="large"  color="#d1d6e9" animating={any}/>
           <View style={styles.buttonclick}>
             <Button
