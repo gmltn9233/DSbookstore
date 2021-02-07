@@ -50,18 +50,16 @@ function Home(props) {
   };
   useEffect(() => {
     if (true) {
-      props.feed.sort(function (x, y) {
-        return x.creation - y.creation;
-      });
+      props.feed.sort((a, b) => {b.selling-a.selling});
       if (text !== nul) {
         const feedObjArray = props.feed.filter(
           (feedObj) =>
             _.includes(_.toLower(feedObj.title), _.toLower(text)) ||
             _.includes(_.toLower(feedObj.lecture), _.toLower(text))
-        ).sort((a, b) => {a.selling-b.selling}).reverse();
+        ).sort((a, b) => {b.selling-a.selling});
         setPosts(feedObjArray);
       } else {
-        setPosts(props.feed);
+        setPosts(props.feed.sort((a, b) => {b.selling-a.selling}));
       }
     }
   }, [text]);
