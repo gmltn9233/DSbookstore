@@ -21,7 +21,6 @@ function Profile(props) {
         if (props.route.params.uid === firebase.auth().currentUser.uid) {
             setUser(currentUser)
             setUserPosts(posts)
-            console.log(posts)
         }
         else {
           console.log("ProfileError")
