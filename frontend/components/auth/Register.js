@@ -71,7 +71,7 @@ export class Register extends Component {
                 />
                 }    
                 
-                <Toast ref={ref => { this.toast = ref; }} />
+                <Toast ref={ref => { this.toast = ref; }} style={{backgroundColor:'gray'}} position='center' />
             </View>
         )
     }

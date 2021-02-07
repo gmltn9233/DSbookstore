@@ -94,7 +94,8 @@ export class Login extends Component {
                         />
                     </View>
                 </View>  
-                <Toast ref={ref => { this.toast = ref; }} />
+                <Toast ref={ref => { this.toast = ref; }} style={{backgroundColor:'#878aab'}} position='center' />
+                
             </View>             
     )}
 }

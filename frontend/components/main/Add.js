@@ -18,6 +18,7 @@ export default function Add({navigation}) {
   const [lecture, setLecture] = useState("");
   const [damage, setDamage] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [any, setany] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -48,6 +49,7 @@ export default function Add({navigation}) {
     }
   };
   const uploadImage = async () => {
+        setany(true);
         const uri = image;
         const childPath = `post/${firebase.auth().currentUser.uid}/${Math.random().toString(36)}`;
         const response = await fetch(uri);
@@ -181,7 +183,7 @@ export default function Add({navigation}) {
               color="#a8a8a8"
             />
           </View>
-
+          <ActivityIndicator style={styles.button} size="large"  color="#d1d6e9" animating={any}/>
           <View style={styles.buttonclick}>
             <Button
               title="  등록  "

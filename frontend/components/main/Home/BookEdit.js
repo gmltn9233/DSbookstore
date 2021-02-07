@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Button, TextInput, Modal, TouchableOpacity, ScrollView, Alert} from "react-native";
+import { StyleSheet, View, Button, TextInput, Modal, TouchableOpacity, ScrollView, Alert,ActivityIndicator} from "react-native";
 import { Header, Left, Body } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import DropDownPicker from "react-native-dropdown-picker";
@@ -26,6 +26,7 @@ const BookEdit = ({
     const [lecture, setLecture] = useState(className);
     const [damage, setDamage] = useState(bookCondition);
     const [phoneNumber, setPhoneNumber] = useState(phone);
+    const [any, setany] = useState(false);
 
     const onSubmit = async() => {
          await dbFirebase.collection('posts').doc(postId).update({
@@ -35,11 +36,14 @@ const BookEdit = ({
              publisher:publisher,
              lecture:lecture,
              damage:damage,
-             phoneNumber:phoneNumber
+             phoneNumber:phoneNumber,
+      
          });
         Alert.alert("수정되었습니다", "변경까지 약간의 시간이 소요됩니다.");
+        setany(true);
         closeModal();
     }
+    
 
     return (
         <Modal visible={visible} animationType='fade' onRequestClose={closeModal}>
@@ -112,7 +116,7 @@ const BookEdit = ({
                     value={phoneNumber}
                     />
                 </View>
-        
+                <ActivityIndicator style={styles.button} size="large"  color="#d1d6e9" animating={any}/>
                 <View style={styles.buttonclick}>
                     <Button
                         title="  등록  "
