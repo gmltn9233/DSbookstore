@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Button, TextInput, Alert, ScrollView,ActivityIndicator} from "react-native";
+import { StyleSheet, Text, View, Button, TextInput, Alert, ScrollView,ActivityIndicator,Image} from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 
 import * as ImagePicker from "expo-image-picker";
@@ -32,7 +32,7 @@ export default function Add({navigation}) {
      Alert.alert(
        "축하합니다!",
        "게시글이 정상적으로 업로드 되었습니다.",
-       [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+       [{ text: "OK"}],
        { cancelable: false }
      );
   }
@@ -40,7 +40,7 @@ export default function Add({navigation}) {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [1, 1],
+      aspect: [2, 3],
       quality: 1,
     });
 
@@ -176,6 +176,7 @@ export default function Add({navigation}) {
               onChangeText={(phoneNumber) => setPhoneNumber(phoneNumber)}
             />
           </View>
+          {image && <Image source={ {uri : image} } style={{ width:160,height:240 }} />}
           <View style={styles.Image}>
             <Button
               title="갤러리에서 이미지 가져오기"
