@@ -56,10 +56,15 @@ const BookItem = ({
     // }
 
 
-    if(selling===false){
         return (
             <View style={{ borderBottomColor:'lightgrey', borderBottomWidth:0.5}}>                
-                <TouchableOpacity style={styles.ItemStyle} onPress={() => setModalVisible(true)}>
+                <TouchableOpacity style={{backgroundColor:selling===true?"#cfcfcf":'white',
+                                          borderBottomColor:'lightgrey',
+                                          borderBottomWidth:0.5,
+                                          alignItems: 'center',
+                                          flexDirection: 'row',
+                                          paddingLeft: 10,
+                                        }} onPress={() => setModalVisible(true)}disabled={selling===true?true:false}>
                     <BookDetail
                         uid = {uid}
                         postId = {postId}
@@ -99,50 +104,8 @@ const BookItem = ({
                 </TouchableOpacity>
            </View>
         );
-    }
-    else{
-        return (
-            <View style={{ borderBottomColor:'lightgrey', borderBottomWidth:0.5}}>                
-                <TouchableOpacity style={styles.ItemStyle1} onPress={() => setModalVisible(true)} disabled={true}>
-                    <BookDetail
-                        uid = {uid}
-                        postId = {postId}
-                        visible={modalVisible}
-                        closeModal={() => setModalVisible(false)}
-                        bookName={bookName}
-                        className={className}
-                        price={price}
-                        publisher={publisher}
-                        bookCondition={bookCondition}
-                        img={{ uri: img }}
-                        phone={phone}
-                        category={category}
-                      />
-                    <Image style={styles.bookImage} source={{ uri: img }} />
-                    <View style={{ width:180,  flexDirection:'column'}}>
-                        <Text style={styles.bookDescribeTitle}>{bookName}</Text>
-                        <View style={styles.icontext}>
-                            <FontAwesome name = 'book'  paddingRight='10'/>
-                            <Text style={ styles.bookDescribe}>  {className}</Text>
-                        </View>
-                        <View style={styles.icontext}>
-                            <FontAwesome name = 'won'  paddingRight='10'/> 
-                            <Text style={ styles.bookDescribe}>  {price}</Text>
-                        </View>
-                    </View>
-                    <View style={styles.button}>
-                        <TouchableOpacity>                            
-                            {currentUserLike ? (
-                                    <Ionicons name = 'heart' color = {"#F15F5F"} size = {30} />
-                                    ) : (
-                                    <Ionicons name = 'heart' color = {'lightgray'} size = {30} onPress={() => onLikePress(postId)} />
-                            )}
-                        </TouchableOpacity>
-                    </View>
-                </TouchableOpacity>
-           </View>
-        );
-    }
+    
+        
     
 }
 
