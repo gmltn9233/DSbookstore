@@ -4,7 +4,7 @@ import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity, RefreshContr
 import {Container, Header,Left, Button, Item, Input} from 'native-base'
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 
-import BookDetail from "./BookDetail";
+// import BookDetail from "./BookDetail";
 import BookItem from './Home/BookItem';
 import _ from 'lodash';
 import firebase from 'firebase'
@@ -81,24 +81,6 @@ function Home(props) {
     }
   }, [props.feed]);
 
-  const onLikePress = (postId) => {
-    firebase
-      .firestore()
-      .collection("posts")
-      .doc(postId)
-      .collection("likes")
-      .doc(firebase.auth().currentUser.uid)
-      .set({});
-  };
-  const onDislikePress = (postId) => {
-    firebase
-      .firestore()
-      .collection("posts")
-      .doc(postId)
-      .collection("likes")
-      .doc(firebase.auth().currentUser.uid)
-      .delete();
-  };
 
   return (
     <Container>
@@ -129,52 +111,21 @@ function Home(props) {
           horizontal={false}
           data={posts}
           renderItem={({ item }) => (
-            <View style={styles.ItemStyle}>
-              <BookDetail
-                visible={modalVisible}
-                closeModal={() => setModalVisible(false)}
-                bookName={item.title}
-                className={item.lecture}
-                price={item.price}
-                publisher={item.publisher}
-                bookCondition={item.damage}
-                img={{ uri: item.downloadURL }}
-                phone={item.phoneNumber}
-                category={item.category}
-              />
-              <TouchableOpacity
-                style={styles.ItemStyle}
-                onPress={() => setModalVisible(true)}
-              >
-                <Image
-                  style={styles.bookImage}
-                  source={{ uri: item.downloadURL }}
-                />
-              </TouchableOpacity>
-              <View style={styles.bookDescribe}>
-                <Text style={styles.bookDescribe2}>{item.title}</Text>
-                <View style={styles.icontext}>
-                  <FontAwesome name="book" paddingRight="10" />
-                  <Text style={styles.bookDescribe3}>{item.category}</Text>
-                </View>
-                <View style={styles.icontext}>
-                  <FontAwesome name="won" paddingRight="10" />
-                  <Text style={styles.bookDescribe3}>{item.price}</Text>
-                </View>
-              </View>
-              <View style={styles.button}>
-                {item.currentUserLike ? (
-                  <Button light onPress={() => onDislikePress(item.id)}>
-                    <Text>Dislike</Text>
-                  </Button>
-                ) : (
-                  <Button light onPress={() => onLikePress(item.id)}>
-                    <Text>Like</Text>
-                  </Button>
-                )}
-              </View>
-            </View>
-          )}
+            <BookItem
+            uid = {item.userId}
+            postId = {item.id}
+            bookName = {item.title}
+            className = {item.lecture}
+            price = {item.price}
+            publisher = {item.publisher}
+            bookCondition = {item.damage}
+            img = {item.downloadURL}
+            phone = {item.phoneNumber}
+            category = {item.category}
+            selling={item.selling}
+            currentUserLike={item.currentUserLike}
+           />
+        )}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
           }

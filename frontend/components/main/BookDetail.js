@@ -4,7 +4,7 @@ import { Header, Left,  Body, Button, Right} from 'native-base'
 import { Ionicons } from '@expo/vector-icons';
 import * as SMS from 'expo-sms';
 
-import {authFirebase} from '../../App';
+import {dbFirebase ,authFirebase} from '../../App';
 
 import BookEdit from './Home/BookEdit';
 
@@ -19,19 +19,19 @@ export default class BookTab extends React.Component{
         };
     }
 
-    updateHeartColor = () => {
-        if(this.state.heartColor === "#F15F5F"){
-            this.setState({
-                heartColor:'lightgray'
-            })
-            this.alertDelete()
-        }else{
-            this.setState({
-                heartColor:'#F15F5F'
-            })
-            this.alertAdd()
-        }
-    }
+    // updateHeartColor = () => {
+    //     if(this.state.heartColor === "#F15F5F"){
+    //         this.setState({
+    //             heartColor:'lightgray'
+    //         })
+    //         this.alertDelete()
+    //     }else{
+    //         this.setState({
+    //             heartColor:'#F15F5F'
+    //         })
+    //         this.alertAdd()
+    //     }
+    // }
 
     openModalEdit = () => {
         this.setState({ 
@@ -54,12 +54,14 @@ export default class BookTab extends React.Component{
         }
     };
 
-    alertAdd = () => {
+    onLikePress = () => {
+        dbFirebase
+          .collection("posts")
+          .doc(this.props.postId)
+          .collection("likes")
+          .doc(authFirebase.currentUser.uid)
+          .set({});
         Alert.alert("관심목록", "추가되었습니다")
-    }
-
-    alertDelete = () => {
-        Alert.alert("관심목록", "삭제되었습니다")
     }
 
     
@@ -121,7 +123,11 @@ export default class BookTab extends React.Component{
                 </View>
                 <View>
                     <TouchableOpacity style={styles.heart}>
-                        <Ionicons name = 'heart' color = {this.state.heartColor} size = {30} onPress={this.updateHeartColor.bind(this)}/>
+                        {this.props.currentUserLike ? (
+                                    <Ionicons name = 'heart' color = {"#F15F5F"} size = {30} />
+                                    ) : (
+                                    <Ionicons name = 'heart' color = {'lightgray'} size = {30} onPress={this.onLikePress.bind(this)} />
+                        )}
                     </TouchableOpacity>
                 </View>
                 <View style={styles.BottomContainer}>

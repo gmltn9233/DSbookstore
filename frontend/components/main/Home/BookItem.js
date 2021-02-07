@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import {View, Text, StyleSheet, Alert,TouchableOpacity,Image} from 'react-native';
 import { Ionicons,FontAwesome } from '@expo/vector-icons';
 
+import {dbFirebase, authFirebase} from "../../../App";
+
 import BookDetail from '../BookDetail';
 
 const BookItem = ({
@@ -16,6 +18,7 @@ const BookItem = ({
   phone,
   category,
   selling,
+  currentUserLike
 }) => {
     
     const [heartColor, setHeartColor] = useState('lightgray'); 
@@ -27,17 +30,30 @@ const BookItem = ({
             alertDelete()
         }else{
             setHeartColor('#F15F5F')
-            alertAdd()
+            onLikePress(postId)
         }
     }
 
-    const alertAdd = () => {
+    const onLikePress = (postId) => {
+        dbFirebase
+          .collection("posts")
+          .doc(postId)
+          .collection("likes")
+          .doc(authFirebase.currentUser.uid)
+          .set({});
         Alert.alert("관심목록", "추가되었습니다")
     }
 
-    const alertDelete = () => {
-        Alert.alert("관심목록", "삭제되었습니다")
-    }
+    // const onDislikePress = (postId) => {
+    //     dbFirebase
+    //         .collection("posts")
+    //         .doc(postId)
+    //         .collection("likes")
+    //         .doc(authFirebase.currentUser.uid)
+    //         .delete();
+        
+    //     Alert.alert("관심목록", "삭제되었습니다")
+    // }
 
 
     if(selling===false){
@@ -57,6 +73,7 @@ const BookItem = ({
                         img={{ uri: img }}
                         phone={phone}
                         category={category}
+                        currentUserLike={currentUserLike}
                       />
                     <Image style={styles.bookImage} source={{ uri: img }} />
                     <View style={{ width:180,  flexDirection:'column'}}>
@@ -72,7 +89,11 @@ const BookItem = ({
                     </View>
                     <View style={styles.button}>
                         <TouchableOpacity>
-                            <Ionicons name = 'heart' color = {heartColor} size = {30} onPress={updateHeartColor}/>
+                            {currentUserLike ? (
+                                <Ionicons name = 'heart' color = {"#F15F5F"} size = {30} />
+                                ) : (
+                                <Ionicons name = 'heart' color = {'lightgray'} size = {30} onPress={() => onLikePress(postId)} />
+                            )}
                         </TouchableOpacity>
                     </View>
                 </TouchableOpacity>
@@ -82,7 +103,7 @@ const BookItem = ({
     else{
         return (
             <View style={{ borderBottomColor:'lightgrey', borderBottomWidth:0.5}}>                
-                <TouchableOpacity style={styles.ItemStyle1} onPress={() => setModalVisible(true)}disabled={true}>
+                <TouchableOpacity style={styles.ItemStyle1} onPress={() => setModalVisible(true)} disabled={true}>
                     <BookDetail
                         uid = {uid}
                         postId = {postId}
@@ -110,8 +131,12 @@ const BookItem = ({
                         </View>
                     </View>
                     <View style={styles.button}>
-                        <TouchableOpacity>
-                            <Ionicons name = 'heart' color = {heartColor} size = {30} onPress={updateHeartColor}/>
+                        <TouchableOpacity>                            
+                            {currentUserLike ? (
+                                    <Ionicons name = 'heart' color = {"#F15F5F"} size = {30} />
+                                    ) : (
+                                    <Ionicons name = 'heart' color = {'lightgray'} size = {30} onPress={() => onLikePress(postId)} />
+                            )}
                         </TouchableOpacity>
                     </View>
                 </TouchableOpacity>

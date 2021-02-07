@@ -36,26 +36,7 @@ function EtcScreen(props) {
       }
     }, [props.usersAllLoaded, props.feed]);
 
-    const onLikePress = (userId, postId) => {
-        firebase.firestore()
-            .collection("posts")
-            .doc(userId)
-            .collection("userPosts")
-            .doc(postId)
-            .collection("likes")
-            .doc(firebase.auth().currentUser.uid)
-            .set({})
-    }
-    const onDislikePress = (userId, postId) => {
-        firebase.firestore()
-            .collection("posts")
-            .doc(userId)
-            .collection("userPosts")
-            .doc(postId)
-            .collection("likes")
-            .doc(firebase.auth().currentUser.uid)
-            .delete()
-    }
+    
     return (
       <Container>
         <Header searchBar style={styles.header}>
@@ -89,6 +70,7 @@ function EtcScreen(props) {
                 phone = {item.phoneNumber}
                 category = {item.category}
                 selling={item.selling}
+                currentUserLike={item.currentUserLike}
                />
             )}
             refreshControl={<RefreshControl refreshing={refreshing}
