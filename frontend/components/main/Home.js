@@ -112,18 +112,18 @@ function Home(props) {
           data={posts}
           renderItem={({ item }) => (
             <BookItem
-            uid = {item.userId}
-            postId = {item.id}
-            bookName = {item.title}
-            className = {item.lecture}
-            price = {item.price}
-            publisher = {item.publisher}
-            bookCondition = {item.damage}
-            img = {item.downloadURL}
-            phone = {item.phoneNumber}
-            category = {item.category}
-            selling={item.selling}
-            currentUserLike={item.currentUserLike}
+              uid = {item.userId}
+              postId = {item.id}
+              bookName = {item.title}
+              className = {item.lecture}
+              price = {item.price}
+              publisher = {item.publisher}
+              bookCondition = {item.damage}
+              img = {item.downloadURL}
+              phone = {item.phoneNumber}
+              category = {item.category}
+              selling={item.selling}
+              currentUserLike={item.currentUserLike}
            />
         )}
           refreshControl={

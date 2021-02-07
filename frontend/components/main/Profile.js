@@ -89,6 +89,7 @@ function Profile(props) {
             data={userPosts}
             renderItem={({ item }) => (
               <MyBookItem
+                uid={item.userId}
                 name={item.title}
                 className={item.lecture}
                 price={item.price}
