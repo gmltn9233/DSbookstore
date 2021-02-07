@@ -100,12 +100,14 @@ export default class BookScreen extends React.Component {
             <View style={styles.textcontent}>
               <Text style={styles.bookDescribeTitle}>{this.props.name}</Text>
               <View style={styles.icontext}>
-                <FontAwesome name="book" paddingRight="10" />
-                <Text style={styles.bookDescribe}>{this.props.className}</Text>
-              </View>
-              <View style={styles.icontext}>
-                <FontAwesome name="won" paddingRight="10" />
-                <Text style={styles.bookDescribe}>{this.props.price}</Text>
+                <View>
+                  <FontAwesome name = 'book' style={{marginTop : 3}}/>
+                  <FontAwesome name = 'won' style={{marginTop : 7}}/> 
+                </View>
+                <View>
+                  <Text style={styles.bookDescribe}>this.props.className</Text>
+                  <Text style={styles.bookDescribe}>this.props.price</Text>
+                </View>
               </View>
             </View>
             <View style={styles.buttoncontent}>

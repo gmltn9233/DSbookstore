@@ -87,7 +87,7 @@ export class Register extends Component {
                 />
                 <View style={{flexDirection:'row', marginBottom:15}}>
                     <Text style={{fontWeight:'bold',textDecorationLine: 'underline',}}
-                          onPress={() => Linking.openURL('https://a-hyun.github.io/per_inform/per_infor')}  >이용약관</Text>
+                          onPress={() => Linking.openURL('https://a-hyun.github.io/per_inform/per_infor')}>이용약관</Text>
                     <Text>에 동의하십니까?</Text>
                     <CheckBox checked={this.state.isSelected} onPress={this.setSelection}/>
                 </View>
