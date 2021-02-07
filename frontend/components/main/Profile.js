@@ -100,8 +100,10 @@ function Profile(props) {
                 publisher={item.publisher}
                 category={item.category}
                 bookCondition={item.damage}
-                seliing={item.selling}
+                selling={item.selling}
                 id={item.postId}
+                userid={item.userId}
+                id2={item.id}
               />
             )}
             ListHeaderComponent={<Text></Text>}
