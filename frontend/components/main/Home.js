@@ -75,8 +75,6 @@ function Home(props) {
     }
   }, [props.feed]);
 
-  console.log(new Date(1612675120 * 1000));
-
   return (
     <Container>
       <Header searchBar style={styles.header}>
