@@ -32,7 +32,7 @@ function Home(props) {
     firebase
       .firestore()
       .collection("posts")
-      .orderBy("creation", "asc")
+      .orderBy("selling", "asc")
       .get()
       .then((snapshot) => {
         let newposts = snapshot.docs.map((doc) => {

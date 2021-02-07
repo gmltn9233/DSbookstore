@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, View, FlatList, RefreshControl,} from "react-native";
+import { StyleSheet, View, FlatList, RefreshControl} from "react-native";
 import {Container, Header, Button, Left, Body, Right, Text} from 'native-base'
 import { Ionicons} from "@expo/vector-icons";
 
@@ -27,8 +27,9 @@ function MajorScreen(props) {
         
         const feedObjArray = props.feed.filter(
             feedObj => feedObj.category === "전공"
-        )
+        ).sort((a, b) => {a.selling > b.selling ? -1 : a.selling < b.selling ? 1 : 0})
         setPosts(feedObjArray);
+        console.log(props.feed)
       }
     }, [props.usersAllLoaded, props.feed]);
 

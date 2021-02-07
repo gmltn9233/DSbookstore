@@ -72,7 +72,7 @@ export default class BookItem extends React.Component {
           <BookDetail
             visible={this.state.modalVisible}
             closeModal={this.closeModal.bind(this)}
-            title={this.props.title}
+            bookName={this.props.title}
             className={this.props.lecture}
             price={this.props.price}
             img={this.props.img}
