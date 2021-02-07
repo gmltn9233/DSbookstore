@@ -67,14 +67,19 @@ function Like(props) {
       </View>
     );
   };
-  /* useEffect(() => {
+  useEffect(() => {
     if (true) {
       props.feed.sort(function (x, y) {
         return x.creation - y.creation;
       });
-      //setPosts(likePosts);
+      let likePosts = props.feed.filter((post) => {
+        if (post.currentUserLike) return post;
+      });
+      if (likePosts && likePosts.length > 0) {
+        setPosts(likePosts);
+      }
     }
-  }, [props.feed]); */
+  }, [props.feed]); 
 
   return (
     <View style={styles.container}>
@@ -89,6 +94,7 @@ function Like(props) {
           numColumns={1}
           horizontal={false}
           data={posts}
+          extraData={posts}
           ListEmptyComponent={EmptyListMessage}
           keyExtractor={(item, index) => index}
           renderItem={({ item, index }) => renderLikedItem(item, index)}
