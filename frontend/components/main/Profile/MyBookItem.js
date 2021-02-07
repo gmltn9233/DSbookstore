@@ -40,7 +40,7 @@ export default class BookScreen extends React.Component {
   };
 
   alertSave = async() => {
-    await dbFirebase.collection('post').doc(this.props.id).update({
+    await dbFirebase.collection('posts').doc(this.props.id).update({
       selling:true
   });
     Alert.alert(
