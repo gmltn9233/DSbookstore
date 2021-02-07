@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { View, Button, TextInput,StyleSheet,Image,ActivityIndicator } from 'react-native'
+import {Text, View, Button, TextInput,StyleSheet,Image,ActivityIndicator,Alert,Linking} from 'react-native'
+import {CheckBox}from"native-base";
 import Toast, {DURATION} from 'react-native-easy-toast'
 
 import firebase from 'firebase'
@@ -13,11 +14,34 @@ export class Register extends Component {
             password: '',
             name: '',
             loading:false,
+            isSelected:false,
         }
-
+        
         this.onSignUp = this.onSignUp.bind(this)
     }
-
+    setSelection=()=>{
+        if(this.state.isSelected===false){
+            this.setState({
+                isSelected:true
+            })
+        }
+        else{
+            this.setState({
+                isSelected:false
+            })
+        }
+    }
+    checkalert=()=>{
+        if(this.state.isSelected===true){
+            this.onSignUp
+        }
+        else{
+            Alert.alert(
+                "오류",
+                "약관에 동의해주세요."
+            )
+        }
+    }
     onSignUp() {
         const { email, password, name } = this.state;
         this.setState({loading:true})
@@ -61,11 +85,18 @@ export class Register extends Component {
                     onChangeText={(password) => this.setState({ password })}
                     style={{marginBottom:20, borderBottomWidth:0.5, borderBottomColor:'gray', width:180, marginBottom:50}}
                 />
+                <View style={{flexDirection:'row', marginBottom:15}}>
+                    <Text style={{fontWeight:'bold',textDecorationLine: 'underline',}}
+                          onPress={() => Linking.openURL('https://naver.com')}  >이용약관</Text>
+                    <Text>에 동의하십니까?</Text>
+                    <CheckBox checked={this.state.isSelected} onPress={this.setSelection}/>
+                </View>
+                    
                 {
                     this.state.loading
                     ? <ActivityIndicator style={styles.button} size="large"  color="#d1d6e9"/>
                     :<Button style={styles.button}
-                    onPress={() => this.onSignUp()}
+                    onPress={this.checkalert}
                     color='gray'
                     title="저장"
                 />
