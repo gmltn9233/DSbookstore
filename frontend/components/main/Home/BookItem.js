@@ -90,6 +90,7 @@ const BookItem = ({
                                 <FontAwesome name = 'won' style={{marginTop : 7}}/> 
                             </View>
                             <View>
+                                <Text style={styles.bookDescribe}>{className}</Text>
                                 <Text style={styles.bookDescribe}>{price}</Text>
                             </View>
                         </View>
