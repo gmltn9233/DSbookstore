@@ -33,10 +33,11 @@ function Like(props) {
     };
   const EmptyListMessage=()=>{
     return(
-        <View style={{alignItems:'center'}}>
+      <View style={styles.back}>
         <Ionicons name="camera-outline"
-              size={100}/>
-        <Text style={{fontSize:30}}>게시물 없음</Text>
+          size={50} style={{color:'#888'}}
+              />
+        <Text style={{fontSize:20, color:'#888'}}>게시물 없음</Text>
       </View>
     )
   }
@@ -120,6 +121,12 @@ const styles = StyleSheet.create({
   button: {
     flex: 0.9,
     alignItems: "flex-end",
+  },
+  back: {
+    //backgroundColor:'white', 
+    justifyContent:'center', 
+    alignItems:'center', 
+    height: 550,
   },
 });
 
