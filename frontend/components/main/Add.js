@@ -27,6 +27,17 @@ export default function Add({navigation}) {
     })();
   }, []);
 
+  const checknull = () => {
+    if (!title.trim() || !category.trim() || !price.trim() || !publisher.trim() || !lecture.trim() || !phoneNumber.trim() || !damage.trim())
+    {
+      Alert.alert("기입하지 않은 정보가 있습니다.");
+      return;
+    }
+    else{
+      uploadImage();
+    }
+  }
+
 
   const alertDone = () => {
      Alert.alert(
@@ -189,7 +200,7 @@ export default function Add({navigation}) {
           <View style={styles.buttonclick}>
             <Button
               title="  등록  "
-              onPress={() => uploadImage()}
+              onPress={() => checknull()}
               color="#303D74"
               size="100"
             />

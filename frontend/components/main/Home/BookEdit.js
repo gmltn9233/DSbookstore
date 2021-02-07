@@ -42,6 +42,7 @@ const BookEdit = ({
         Alert.alert("수정되었습니다", "변경까지 약간의 시간이 소요됩니다.");
         setany(true);
         closeModal();
+        setany(false);
     }
     
 
