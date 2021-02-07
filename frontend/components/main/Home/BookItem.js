@@ -59,6 +59,7 @@ const BookItem = ({
         return (
             <View style={{ borderBottomColor:'lightgrey', borderBottomWidth:0.5}}>                
                 <TouchableOpacity style={{backgroundColor:selling===true?"#cfcfcf":'white',
+                                          opacity:selling===true?0.5:1,
                                           borderBottomColor:'lightgrey',
                                           borderBottomWidth:0.5,
                                           alignItems: 'center',
