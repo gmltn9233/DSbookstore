@@ -27,8 +27,14 @@ export default class BookScreen extends React.Component {
     });
   };
 
-  yalert = () => {
-    if (this.state.seg == 1) {
+  yalert = async() => {
+    await dbFirebase.collection('posts').doc(this.props.id).update({
+      selling:true
+  });
+    await dbFirebase.collection('users').doc(this.props.userid).collection("userPosts").doc(this.props.id2).update({
+    selling:true
+  });
+    if (this.props.selling === true) {
       this.setState({
         seg: 2,
         backgroundColor: "#cfcfcf",
@@ -40,12 +46,6 @@ export default class BookScreen extends React.Component {
   };
 
   alertSave = async() => {
-    await dbFirebase.collection('posts').doc(this.props.id).update({
-      selling:true
-  });
-  await dbFirebase.collection('users').doc(this.props.userid).collection("userPosts").doc(this.props.id2).update({
-    selling:true
-});
     Alert.alert(
       "판매완료",
       "상태를 수정하시겠습니까?\n \n 주의) 수정할 수 없습니다.",
@@ -64,15 +64,14 @@ export default class BookScreen extends React.Component {
   };
 
   render() {
-    if(this.props.selling===false){
       return (
         <View
           style={{
             flexDirection: "row",
             borderBottomWidth: 0.7,
             borderColor: "lightgray",
-            backgroundColor: this.state.backgroundColor,
-            opacity: this.state.opacity,
+            backgroundColor: this.props.selling===true? "#cfcfcf":'white',
+            opacity: this.props.selling===true? 0.5:1,
           }}
         >
           <View>
@@ -90,7 +89,7 @@ export default class BookScreen extends React.Component {
             />
             <TouchableOpacity
               onPress={this.openModal.bind(this)}
-              disabled={this.state.ds}
+              disabled={this.props.selling===true? true:false}
             >
               <Image style={styles.image} source={this.props.img} />
             </TouchableOpacity>
@@ -108,16 +107,16 @@ export default class BookScreen extends React.Component {
               </View>
             </View>
             <View style={styles.buttoncontent}>
-              <Segment style={{backgroundColor:this.state.btbc}} >
+              <Segment style={{backgroundColor:this.props.selling===true? 'transparent':'white'}} >
                 <Button style={{backgroundColor: this.state.seg === 1 ? "#303D74" : 'white', borderColor: "#303D74"}}
-                  disabled={this.state.ds}
+                  disabled={this.props.selling===true? true:false}
                   first
                   active={this.state.seg === 1 ? true : false}>
                   <Text style={{ color: this.state.seg === 1 ? "white" : "#303D74" }}>  판매중  </Text>
                 </Button>
                 <Button last
                   style={{backgroundColor: this.state.seg === 2 ? "#303D74" : 'white',borderColor: "#303D74"}}
-                  disabled={this.state.ds}
+                  disabled={this.props.selling===true? true:false}
                   active={this.state.seg === 2 ? true : false}
                   onPress={this.alertSave}>
                   <Text style={{ color: this.state.seg === 1 ? "#303D74" : "white" }}>  판매완료  </Text>
@@ -127,72 +126,6 @@ export default class BookScreen extends React.Component {
           </View>
         </View>
       );
-    }
-    else{
-      return (
-        <View
-          style={{
-            flexDirection: "row",
-            borderBottomWidth: 0.7,
-            borderColor: "lightgray",
-            backgroundColor: "#cfcfcf",
-            opacity: 0.5,
-          }}
-        >
-          <View>
-            <BookDetail
-              visible={this.state.modalVisible}
-              closeModal={this.closeModal.bind(this)}
-              bookName={this.props.name}
-              className={this.props.className}
-              price={this.props.price}
-              publisher={this.props.publisher}
-              bookCondition={this.props.bookCondition}
-              category={this.props.category}
-              img={this.props.img}
-              selling={this.props.selling}
-            />
-            <TouchableOpacity
-              onPress={this.openModal.bind(this)}
-              disabled={this.true}
-            >
-              <Image style={styles.image} source={this.props.img} />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.bookcontent}>
-            <View style={styles.textcontent}>
-              <Text style={styles.bookDescribeTitle}>{this.props.name}</Text>
-              <View style={styles.icontext}>
-                <FontAwesome name="book" paddingRight="10" />
-                <Text style={styles.bookDescribe}>{this.props.className}</Text>
-              </View>
-              <View style={styles.icontext}>
-                <FontAwesome name="won" paddingRight="10" />
-                <Text style={styles.bookDescribe}>{this.props.price}</Text>
-              </View>
-            </View>
-            <View style={styles.buttoncontent}>
-              <Segment style={{backgroundColor:'transparent'}} >
-                <Button style={{backgroundColor: this.state.seg === 2 ? "#303D74" : 'white', borderColor: "#303D74"}}
-                  disabled={this.state.ds}
-                  first
-                  active={this.state.seg === 2 ? true : false}>
-                  <Text style={{ color: this.state.seg === 2 ? "white" : "#303D74" }}>  판매중  </Text>
-                </Button>
-                <Button last
-                  style={{backgroundColor: this.state.seg === 1 ? "#303D74" : 'white',borderColor: "#303D74"}}
-                  disabled={this.state.ds}
-                  active={this.state.seg === 1 ? true : false}
-                  onPress={this.alertSave}>
-                  <Text style={{ color: this.state.seg === 2 ? "#303D74" : "white" }}>  판매완료  </Text>
-                </Button>
-              </Segment> 
-            </View>
-          </View>
-        </View>
-      );
-    }
-    
   }
 }
 
