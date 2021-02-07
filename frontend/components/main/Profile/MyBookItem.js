@@ -105,8 +105,8 @@ export default class BookScreen extends React.Component {
                   <FontAwesome name = 'won' style={{marginTop : 7}}/> 
                 </View>
                 <View>
-                  <Text style={styles.bookDescribe}>this.props.className</Text>
-                  <Text style={styles.bookDescribe}>this.props.price</Text>
+                  <Text style={styles.bookDescribe}>{this.props.className}</Text>
+                  <Text style={styles.bookDescribe}>{this.props.price}</Text>
                 </View>
               </View>
             </View>
