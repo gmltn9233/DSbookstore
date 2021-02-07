@@ -23,7 +23,7 @@ function Home(props) {
       <View style={styles.back}>
         <Ionicons name="reload-circle-outline"
           size={50} style={{color:'#888', marginLeft:3}}/>
-        <Text style={{fontSize:20, color:'#888'}}>로딩중</Text>
+        <Text style={{fontSize:20, color:'#888'}}>불러오는 중</Text>
       </View>
     );
   };
