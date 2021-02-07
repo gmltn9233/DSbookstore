@@ -79,6 +79,7 @@ export default class BookItem extends React.Component {
             phoneNumber={this.props.phoneNumber}
             publisher={this.props.publisher}
             bookCondition={this.props.damage}
+            date = {this.props.date}
             category={this.props.category}
             currentUserLike={this.props.currentUserLike}
           />

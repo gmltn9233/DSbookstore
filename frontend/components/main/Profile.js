@@ -98,6 +98,7 @@ function Profile(props) {
                 publisher={item.publisher}
                 category={item.category}
                 bookCondition={item.damage}
+                date = {Date(item.creation.seconds*1000)}
                 selling={item.selling}
                 id={item.postId}
                 userid={item.userId}

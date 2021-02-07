@@ -19,20 +19,6 @@ export default class BookTab extends React.Component{
         };
     }
 
-    // updateHeartColor = () => {
-    //     if(this.state.heartColor === "#F15F5F"){
-    //         this.setState({
-    //             heartColor:'lightgray'
-    //         })
-    //         this.alertDelete()
-    //     }else{
-    //         this.setState({
-    //             heartColor:'#F15F5F'
-    //         })
-    //         this.alertAdd()
-    //     }
-    // }
-
     openModalEdit = () => {
         this.setState({ 
             modalVisibleEdit:true
@@ -133,7 +119,7 @@ export default class BookTab extends React.Component{
                 <View style={styles.BottomContainer}>
                     <View>
                         <Text style={styles.Seller}>훼손 상태 및 부가 설명</Text>
-                        <Text style={styles.time}>마지막 수정  2021.01.26 14:00</Text>
+                        <Text style={styles.time}>마지막 수정  {this.props.date}</Text>
                         <View style={styles.detail}>
                             <Text style={styles.bookDescribeButtom}>훼손상태: {this.props.bookCondition}</Text>
                         </View>

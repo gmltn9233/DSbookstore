@@ -48,12 +48,6 @@ function Home(props) {
     setrefreshing(refreshing == true);
     fetchUsersPostsUpdate();
   };
-  function toUpperText(text) {
-    return text.toString().toUpperCase();
-  }
-  function toLowerText(text) {
-    return text.toString().toLowerCase();
-  }
   useEffect(() => {
     if (true) {
       props.feed.sort(function (x, y) {
@@ -81,6 +75,7 @@ function Home(props) {
     }
   }, [props.feed]);
 
+  console.log(new Date(1612675120 * 1000));
 
   return (
     <Container>
@@ -119,6 +114,7 @@ function Home(props) {
               price = {item.price}
               publisher = {item.publisher}
               bookCondition = {item.damage}
+              date = {Date(item.creation.seconds*1000)}
               img = {item.downloadURL}
               phone = {item.phoneNumber}
               category = {item.category}

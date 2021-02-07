@@ -14,6 +14,7 @@ const BookItem = ({
   price,
   publisher,
   bookCondition,
+  date,
   img,
   phone,
   category,
@@ -76,6 +77,7 @@ const BookItem = ({
                         price={price}
                         publisher={publisher}
                         bookCondition={bookCondition}
+                        date={date}
                         img={{ uri: img }}
                         phone={phone}
                         category={category}

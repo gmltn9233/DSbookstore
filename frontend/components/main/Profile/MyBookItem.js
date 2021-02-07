@@ -84,6 +84,7 @@ export default class BookScreen extends React.Component {
               price={this.props.price}
               publisher={this.props.publisher}
               bookCondition={this.props.bookCondition}
+              date = {this.props.date}
               category={this.props.category}
               img={this.props.img}
               selling={this.props.selling}

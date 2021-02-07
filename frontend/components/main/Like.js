@@ -51,6 +51,7 @@ function Like(props) {
           phoneNumber={item.phoneNumber}
           publisher={item.publisher}
           damage={item.damage}
+          date = {Date(item.creation.seconds*1000)}
           id={item.id}
           category={item.category}
           currentUserLike={item.currentUserLike}

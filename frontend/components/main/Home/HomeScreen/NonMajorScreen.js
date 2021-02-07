@@ -63,6 +63,7 @@ function NonMajorScreen(props) {
                 price = {item.price}
                 publisher = {item.publisher}
                 bookCondition = {item.damage}
+                date = {Date(item.creation.seconds*1000)}
                 img = {item.downloadURL}
                 phone = {item.phoneNumber}
                 category = {item.category}
