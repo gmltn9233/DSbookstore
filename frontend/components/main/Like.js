@@ -42,7 +42,7 @@ function Like(props) {
   }
   const renderLikedItem = (item,index) => {
     return (
-      <View flexDirection="row">
+      <View flexDirection="row" borderBottomWidth={1} borderBottomColor={'lightgray'}>
         <LikeBookItem
           title={item.title}
           lecture={item.lecture}
@@ -56,13 +56,12 @@ function Like(props) {
           currentUserLike={item.currentUserLike}
         />
         <View style={styles.button}>
-          <Button
-            title="disLike"
+          <Ionicons name = 'heart' color = {"#F15F5F"} size = {30}
             onPress={() => {
               setPosts((prevItemState) =>
-                prevItemState.filter((_item, _Index) => _Index !== index)
+              prevItemState.filter((_item, _Index) => _Index !== index)
               );
-              onDislikePress(item.id);
+            onDislikePress(item.id);
             }}
           />
         </View>
@@ -112,6 +111,7 @@ function Like(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white'
   },
   containerList: {
     flex: 1,
@@ -125,12 +125,13 @@ const styles = StyleSheet.create({
     color: "#303D74",
     fontSize: 19,
   },
-  button: {
-    flex: 0.9,
-    alignItems: "flex-end",
+  button:{
+    paddingRight:5,
+    alignItems:'flex-end',
+    justifyContent: 'center',
+    flex:0.9,
   },
   back: {
-    //backgroundColor:'white', 
     justifyContent:'center', 
     alignItems:'center', 
     height: 550,

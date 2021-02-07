@@ -140,6 +140,7 @@ const styles = StyleSheet.create({
   containerList: {
     marginTop: 20,
     flex: 1,
+    backgroundColor: 'white'
   },
   ItemStyle: {
     borderBottomColor:'lightgrey',

@@ -65,8 +65,10 @@ export default class BookItem extends React.Component {
   };
   render() {
     return (
-      <View style={{ borderBottomColor: "lightgrey", borderBottomWidth: 1 }}>
-        <View style={styles.ItemStyle}>
+      <View>
+        <TouchableOpacity style={styles.ItemStyle}
+          onPress={this.openModal.bind(this)}
+          disabled={this.state.ds}>
           <BookDetail
             visible={this.state.modalVisible}
             closeModal={this.closeModal.bind(this)}
@@ -80,73 +82,46 @@ export default class BookItem extends React.Component {
             category={this.props.category}
             currentUserLike={this.props.currentUserLike}
           />
-          <TouchableOpacity
-            onPress={this.openModal.bind(this)}
-            disabled={this.state.ds}
-          >
-            <Image style={styles.bookImage} source={this.props.img} />
-          </TouchableOpacity>
-          <View style={styles.bookDescribe}>
-            <Text style={styles.bookDescribe2}>{this.props.title}</Text>
+          <Image style={styles.bookImage} source={this.props.img}/>
+          <View style={{ width:180,  flexDirection:'column'}}>
+            <Text style={styles.bookDescribeTitle}>{this.props.title}</Text>
             <View style={styles.icontext}>
-              <FontAwesome name="book" paddingRight="10" />
-              <Text style={styles.bookDescribe3}>{this.props.lecture}</Text>
-            </View>
-            <View style={styles.icontext}>
-              <FontAwesome name="won" paddingRight="10" />
-              <Text style={styles.bookDescribe3}>{this.props.price}</Text>
+              <View>
+                <FontAwesome name="book" style={{marginTop : 3}}/>
+                <FontAwesome name="won" style={{marginTop : 7}}/>
+              </View>
+              <View>
+                <Text style={styles.bookDescribe}>{this.props.lecture}</Text>
+                <Text style={styles.bookDescribe}>{this.props.price}</Text>
+              </View>
             </View>
           </View>
-        </View>
+        </TouchableOpacity>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  header: {
-    backgroundColor: "gray",
-  },
-  search: {
-    marginRight: 10,
-    backgroundColor: "#ededed",
-  },
-  content: {
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 30,
-    //backgroundColor: '#d6ca1a',
-  },
   ItemStyle: {
-    // borderBottomColor:'lightgrey',
-    // borderBottomWidth:1,
     alignItems: "center",
-    justifyContent: "flex-start",
     flexDirection: "row",
     paddingLeft: 10,
   },
   bookImage: {
+    marginRight:20,
     width: 90,
     marginBottom: 5,
     height: 120,
   },
-  bookDescribe: {
-    paddingLeft: 20,
-    flexDirection: "column",
+  bookDescribeTitle:{
     fontSize: 20,
+    marginBottom:10
   },
-  bookDescribe2: {
-    fontSize: 20,
-    marginBottom: 10,
-  },
-  bookDescribe3: {
-    marginLeft: 10,
+  bookDescribe:{
+    marginLeft:8,
     fontSize: 15,
-    marginBottom: 3,
+    marginBottom:3
   },
   icontext: {
     flexDirection: "row",

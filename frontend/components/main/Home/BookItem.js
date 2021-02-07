@@ -85,12 +85,13 @@ const BookItem = ({
                     <View style={{ width:180,  flexDirection:'column'}}>
                         <Text style={styles.bookDescribeTitle}>{bookName}</Text>
                         <View style={styles.icontext}>
-                            <FontAwesome name = 'book'  paddingRight='10'/>
-                            <Text style={ styles.bookDescribe}>  {className}</Text>
-                        </View>
-                        <View style={styles.icontext}>
-                            <FontAwesome name = 'won'  paddingRight='10'/> 
-                            <Text style={ styles.bookDescribe}>  {price}</Text>
+                            <View>
+                                <FontAwesome name = 'book' style={{marginTop : 3}}/>
+                                <FontAwesome name = 'won' style={{marginTop : 7}}/> 
+                            </View>
+                            <View>
+                                <Text style={styles.bookDescribe}>{price}</Text>
+                            </View>
                         </View>
                     </View>
                     <View style={styles.button}>
@@ -136,8 +137,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
         marginBottom:10
     },
-    bookDescribe3:{
-        marginLeft:10,
+    bookDescribe:{
+        marginLeft:8,
         fontSize: 15,
         marginBottom:3
     },
