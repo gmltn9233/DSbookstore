@@ -28,7 +28,7 @@ export default function Add({navigation}) {
   }, []);
 
   const checknull = () => {
-    if (!title.trim() || !category.trim() || !price.trim() || !publisher.trim() || !lecture.trim() || !phoneNumber.trim() || !damage.trim())
+    if (!title.trim() || !category.trim() || !price.trim() || !publisher.trim() || !lecture.trim() || !phoneNumber.trim() || !damage.trim() || image===null)
     {
       Alert.alert("기입하지 않은 정보가 있습니다.");
       return;
