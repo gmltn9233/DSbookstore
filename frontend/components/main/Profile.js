@@ -34,11 +34,10 @@ function Profile(props) {
     const EmptyListMessage=()=>{
       return(
         <View style={styles.back}>
-          <Ionicons name="camera-outline"
-            size={50} style={{color:'#888'}}
-                />
-          <Text style={{fontSize:20, color:'#888'}}>게시물 없음</Text>
-        </View>
+          <Ionicons name="book-outline"
+            size={50} style={{color:'#888', marginLeft:3}}/>
+          <Text style={{fontSize:20, color:'#888'}}>게시물없음</Text>
+       </View>
       )
     }
     const getemail = async() => {
