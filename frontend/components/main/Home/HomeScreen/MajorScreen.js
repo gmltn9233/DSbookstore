@@ -27,7 +27,7 @@ function MajorScreen(props) {
         
         const feedObjArray = props.feed.filter(
             feedObj => feedObj.category === "전공"
-        ).sort((a, b) => {a.selling > b.selling ? -1 : a.selling < b.selling ? 1 : 0})
+        ).sort((a, b) => {b.selling-a.selling}).reverse()
         setPosts(feedObjArray);
         console.log(props.feed)
       }

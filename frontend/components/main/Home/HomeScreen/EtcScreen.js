@@ -27,7 +27,7 @@ function EtcScreen(props) {
         
         const feedObjArray = props.feed.filter(
             feedObj => feedObj.category === "기타"
-        )
+        ).sort((a, b) => {b.selling-a.selling}).reverse()
         setPosts(feedObjArray);
       }
     }, [props.usersAllLoaded, props.feed]);

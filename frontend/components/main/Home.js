@@ -58,7 +58,7 @@ function Home(props) {
           (feedObj) =>
             _.includes(_.toLower(feedObj.title), _.toLower(text)) ||
             _.includes(_.toLower(feedObj.lecture), _.toLower(text))
-        );
+        ).sort((a, b) => {a.selling-b.selling}).reverse();
         setPosts(feedObjArray);
       } else {
         setPosts(props.feed);
@@ -68,10 +68,9 @@ function Home(props) {
 
   useEffect(() => {
     if (true) {
-      props.feed.sort(function (x, y) {
-        return x.creation - y.creation;
-      });
-      setPosts(props.feed);
+      const propsFeed = props.feed
+        .sort((a, b) => {b.selling-a.selling})
+      setPosts(propsFeed);
     }
   }, [props.feed]);
 
@@ -94,7 +93,6 @@ function Home(props) {
             placeholder="검색"
             value={text}
             onChangeText={(text) => setText(text)}
-            /* onSubmitEditing={} */
           />
         </Item>
       </Header>
@@ -156,7 +154,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     paddingBottom: 30,
-    //backgroundColor: '#d6ca1a',
   },
   ItemStyle: {
     borderBottomColor:'lightgrey',
@@ -193,7 +190,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   back: {
-    //backgroundColor:'white', 
     justifyContent:'center', 
     alignItems:'center', 
     height: 550,

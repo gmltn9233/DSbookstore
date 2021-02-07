@@ -30,7 +30,7 @@ export function fetchUserPosts() {
             .collection("users")
             .doc(firebase.auth().currentUser.uid)
             .collection("userPosts")
-            .orderBy("creation", "asc")
+            .orderBy("selling", "asc")
             .get()
             .then((snapshot) => {
                 let posts = snapshot.docs.map(doc => {
@@ -47,7 +47,7 @@ export function fetchUsersPosts() {
     firebase
       .firestore()
       .collection("posts")
-      .orderBy("creation", "asc")
+      .orderBy("selling", "asc")
       .get()
       .then((snapshot) => {
         let posts = snapshot.docs.map((doc) => {
