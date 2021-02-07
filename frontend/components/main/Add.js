@@ -26,6 +26,7 @@ export default function Add({navigation}) {
     })();
   }, []);
 
+
   const alertDone = () => {
      Alert.alert(
        "축하합니다!",
@@ -80,16 +81,30 @@ export default function Add({navigation}) {
           downloadURL,title,category,price,publisher,lecture,damage,phoneNumber,likesCount: 0,selling:false,
           creation: firebase.firestore.FieldValue.serverTimestamp(),
         })
-        .then(saveUsersPostData(downloadURL));
+        .then(getPostId(downloadURL))
+      
     }
-    const saveUsersPostData = (downloadURL) => {
+    const getPostId = (downloadURL) => {
+      firebase.firestore().collection("posts").where("userId", "==", firebase.auth().currentUser.uid).where("title", "==", title)
+      .where("publisher", "==", publisher).where("category", "==", category).where("price", "==", price)
+      .get().then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+              saveUsersPostData(downloadURL, doc.id);
+          });
+      })
+      .catch((error) => {
+          console.log("Error getting documents: ", error);
+      })
+    }
+    const saveUsersPostData = (downloadURL, postId) => {
+
       firebase
         .firestore()
         .collection("users")
         .doc(firebase.auth().currentUser.uid)
         .collection("userPosts")
         .add({
-          userId: firebase.auth().currentUser.uid,
+          userId: firebase.auth().currentUser.uid, postId,
           downloadURL,title,category,price,publisher,lecture,damage,phoneNumber,likesCount: 0,selling:false,
           creation: firebase.firestore.FieldValue.serverTimestamp(),
         })
@@ -102,7 +117,6 @@ export default function Add({navigation}) {
   if (hasGalleryPermission === false) {
     return <Text>No access to Gallery</Text>;
   }
-  
 
   return (
     <View style={{backgroundColor: 'white', flex:1}}>

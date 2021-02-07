@@ -37,7 +37,7 @@ const BookEdit = ({
              damage:damage,
              phoneNumber:phoneNumber
          });
-        Alert.alert("수정되었습니다");
+        Alert.alert("수정되었습니다", "변경까지 약간의 시간이 소요됩니다.");
         closeModal();
     }
 

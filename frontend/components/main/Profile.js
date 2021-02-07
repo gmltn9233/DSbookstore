@@ -101,7 +101,7 @@ function Profile(props) {
                 category={item.category}
                 bookCondition={item.damage}
                 seliing={item.selling}
-                id={item.id}
+                id={item.postId}
               />
             )}
             ListHeaderComponent={<Text></Text>}

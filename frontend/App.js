@@ -60,7 +60,7 @@ export class App extends Component {
     const { loggedIn, loaded } = this.state;
     if (!loaded) {
       return (
-        <View style={{ flex: 1, justifyContent: 'center', backgroundColor: '#303D74'}}>
+        <View style={{ flex: 1, alignItems:'center', justifyContent: 'center', backgroundColor: '#303D74'}}>
           <Image
             source={require("./assets/DS_white.png")}
             style={{width:200, height:200}}/>
