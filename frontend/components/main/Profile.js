@@ -119,9 +119,9 @@ function Profile(props) {
           </View>
           <View style={styles.bottomitem} >
             <Ionicons name = 'information-circle-outline' size = {23} sytle={{alignItems: 'center'}}
-              onPress={() => Linking.openURL('https://naver.com')}/>
+              onPress={() => Linking.openURL('https://a-hyun.github.io/-/dsbookstore')}/>
             <Text style={{fontSize: 13}, {alignItems: 'center'}}
-              onPress={() => Linking.openURL('https://naver.com')}>이용안내</Text>
+              onPress={() => Linking.openURL('https://a-hyun.github.io/-/dsbookstore')}>이용안내</Text>
           </View>
           <View style={styles.bottomitem}>
             <Ionicons name = 'help-outline'  size = {23} sytle={{alignItems: 'center'}}
