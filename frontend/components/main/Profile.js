@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     //backgroundColor:'white', 
     justifyContent:'center', 
     alignItems:'center', 
-    height: 550,
+    height: 300,
   },
 });
 
