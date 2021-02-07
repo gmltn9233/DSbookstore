@@ -71,12 +71,14 @@ export default class BookItem extends React.Component {
             visible={this.state.modalVisible}
             closeModal={this.closeModal.bind(this)}
             title={this.props.title}
-            lecture={this.props.lecture}
+            className={this.props.lecture}
             price={this.props.price}
             img={this.props.img}
             phoneNumber={this.props.phoneNumber}
             publisher={this.props.publisher}
-            damage={this.props.damage}
+            bookCondition={this.props.damage}
+            category={this.props.category}
+            currentUserLike={this.props.currentUserLike}
           />
           <TouchableOpacity
             onPress={this.openModal.bind(this)}

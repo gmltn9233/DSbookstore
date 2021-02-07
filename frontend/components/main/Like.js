@@ -52,6 +52,8 @@ function Like(props) {
           publisher={item.publisher}
           damage={item.damage}
           id={item.id}
+          category={item.category}
+          currentUserLike={item.currentUserLike}
         />
         <View style={styles.button}>
           <Button

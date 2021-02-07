@@ -18,15 +18,7 @@ function NonMajorScreen(props) {
       /*문법상 setrefresing(true)가 맞는것같은데 저렇게 둘 경우 무한으로 빙글빙글돔..*/
       ()=>{componentDidMount()};
     } 
-    const componentDidMound=()=>{
-        //데이터불러오기
-        //setrefreshing(false);
-    }
-
-
-    const openDrawer=()=>{
-        props.navigation.openDrawer();
-    }
+    
 
     useEffect(() => {
       if (true) {
