@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, View, FlatList, RefreshControl} from "react-native";
+import { StyleSheet, View, FlatList} from "react-native";
 import {Container, Header, Button, Left, Body, Right, Text} from 'native-base'
 import { Ionicons} from "@expo/vector-icons";
 
@@ -11,14 +11,6 @@ import { connect } from 'react-redux'
 
 function NonMajorScreen(props) {
     const [posts, setPosts] = useState([]);
-    const [refreshing,setrefreshing]=useState(false);
-    
-    const handleRefresh=()=>{
-      setrefreshing(refreshing==true),
-      /*문법상 setrefresing(true)가 맞는것같은데 저렇게 둘 경우 무한으로 빙글빙글돔..*/
-      ()=>{componentDidMount()};
-    } 
-    
 
     useEffect(() => {
       if (true) {     
@@ -67,9 +59,6 @@ function NonMajorScreen(props) {
                 currentUserLike={item.currentUserLike}
                />
             )}
-            refreshControl={<RefreshControl refreshing={refreshing}
-                                            onRefresh={handleRefresh}/>}
-
           />
         </View>
       </Container>

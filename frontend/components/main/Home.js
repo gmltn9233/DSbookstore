@@ -13,7 +13,6 @@ import { connect } from 'react-redux'
 function Home(props) {
   const [text, setText] = useState();
   const [posts, setPosts] = useState([]);
-  const [posts1,setPosts1]=useState([]);
   const [refreshing, setrefreshing] = useState(false);
   const [nul, setnul] = useState("");
 
@@ -26,15 +25,26 @@ function Home(props) {
       </View>
     );
   };
-  const EmptysearchMessage = () => {
-    return (
-      <View style={styles.back}>
-        <Ionicons name="reload-circle-outline"
-          size={50} style={{color:'#888', marginLeft:3}}/>
-        <Text style={{fontSize:20, color:'#888'}}>게시물 없음</Text>
-      </View>
-    );
-  };
+
+  const getUsersLikes = (postId) => {
+    console.log("getUser start")
+    
+    firebase.firestore()
+        .collection("posts")
+        .doc(postId)
+        .collection("likes")
+        .doc(firebase.auth().currentUser.uid)
+        .onSnapshot((snapshot) => {
+            let currentUserLike = false;
+            if(snapshot.exists){
+                currentUserLike = true;
+            }
+        })
+}
+
+const testFunc = () => {
+  return true
+}
 
   const fetchUsersPostsUpdate = () => {
     firebase
@@ -49,10 +59,19 @@ function Home(props) {
 
           return { id, ...data };
         });
+
+
+        // for (let i = 0; i < newposts.length; i++) {
+        //   console.log("함수 시작")
+        //   let userLike=getUsersLikes(newposts[i].id);
+
+        //   newposts[i] = {...newposts[i], userLike};
+        //   console.log(newposts[i])
+        // }
         setPosts(newposts)
-        setPosts1(newposts)
       });
     }
+
 
   const handleRefresh = () => {
     setrefreshing(refreshing == true);
@@ -61,17 +80,16 @@ function Home(props) {
 
   useEffect(() => {
     if (true) {
-      posts.sort((a, b) => {b.selling-a.selling});
-      setPosts1(posts);
+      props.feed.sort((a, b) => {b.selling-a.selling});
       if (text !== nul) {
-        const feedObjArray = posts.filter(
+        const feedObjArray = props.feed.filter(
           (feedObj) =>
             _.includes(_.toLower(feedObj.title), _.toLower(text)) ||
             _.includes(_.toLower(feedObj.lecture), _.toLower(text))
         ).sort((a, b) => {b.selling-a.selling});
-        setPosts1(feedObjArray);
+        setPosts(feedObjArray);
       } else {
-        setPosts(posts.sort((a, b) => {b.selling-a.selling}));
+        setPosts(props.feed.sort((a, b) => {b.selling-a.selling}));
       }
     }
   }, [text]);
@@ -81,7 +99,6 @@ function Home(props) {
       const propsFeed = props.feed
         .sort((a, b) => {b.selling-a.selling})
       setPosts(propsFeed);
-      setPosts1(propsFeed)
     }
   }, [props.feed]);
 
@@ -111,7 +128,7 @@ function Home(props) {
         <FlatList
           numColumns={1}
           horizontal={false}
-          data={posts,posts1}
+          data={posts}
           renderItem={({ item }) => (
             <BookItem
               uid = {item.userId}
@@ -132,7 +149,7 @@ function Home(props) {
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
           }
-          ListEmptyComponent={EmptyListMessage,EmptysearchMessage}
+          ListEmptyComponent={EmptyListMessage}
         />
       </View>
     </Container>

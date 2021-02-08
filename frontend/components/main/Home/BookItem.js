@@ -98,13 +98,13 @@ const BookItem = ({
                         </View>
                     </View>
                     <View style={styles.button}>
-                        <TouchableOpacity>
                             {currentUserLike ? (
                                 <Ionicons name = 'heart' color = {"#F15F5F"} size = {30} />
                                 ) : (
-                                <Ionicons name = 'heart' color = {'lightgray'} size = {30} onPress={() => onLikePress(postId)} />
+                                <TouchableOpacity>
+                                        <Ionicons name = 'heart' color = {'lightgray'} size = {30} onPress={() => onLikePress(postId)} />
+                                </TouchableOpacity>
                             )}
-                        </TouchableOpacity>
                     </View>
                 </TouchableOpacity>
            </View>
