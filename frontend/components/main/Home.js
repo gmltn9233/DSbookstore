@@ -19,22 +19,13 @@ function Home(props) {
   const EmptyListMessage = () => {
     return (
       <View style={styles.back}>
-        <Ionicons name="reload-circle-outline"
+        <Ionicons name="book-outline"
           size={50} style={{color:'#888', marginLeft:3}}/>
-        <Text style={{fontSize:20, color:'#888'}}>불러오는 중</Text>
+        <Text style={{fontSize:20, color:'#888'}}>데싸 책방</Text>
       </View>
     );
   };
 
-  const EmptysearchMessage = () => {
-    return (
-      <View style={styles.back}>
-        <Ionicons name="reload-circle-outline"
-          size={50} style={{color:'#888', marginLeft:3}}/>
-        <Text style={{fontSize:20, color:'#888'}}>게시물 없음</Text>
-      </View>
-    );
-  };
 
   const getUsersLikes = (postId) => {
     console.log("getUser start")
@@ -161,7 +152,7 @@ const testFunc = () => {
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
           }
-          ListEmptyComponent={EmptyListMessage,EmptysearchMessage}
+          ListEmptyComponent={EmptyListMessage}
         />
       </View>
     </Container>

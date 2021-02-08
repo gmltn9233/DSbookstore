@@ -12,6 +12,15 @@ import { connect } from 'react-redux'
 function NonMajorScreen(props) {
     const [posts, setPosts] = useState([]);
 
+    const EmptyListMessage = () => {
+      return (
+        <View style={styles.back}>
+          <Ionicons name="book-outline"
+            size={50} style={{color:'#888', marginLeft:3}}/>
+          <Text style={{fontSize:20, color:'#888'}}>데싸 책방</Text>
+        </View>
+      );}
+    
     useEffect(() => {
       if (true) {     
         const feedObjArray = props.feed.filter(
@@ -59,6 +68,7 @@ function NonMajorScreen(props) {
                 currentUserLike={item.currentUserLike}
                />
             )}
+            ListEmptyComponent={EmptyListMessage}
           />
         </View>
       </Container>
@@ -76,7 +86,12 @@ const styles = StyleSheet.create({
     headertext:{
       color:'#303D74',
       fontSize:19,
-    }
+    },
+    back: {
+      justifyContent:'center', 
+      alignItems:'center', 
+      height: 550,
+    },
   });
 
 const mapStateToProps = (store) => ({
