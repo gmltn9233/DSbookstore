@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, View, Text, FlatList, RefreshControl} from "react-native";
 import {Container, Header,Left, Button, Item, Input} from 'native-base'
@@ -13,6 +12,7 @@ import { connect } from 'react-redux'
 function Home(props) {
   const [text, setText] = useState();
   const [posts, setPosts] = useState([]);
+  const [posts1,setPosts1]=useState([]);
   const [refreshing, setrefreshing] = useState(false);
   const [nul, setnul] = useState("");
 
@@ -22,6 +22,16 @@ function Home(props) {
         <Ionicons name="reload-circle-outline"
           size={50} style={{color:'#888', marginLeft:3}}/>
         <Text style={{fontSize:20, color:'#888'}}>불러오는 중</Text>
+      </View>
+    );
+  };
+
+  const EmptysearchMessage = () => {
+    return (
+      <View style={styles.back}>
+        <Ionicons name="reload-circle-outline"
+          size={50} style={{color:'#888', marginLeft:3}}/>
+        <Text style={{fontSize:20, color:'#888'}}>게시물 없음</Text>
       </View>
     );
   };
@@ -69,6 +79,7 @@ const testFunc = () => {
         //   console.log(newposts[i])
         // }
         setPosts(newposts)
+        setPosts1(newposts)
       });
     }
 
@@ -80,16 +91,17 @@ const testFunc = () => {
 
   useEffect(() => {
     if (true) {
-      props.feed.sort((a, b) => {b.selling-a.selling});
+      posts.sort((a, b) => {b.selling-a.selling});
+      setPosts1(posts);
       if (text !== nul) {
-        const feedObjArray = props.feed.filter(
+        const feedObjArray = posts.filter(
           (feedObj) =>
             _.includes(_.toLower(feedObj.title), _.toLower(text)) ||
             _.includes(_.toLower(feedObj.lecture), _.toLower(text))
         ).sort((a, b) => {b.selling-a.selling});
-        setPosts(feedObjArray);
+        setPosts1(feedObjArray);
       } else {
-        setPosts(props.feed.sort((a, b) => {b.selling-a.selling}));
+        setPosts(posts.sort((a, b) => {b.selling-a.selling}));
       }
     }
   }, [text]);
@@ -128,7 +140,7 @@ const testFunc = () => {
         <FlatList
           numColumns={1}
           horizontal={false}
-          data={posts}
+          data={posts,posts1}
           renderItem={({ item }) => (
             <BookItem
               uid = {item.userId}
@@ -149,7 +161,7 @@ const testFunc = () => {
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
           }
-          ListEmptyComponent={EmptyListMessage}
+          ListEmptyComponent={EmptyListMessage,EmptysearchMessage}
         />
       </View>
     </Container>

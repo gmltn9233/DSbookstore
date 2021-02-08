@@ -108,13 +108,16 @@ export default class BookTab extends React.Component{
                     </View>
                 </View>
                 <View>
-                    <TouchableOpacity style={styles.heart}>
+                    <View style={styles.heart}>
                         {this.props.currentUserLike ? (
                                     <Ionicons name = 'heart' color = {"#F15F5F"} size = {30} />
                                     ) : (
-                                        this.props.currentUserLike === false ? <Ionicons name = 'heart' color = {'lightgray'} size = {30} onPress={this.onLikePress.bind(this)}/>
+                                        this.props.currentUserLike === false ? 
+                                        <TouchableOpacity>
+                                            <Ionicons name = 'heart' color = {'lightgray'} size = {30} onPress={this.onLikePress.bind(this)}/>
+                                        </TouchableOpacity>
                         : <View/>  )}
-                    </TouchableOpacity>
+                    </View>
                 </View>
                 <View style={styles.BottomContainer}>
                     <View>
