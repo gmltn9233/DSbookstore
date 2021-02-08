@@ -33,7 +33,7 @@ export class Register extends Component {
     }
     checkalert=()=>{
         if(this.state.isSelected===true){
-            this.onSignUp
+            this.onSignUp()
         }
         else{
             Alert.alert(
