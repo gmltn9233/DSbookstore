@@ -17,7 +17,7 @@ function NonMajorScreen(props) {
         <View style={styles.back}>
           <Ionicons name="book-outline"
             size={50} style={{color:'#888', marginLeft:3}}/>
-          <Text style={{fontSize:20, color:'#888'}}>데싸 책방</Text>
+          <Text style={{fontSize:20, color:'#888'}}>데사책방</Text>
         </View>
       );}
     
