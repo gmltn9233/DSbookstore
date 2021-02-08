@@ -112,18 +112,18 @@ export default class BookScreen extends React.Component {
             </View>
             <View style={styles.buttoncontent}>
               <Segment style={{backgroundColor:this.props.selling===true? 'transparent':'white'}} >
-                <Button style={{backgroundColor: this.state.seg === 1 ? "#303D74" : 'white', borderColor: "#303D74"}}
-                  disabled={this.props.selling===true? true:false}
+                <Button style={{backgroundColor: this.props.selling === false ? "#303D74" : 'white', borderColor: "#303D74"}}
+                  disabled={this.props.selling===false? true:false}
                   first
-                  active={this.state.seg === 1 ? true : false}>
-                  <Text style={{ color: this.state.seg === 1 ? "white" : "#303D74" }}>  판매중  </Text>
+                  active={this.props.selling === true ? true : false}>
+                  <Text style={{ color: this.props.selling === false ? "white" : "#303D74" }}>  판매중  </Text>
                 </Button>
                 <Button last
-                  style={{backgroundColor: this.state.seg === 2 ? "#303D74" : 'white',borderColor: "#303D74"}}
+                  style={{backgroundColor: this.props.selling === true ? "#303D74" : 'white',borderColor: "#303D74"}}
                   disabled={this.props.selling===true? true:false}
-                  active={this.state.seg === 2 ? true : false}
+                  active={this.props.selling === false ? true : false}
                   onPress={this.alertSave}>
-                  <Text style={{ color: this.state.seg === 1 ? "#303D74" : "white" }}>  판매완료  </Text>
+                  <Text style={{ color: this.props.selling === false ? "#303D74" : "white" }}>  판매완료  </Text>
                 </Button>
               </Segment> 
             </View>
