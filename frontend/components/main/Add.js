@@ -133,7 +133,7 @@ export default function Add({navigation}) {
 
   return (
     <View style={{backgroundColor: 'white', flex:1}}>
-      <ScrollView justifyContent='center'>
+      <ScrollView>
         <View style={styles.container}>
           <View style={styles.formArea}>
             <DropDownPicker
