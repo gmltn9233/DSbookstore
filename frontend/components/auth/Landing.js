@@ -83,6 +83,7 @@ export class Login extends Component {
                             onPress={() => this.onSignUp()}
                             title="로그인"
                             color='#819ccc'
+                            
                         />
                     </View>
                     }

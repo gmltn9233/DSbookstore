@@ -66,30 +66,33 @@ export class Register extends Component {
         return (
             <View style={styles.Container}>
                 <Image
-                source={require("../../assets/DS_Logo.png")}
+                source={require("../../assets/DS_white1.png")}
                 style={{ width: 70, height: 70, marginBottom:20,}}
-              />
+                />
                 <TextInput 
-                    placeholder=" Name"
+                    placeholder="Name"
+                    placeholderTextColor='#d1d6e9'
                     onChangeText={(name) => this.setState({ name })}
-                    style={{marginBottom:20, borderBottomWidth:0.5, borderBottomColor:'gray', width:180}}
+                    style={{color:'#d1d6e9',marginBottom:20, borderBottomWidth:1.2, borderColor:'#d1d6e9', width:180}}
                 />
                 <TextInput 
-                    placeholder=" E-mail"
+                    placeholder="E-mail"
+                    placeholderTextColor='#d1d6e9'
                     onChangeText={(email) => this.setState({ email })}
-                    style={{marginBottom:20, borderBottomWidth:0.5, borderBottomColor:'gray', width:180}}
+                    style={{color:'#d1d6e9',marginBottom:20, borderBottomWidth:1.2, borderColor:'#d1d6e9', width:180}}
                 />
                 <TextInput 
-                    placeholder=" Password"
+                    placeholder="Password"
+                    placeholderTextColor='#d1d6e9'
                     secureTextEntry={true}
                     onChangeText={(password) => this.setState({ password })}
-                    style={{marginBottom:20, borderBottomWidth:0.5, borderBottomColor:'gray', width:180, marginBottom:50}}
+                    style={{color:'#d1d6e9',marginBottom:20, borderBottomWidth:1.2, borderColor:'#d1d6e9', width:180, marginBottom:50}}
                 />
                 <View style={{flexDirection:'row', marginBottom:15}}>
-                    <Text style={{fontWeight:'bold',textDecorationLine: 'underline',}}
+                    <Text style={{fontWeight:'bold',textDecorationLine: 'underline',color:'#d1d6e9',marginTop:2}}
                           onPress={() => Linking.openURL('https://a-hyun.github.io/per_inform/per_infor')}>이용약관</Text>
-                    <Text>에 동의하십니까?</Text>
-                    <CheckBox checked={this.state.isSelected} onPress={this.setSelection}/>
+                    <Text style={{color:'#d1d6e9',marginTop:2}}>에 동의하십니까?</Text>
+                    <CheckBox style={{borderColor:'#d1d6e9'}}checked={this.state.isSelected} onPress={this.setSelection}/>
                 </View>
                     
                 {
@@ -97,7 +100,7 @@ export class Register extends Component {
                     ? <ActivityIndicator style={styles.button} size="large"  color="#d1d6e9"/>
                     :<Button style={styles.button}
                     onPress={this.checkalert}
-                    color='gray'
+                    color='#819ccc'
                     title="저장"
                 />
                 }    
@@ -112,11 +115,13 @@ const styles = StyleSheet.create({
     Container:{
         justifyContent:'center',
         flex:1,
-        alignItems:'center'
+        alignItems:'center',
+        backgroundColor: '#303D74'
     },
     button:{
         marginTop:20,
         paddingTop:20,
+        width: 155,
     }
   });
 
