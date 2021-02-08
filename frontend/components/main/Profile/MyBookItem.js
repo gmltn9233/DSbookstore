@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {View, Text, StyleSheet,Image,ScrollView,Alert,TouchableOpacity,Switch} from 'react-native';
-import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content} from 'native-base'
-import { Ionicons,FontAwesome } from '@expo/vector-icons';
+import {View, Text, StyleSheet,Image,Alert,TouchableOpacity} from 'react-native';
+import { Button, Segment} from 'native-base'
+import {FontAwesome } from '@expo/vector-icons';
 
 import BookDetail from '../BookDetail';
 import {dbFirebase} from '../../../App';

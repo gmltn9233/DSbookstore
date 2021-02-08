@@ -72,7 +72,7 @@ function Like(props) {
   useEffect(() => {
     if (true) {
       props.feed.sort(function (x, y) {
-        return x.creation - y.creation;
+        return x.selling - y.selling;
       });
       let likePosts = props.feed.filter((post) => {
         if (post.currentUserLike) return post;

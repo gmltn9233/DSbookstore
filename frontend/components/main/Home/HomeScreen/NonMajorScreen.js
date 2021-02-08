@@ -21,14 +21,10 @@ function NonMajorScreen(props) {
     
 
     useEffect(() => {
-      if (true) {
-        props.feed.sort(function (x, y) {
-          return x.creation - y.creation;
-        });
-        
+      if (true) {     
         const feedObjArray = props.feed.filter(
             feedObj => feedObj.category === "비전공"
-        ).sort((a, b) => {b.selling-a.selling}).reverse()
+        ).sort((a, b) => {b.selling-a.selling})        
         setPosts(feedObjArray);
       }
     }, [props.usersAllLoaded, props.feed]);

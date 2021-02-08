@@ -21,13 +21,9 @@ function MajorScreen(props) {
 
     useEffect(() => {
       if (true) {
-        props.feed.sort(function (x, y) {
-          return x.creation - y.creation;
-        });
-        
         const feedObjArray = props.feed.filter(
             feedObj => feedObj.category === "전공"
-        ).sort((a, b) => {b.selling-a.selling}).reverse()
+        ).sort((a, b) => {b.selling-a.selling})
         setPosts(feedObjArray);
         console.log(props.feed)
       }

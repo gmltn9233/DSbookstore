@@ -1,10 +1,9 @@
 
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity, RefreshControl,} from "react-native";
+import { StyleSheet, View, Text, FlatList, RefreshControl} from "react-native";
 import {Container, Header,Left, Button, Item, Input} from 'native-base'
-import { Ionicons, FontAwesome } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
-// import BookDetail from "./BookDetail";
 import BookItem from './Home/BookItem';
 import _ from 'lodash';
 import firebase from 'firebase'
@@ -14,7 +13,6 @@ import { connect } from 'react-redux'
 function Home(props) {
   const [text, setText] = useState();
   const [posts, setPosts] = useState([]);
-  const [modalVisible, setModalVisible] = useState(false);
   const [refreshing, setrefreshing] = useState(false);
   const [nul, setnul] = useState("");
 
@@ -38,6 +36,7 @@ function Home(props) {
         let newposts = snapshot.docs.map((doc) => {
           const data = doc.data();
           const id = doc.id;
+
           return { id, ...data };
         });
         setPosts(newposts)
@@ -48,6 +47,7 @@ function Home(props) {
     setrefreshing(refreshing == true);
     fetchUsersPostsUpdate();
   };
+
   useEffect(() => {
     if (true) {
       props.feed.sort((a, b) => {b.selling-a.selling});
