@@ -138,8 +138,8 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: "black",
     margin: 15,
-    width: 100,
-    height: 150,
+    width: 120,
+    height: 120,
   },
   icontext: {
     flexDirection: "row",

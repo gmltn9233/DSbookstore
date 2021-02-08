@@ -51,7 +51,7 @@ export default function Add({navigation}) {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [2, 3],
+      aspect: [3, 3],
       quality: 1,
     });
 
@@ -187,7 +187,7 @@ export default function Add({navigation}) {
               onChangeText={(phoneNumber) => setPhoneNumber(phoneNumber)}
             />
           </View>
-          {image && <Image source={ {uri : image} } style={{ width:160,height:240,marginBottom:10}} />}
+          {image && <Image source={ {uri : image} } style={{ width:220,height:220,marginBottom:10}} />}
           <View style={styles.Image}>
             <Button
               title="갤러리에서 이미지 가져오기"
