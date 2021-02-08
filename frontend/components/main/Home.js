@@ -26,6 +26,15 @@ function Home(props) {
       </View>
     );
   };
+  const EmptysearchMessage = () => {
+    return (
+      <View style={styles.back}>
+        <Ionicons name="reload-circle-outline"
+          size={50} style={{color:'#888', marginLeft:3}}/>
+        <Text style={{fontSize:20, color:'#888'}}>게시물 없음</Text>
+      </View>
+    );
+  };
 
   const fetchUsersPostsUpdate = () => {
     firebase
@@ -123,7 +132,7 @@ function Home(props) {
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
           }
-          ListEmptyComponent={EmptyListMessage}
+          ListEmptyComponent={EmptyListMessage,EmptysearchMessage}
         />
       </View>
     </Container>
