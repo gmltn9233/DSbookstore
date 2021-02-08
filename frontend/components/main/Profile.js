@@ -94,7 +94,7 @@ function Profile(props) {
                 className={item.lecture}
                 price={item.price}
                 img={{ uri: item.downloadURL }}
-                phone={item.phone}
+                phone={item.phoneNumber}
                 publisher={item.publisher}
                 category={item.category}
                 bookCondition={item.damage}
