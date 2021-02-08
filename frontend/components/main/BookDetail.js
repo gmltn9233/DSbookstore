@@ -157,8 +157,8 @@ const styles = StyleSheet.create({
         color: '#888',
     },
     Imgborder:{
-        borderWidth:3,
-        borderColor:'#303D74',
+        //borderWidth:3,
+        //borderColor:'#303D74',
     },
     sell:{
         flexDirection:'row'
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
         marginBottom:20,
     },
     UpperContainer: {
-        paddingBottom:20,
+        paddingBottom:10,
         paddingTop:20,
         flexDirection:'row',
         justifyContent: 'space-evenly',
@@ -218,9 +218,9 @@ const styles = StyleSheet.create({
         alignItems:'flex-start'
     },
     bookImage:{
-        width: 100,
+        width: 130,
         marginBottom:5,
-        height:150,
+        height:130,
     },
     bookDescribeButtom:{
         fontSize:15

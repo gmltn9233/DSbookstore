@@ -110,10 +110,11 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   bookImage: {
-    marginRight:20,
-    width: 90,
-    marginBottom: 5,
-    height: 120,
+    marginRight:15,
+    width: 110,
+    marginTop:3,
+    marginBottom:3,
+    height:110,
   },
   bookDescribeTitle:{
     fontSize: 20,
