@@ -13,6 +13,7 @@ import { connect } from 'react-redux'
 function Home(props) {
   const [text, setText] = useState();
   const [posts, setPosts] = useState([]);
+  const [posts1,setPosts1]=useState([]);
   const [refreshing, setrefreshing] = useState(false);
   const [nul, setnul] = useState("");
 
@@ -40,6 +41,7 @@ function Home(props) {
           return { id, ...data };
         });
         setPosts(newposts)
+        setPosts1(newposts)
       });
     }
 
@@ -50,16 +52,17 @@ function Home(props) {
 
   useEffect(() => {
     if (true) {
-      props.feed.sort((a, b) => {b.selling-a.selling});
+      posts.sort((a, b) => {b.selling-a.selling});
+      setPosts1(posts);
       if (text !== nul) {
-        const feedObjArray = props.feed.filter(
+        const feedObjArray = posts.filter(
           (feedObj) =>
             _.includes(_.toLower(feedObj.title), _.toLower(text)) ||
             _.includes(_.toLower(feedObj.lecture), _.toLower(text))
         ).sort((a, b) => {b.selling-a.selling});
-        setPosts(feedObjArray);
+        setPosts1(feedObjArray);
       } else {
-        setPosts(props.feed.sort((a, b) => {b.selling-a.selling}));
+        setPosts(posts.sort((a, b) => {b.selling-a.selling}));
       }
     }
   }, [text]);
@@ -69,6 +72,7 @@ function Home(props) {
       const propsFeed = props.feed
         .sort((a, b) => {b.selling-a.selling})
       setPosts(propsFeed);
+      setPosts1(propsFeed)
     }
   }, [props.feed]);
 
@@ -98,7 +102,7 @@ function Home(props) {
         <FlatList
           numColumns={1}
           horizontal={false}
-          data={posts}
+          data={posts,posts1}
           renderItem={({ item }) => (
             <BookItem
               uid = {item.userId}
