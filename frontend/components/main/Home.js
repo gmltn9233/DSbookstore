@@ -102,6 +102,7 @@ const testFunc = () => {
       const propsFeed = props.feed
         .sort((a, b) => {b.selling-a.selling})
       setPosts(propsFeed);
+      setPosts1(propsFeed);
     }
   }, [props.feed]);
 
