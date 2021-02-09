@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Button, TextInput, Alert, ScrollView,ActivityIndicator,Image} from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
-
 import * as ImagePicker from "expo-image-picker";
 
+import {fetchUsersPosts, fetchUser, clearData } from '../../redux/actions/index'
+import { bindActionCreators } from "redux";
 import firebase from "firebase";
 require("firebase/firestore");
 require("firebase/firebase-storage");
+import { connect } from "react-redux";
 
-export default function Add({navigation}) {
+function Add({ navigation, fetchUsersPosts, fetchUser,clearData }) {
   const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
   const [image, setImage] = useState(null);
   const [title, setTitle] = useState("");
@@ -28,25 +30,31 @@ export default function Add({navigation}) {
   }, []);
 
   const checknull = () => {
-    if (!title.trim() || !category.trim() || !price.trim() || !publisher.trim() || !lecture.trim() || !phoneNumber.trim() || !damage.trim() || image===null)
-    {
+    if (
+      !title.trim() ||
+      !category.trim() ||
+      !price.trim() ||
+      !publisher.trim() ||
+      !lecture.trim() ||
+      !phoneNumber.trim() ||
+      !damage.trim() ||
+      image === null
+    ) {
       Alert.alert("기입하지 않은 정보가 있습니다.");
       return;
-    }
-    else{
+    } else {
       uploadImage();
     }
-  }
-
+  };
 
   const alertDone = () => {
-     Alert.alert(
-       "축하합니다!",
-       "게시글이 정상적으로 업로드 되었습니다.",
-       [{ text: "OK"}],
-       { cancelable: false }
-     );
-  }
+    Alert.alert(
+      "축하합니다!",
+      "게시글이 정상적으로 업로드 되었습니다.",
+      [{ text: "OK" }],
+      { cancelable: false }
+    );
+  };
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -60,94 +68,74 @@ export default function Add({navigation}) {
     }
   };
   const uploadImage = async () => {
-        setany(true);
-        const uri = image;
-        const childPath = `post/${firebase.auth().currentUser.uid}/${Math.random().toString(36)}`;
-        const response = await fetch(uri);
-        const blob = await response.blob();
-        const task = firebase
-            .storage()
-            .ref()
-            .child(childPath)
-            .put(blob);
+    setany(true);
+    const uri = image;
+    const childPath = `post/${
+      firebase.auth().currentUser.uid
+    }/${Math.random().toString(36)}`;
+    const response = await fetch(uri);
+    const blob = await response.blob();
+    const task = firebase.storage().ref().child(childPath).put(blob);
 
-        const taskProgress = snapshot => {
-            //console.log(`transferred: ${snapshot.bytesTransferred}`)
-        }
-        const taskCompleted = () => {
-            task.snapshot.ref.getDownloadURL().then((snapshot) => {
-                savePostData(snapshot);
-            })
-        }
-        const taskError = snapshot => {
-            console.log(snapshot)
-        }
-        task.on("state_changed", taskProgress, taskError, taskCompleted);
-    }
-
-    const savePostData = (downloadURL) => {
-      firebase
-        .firestore()
-        .collection("posts")
-        .add({
-          userId: firebase.auth().currentUser.uid,
-          downloadURL,title,category,price,publisher,lecture,damage,phoneNumber,likesCount: 0,selling:false,
-          creation: firebase.firestore.FieldValue.serverTimestamp(),
-        })
-        .then(getPostId(downloadURL))
-      
-    }
-    const getPostId = (downloadURL) => {
-      firebase.firestore().collection("posts").where("userId", "==", firebase.auth().currentUser.uid).where("title", "==", title)
-      .where("publisher", "==", publisher).where("category", "==", category).where("price", "==", price)
-      .get().then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-              saveUsersPostData(downloadURL, doc.id);
-          });
-      })
-      .catch((error) => {
-          console.log("Error getting documents: ", error);
-      })
-    }
-    const saveUsersPostData = (downloadURL, postId) => {
-
-      firebase
-        .firestore()
-        .collection("users")
-        .doc(firebase.auth().currentUser.uid)
-        .collection("userPosts")
-        .add({
-          userId: firebase.auth().currentUser.uid, postId,
-          downloadURL,title,category,price,publisher,lecture,damage,phoneNumber,likesCount: 0,selling:false,
-          creation: firebase.firestore.FieldValue.serverTimestamp(),
-        })
-        .then(function () {
-          navigation.navigate("Main");
-        })
-        .then(alertDone());
+    const taskProgress = (snapshot) => {
+      //console.log(`transferred: ${snapshot.bytesTransferred}`)
     };
+    const taskCompleted = () => {
+      task.snapshot.ref.getDownloadURL().then((snapshot) => {
+        savePostData(snapshot);
+      });
+    };
+    const taskError = (snapshot) => {
+      console.log(snapshot);
+    };
+    task.on("state_changed", taskProgress, taskError, taskCompleted);
+  };
 
+  const savePostData = (downloadURL) => {
+    firebase
+      .firestore()
+      .collection("posts")
+      .add({
+        userId: firebase.auth().currentUser.uid,
+        downloadURL,
+        title,
+        category,
+        price,
+        publisher,
+        lecture,
+        damage,
+        phoneNumber,
+        likesCount: 0,
+        selling: false,
+        creation: firebase.firestore.FieldValue.serverTimestamp(),
+      })
+      .then(function () {
+        clearData();
+        fetchUsersPosts();
+        fetchUser();
+        navigation.navigate("Main");
+      })
+      .then(alertDone());
+  };
   if (hasGalleryPermission === false) {
     return <Text>No access to Gallery</Text>;
   }
 
   return (
-    <View style={{backgroundColor: 'white', flex:1}}>
+    <View style={{ backgroundColor: "white", flex: 1 }}>
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.formArea}>
             <DropDownPicker
               items={[
-                {label: '전공', value: 'item1'},
-                {label: '비전공', value: 'item2'},
-                {label: '기타', value: 'item3'},
+                { label: "전공", value: "item1" },
+                { label: "비전공", value: "item2" },
+                { label: "기타", value: "item3" },
               ]}
-
               placeholder="카테고리"
-              placeholderStyle={{color: '#888'}}
-
-              containerStyle={{height: 45}}
-              itemStyle={{justifyContent: 'flex-start'}}
+              placeholderStyle={{ color: "#888" }}
+              containerStyle={{ height: 45 }}
+              itemStyle={{ justifyContent: "flex-start" }}
               onChangeItem={(category) => setCategory(category.label)}
             />
 
@@ -187,7 +175,12 @@ export default function Add({navigation}) {
               onChangeText={(phoneNumber) => setPhoneNumber(phoneNumber)}
             />
           </View>
-          {image && <Image source={ {uri : image} } style={{ width:220,height:220,marginBottom:10}} />}
+          {image && (
+            <Image
+              source={{ uri: image }}
+              style={{ width: 220, height: 220, marginBottom: 10 }}
+            />
+          )}
           <View style={styles.Image}>
             <Button
               title="갤러리에서 이미지 가져오기"
@@ -195,8 +188,15 @@ export default function Add({navigation}) {
               color="#a8a8a8"
             />
           </View>
-          <Text style={{color:'#a8a8a8'}}>주의 : 부적절한 게시글의 경우 삭제 될 수 있습니다.</Text>
-          <ActivityIndicator style={styles.button} size="large"  color="#d1d6e9" animating={any}/>
+          <Text style={{ color: "#a8a8a8" }}>
+            주의 : 부적절한 게시글의 경우 삭제 될 수 있습니다.
+          </Text>
+          <ActivityIndicator
+            style={styles.button}
+            size="large"
+            color="#d1d6e9"
+            animating={any}
+          />
           <View style={styles.buttonclick}>
             <Button
               title="  등록  "
@@ -250,3 +250,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
 });
+
+const mapDispatchProps = (dispatch) =>
+  bindActionCreators({ fetchUsersPosts, fetchUser,clearData }, dispatch);
+export default connect(null, mapDispatchProps)(Add);

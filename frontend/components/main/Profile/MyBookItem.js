@@ -31,9 +31,6 @@ export default class BookScreen extends React.Component {
     await dbFirebase.collection('posts').doc(this.props.id).update({
       selling:true
   });
-    await dbFirebase.collection('users').doc(this.props.userid).collection("userPosts").doc(this.props.id2).update({
-    selling:true
-  });
     if (this.props.selling === true) {
       this.setState({
         seg: 2,

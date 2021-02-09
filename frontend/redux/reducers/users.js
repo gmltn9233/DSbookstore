@@ -1,7 +1,6 @@
 import { USERS_POSTS_STATE_CHANGE, USERS_LIKES_STATE_CHANGE, CLEAR_DATA } from "../constants"
 
 const initialState = {
-  users: [],
   feed: [],
 };
 

@@ -1,4 +1,4 @@
-import { USER_STATE_CHANGE, USER_POSTS_STATE_CHANGE, USERS_POSTS_STATE_CHANGE, USERS_LIKES_STATE_CHANGE, CLEAR_DATA} from '../constants/index'
+import { USER_STATE_CHANGE, USERS_POSTS_STATE_CHANGE, USERS_LIKES_STATE_CHANGE, CLEAR_DATA} from '../constants/index'
 import firebase from 'firebase'
 require('firebase/firestore')
 
@@ -21,24 +21,6 @@ export function fetchUser() {
                 else {
                     console.log('fetchUser does not exist')
                 }
-            })
-    })
-}
-export function fetchUserPosts() {
-    return ((dispatch) => {
-        firebase.firestore()
-            .collection("users")
-            .doc(firebase.auth().currentUser.uid)
-            .collection("userPosts")
-            .orderBy("selling", "asc")
-            .get()
-            .then((snapshot) => {
-                let posts = snapshot.docs.map(doc => {
-                    const data = doc.data();
-                    const id = doc.id;
-                    return { id, ...data }
-                })
-                dispatch({ type: USER_POSTS_STATE_CHANGE, posts })
             })
     })
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, StyleSheet, View, Modal, Image, Alert, TouchableOpacity} from 'react-native';
-import { Header, Left,  Body, Button, Right} from 'native-base'
+import { Header, Left,  Body, Right} from 'native-base'
 import { Ionicons } from '@expo/vector-icons';
 import * as SMS from 'expo-sms';
 

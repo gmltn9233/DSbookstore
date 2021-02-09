@@ -5,14 +5,12 @@ import { Ionicons } from "@expo/vector-icons";
 
 import BookItem from './Home/BookItem';
 import _ from 'lodash';
-import firebase from 'firebase'
 require('firebase/firestore')
 import { connect } from 'react-redux'
 
 function Home(props) {
   const [text, setText] = useState();
   const [posts, setPosts] = useState([]);
-  const [posts1,setPosts1]=useState([]);
   const [refreshing, setrefreshing] = useState(false);
   const [nul, setnul] = useState("");
 
@@ -26,84 +24,31 @@ function Home(props) {
     );
   };
 
-
-  const getUsersLikes = (postId) => {
-    console.log("getUser start")
-    
-    firebase.firestore()
-        .collection("posts")
-        .doc(postId)
-        .collection("likes")
-        .doc(firebase.auth().currentUser.uid)
-        .onSnapshot((snapshot) => {
-            let currentUserLike = false;
-            if(snapshot.exists){
-                currentUserLike = true;
-            }
-        })
-}
-
-const testFunc = () => {
-  return true
-}
-
-  const fetchUsersPostsUpdate = () => {
-    firebase
-      .firestore()
-      .collection("posts")
-      .orderBy("selling", "asc")
-      .get()
-      .then((snapshot) => {
-        let newposts = snapshot.docs.map((doc) => {
-          const data = doc.data();
-          const id = doc.id;
-
-          return { id, ...data };
-        });
-
-
-        // for (let i = 0; i < newposts.length; i++) {
-        //   console.log("함수 시작")
-        //   let userLike=getUsersLikes(newposts[i].id);
-
-        //   newposts[i] = {...newposts[i], userLike};
-        //   console.log(newposts[i])
-        // }
-        setPosts(newposts)
-        setPosts1(newposts)
-      });
-    }
-
-
   const handleRefresh = () => {
     setrefreshing(refreshing == true);
-    fetchUsersPostsUpdate();
   };
 
   useEffect(() => {
     if (true) {
-      posts.sort((a, b) => {b.selling-a.selling});
-      setPosts1(posts);
+      props.feed.sort((a, b) => {b.selling-a.selling});
       if (text !== nul) {
-        const feedObjArray = posts.filter(
+        const feedObjArray = props.feed.filter(
           (feedObj) =>
             _.includes(_.toLower(feedObj.title), _.toLower(text)) ||
             _.includes(_.toLower(feedObj.lecture), _.toLower(text))
         ).sort((a, b) => {b.selling-a.selling});
-        setPosts1(feedObjArray);
+        setPosts(feedObjArray);
       } else {
-        setPosts(posts.sort((a, b) => {b.selling-a.selling}));
+        setPosts(props.feed.sort((a, b) => {b.selling-a.selling}));
       }
     }
   }, [text]);
 
   useEffect(() => {
-    if (true) {
-      const propsFeed = props.feed
-        .sort((a, b) => {b.selling-a.selling})
-      setPosts(propsFeed);
-      setPosts1(propsFeed);
-    }
+    const propsFeed = props.feed.sort((a, b) => {
+      b.selling - a.selling;
+    });
+    setPosts(propsFeed);
   }, [props.feed]);
 
   return (
@@ -132,7 +77,7 @@ const testFunc = () => {
         <FlatList
           numColumns={1}
           horizontal={false}
-          data={posts,posts1}
+          data={posts}
           renderItem={({ item }) => (
             <BookItem
               uid = {item.userId}

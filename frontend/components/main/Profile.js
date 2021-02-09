@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, View, Text, Image, FlatList, Button, TouchableOpacity, Alert, Linking,} from "react-native";
+import { StyleSheet, View, Text, Image, FlatList, Alert, Linking,} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import MyBookItem from "./Profile/MyBookItem";
 import * as MailComposer from 'expo-mail-composer';
-import {Container, Header,  Left, Item, Input,Body} from 'native-base'
-import {WebView} from "react-native-webview";
+import {Header, Left, Body} from 'native-base'
 
 import firebase from 'firebase'
 require('firebase/firestore')
@@ -16,16 +15,12 @@ function Profile(props) {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        const { currentUser, posts } = props;
-
-        if (props.route.params.uid === firebase.auth().currentUser.uid) {
-            setUser(currentUser)
-            setUserPosts(posts)
-        }
-        else {
-          console.log("ProfileError")
-        }
-    }, [props.route.params.uid])
+      const propsFeed = props.feed.filter(
+        (x) => x.userId === firebase.auth().currentUser.uid
+      );
+      setUser(props.currentUser);
+      setUserPosts(propsFeed);
+    }, [props.feed]);
 
     const onLogout = () => {
         firebase.auth().signOut();
@@ -54,7 +49,13 @@ function Profile(props) {
     };
 
     if (user === null) {
-        return <View />
+      return (
+        <View style={styles.emptyView}>
+          <Text>
+            유저 정보가 확인되지 않습니다. 네트워크 상태를 확인해주세요.
+          </Text>
+        </View>
+      );
     }
     return (
       <View style={styles.container}>
@@ -137,7 +138,7 @@ function Profile(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: "white",
   },
   containerInfo: {
     margin: 15,
@@ -149,49 +150,53 @@ const styles = StyleSheet.create({
   containerImage: {
     flex: 1 / 3,
   },
-  header:{
-    backgroundColor:'white',
+  header: {
+    backgroundColor: "white",
   },
-  headertext:{
-    marginLeft:10,
-    color:'#303D74',
-    fontSize:19,
+  headertext: {
+    marginLeft: 10,
+    color: "#303D74",
+    fontSize: 19,
   },
   bottombar: {
-    height: 50, 
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderColor : '#d6d6d6',
-    borderWidth: 0.5, 
+    height: 50,
+    flexDirection: "row",
+    alignItems: "center",
+    borderColor: "#d6d6d6",
+    borderWidth: 0.5,
     borderLeftWidth: 0,
     borderRightWidth: 0,
     borderBottomWidth: 0,
   },
-  bottomitem:{
+  bottomitem: {
     flex: 1,
-    height: 40, 
-    flexDirection: 'column', 
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  list:{
     height: 40,
-    alignItems: 'center', 
-    backgroundColor: '#303D74',
-    justifyContent: 'center',
-    flexDirection: 'row',
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  list: {
+    height: 40,
+    alignItems: "center",
+    backgroundColor: "#303D74",
+    justifyContent: "center",
+    flexDirection: "row",
   },
   back: {
-    //backgroundColor:'white', 
-    justifyContent:'center', 
-    alignItems:'center', 
+    //backgroundColor:'white',
+    justifyContent: "center",
+    alignItems: "center",
     height: 300,
+  },
+  emptyView: {
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
 const mapStateToProps = (store) => ({
-    currentUser: store.userState.currentUser,
-    posts: store.userState.posts,
-})
+  currentUser: store.userState.currentUser,
+  feed: store.usersState.feed,
+});
 
 export default connect(mapStateToProps, null)(Profile);
