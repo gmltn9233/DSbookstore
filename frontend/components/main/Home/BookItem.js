@@ -84,7 +84,7 @@ const BookItem = ({
                                 </TouchableOpacity>)
                             }
                             {
-                                selled===true?<View><Image source={require("../../../assets/panmae.png")} style={{width: 45, height: 15}}/></View>:<View/
+                                selled===true?<View><Image source={require("../../../assets/panmae.png")} style={{width: 45, height: 15}}/></View>:<View/>
                             }
                         </View>
                         
