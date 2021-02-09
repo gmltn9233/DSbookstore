@@ -21,19 +21,8 @@ const BookItem = ({
   selled,
   currentUserLike
 }) => {
-    
-    const [heartColor, setHeartColor] = useState('lightgray'); 
     const [modalVisible, setModalVisible] = useState(false);
 
-    const updateHeartColor = () => {
-        if(heartColor === "#F15F5F"){
-            setHeartColor('lightgray')
-            alertDelete()
-        }else{
-            setHeartColor('#F15F5F')
-            onLikePress(postId)
-        }
-    }
 
     const onLikePress = (postId) => {
         dbFirebase
@@ -44,18 +33,6 @@ const BookItem = ({
           .set({});
         Alert.alert("관심목록", "추가되었습니다")
     }
-
-    // const onDislikePress = (postId) => {
-    //     dbFirebase
-    //         .collection("posts")
-    //         .doc(postId)
-    //         .collection("likes")
-    //         .doc(authFirebase.currentUser.uid)
-    //         .delete();
-        
-    //     Alert.alert("관심목록", "삭제되었습니다")
-    // }
-
 
         return (
             <View style={{ borderBottomColor:'lightgrey', borderBottomWidth:0.5}}>                
