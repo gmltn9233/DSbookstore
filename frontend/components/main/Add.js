@@ -153,7 +153,7 @@ function Add({ navigation, fetchUsersPosts, fetchUser,clearData }) {
 
             <TextInput
               style={styles.textForm}
-              placeholder={"수업 과목"}
+              placeholder={"과목명  or  키워드"}
               onChangeText={(lecture) => setLecture(lecture)}
             />
 
@@ -188,7 +188,7 @@ function Add({ navigation, fetchUsersPosts, fetchUser,clearData }) {
               color="#a8a8a8"
             />
           </View>
-          <Text style={{ color: "#a8a8a8" }}>
+          <Text style={{ color: "#a8a8a8"}}>
             주의 : 부적절한 게시글의 경우 삭제 될 수 있습니다.
           </Text>
           <ActivityIndicator
