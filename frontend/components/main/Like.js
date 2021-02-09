@@ -60,6 +60,10 @@ function Like(props) {
           selled={item.selled}
         />
         <View style={styles.button}>
+          {
+            item.selled===true?
+            <Image source={require("../../assets/panmae.png")} style={{width: 45, height: 15, opacity:0, marginBottom:16}}/>:<View/>
+          }
           <Ionicons name = {'heart'} color = {"#F15F5F"} size = {30}
             onPress={() => {
               setPosts((prevItemState) =>
@@ -70,9 +74,7 @@ function Like(props) {
           />
           {
             item.selled===true?
-            <View>
-              <Image source={require("../../assets/panmae.png")} style={{width: 45, height: 15}}/>
-            </View>:<View/>
+            <Image source={require("../../assets/panmae.png")} style={{width: 45, height: 15, marginTop:16}}/>:<View/>
           }
         </View>
       </View>
