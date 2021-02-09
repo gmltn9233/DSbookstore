@@ -42,6 +42,7 @@ export default class BookScreen extends React.Component {
         sel:false
       })
     }
+    Alert.alert("수정되었습니다", "앱 재구동시 완전히 적용됩니다")
   };
 
   alertSave = async() => {
