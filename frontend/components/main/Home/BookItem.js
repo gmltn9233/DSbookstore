@@ -75,7 +75,8 @@ const BookItem = ({
                         </View>
                     </View>
                     <View alignItems='flex-end' flex={1} marginRight={3}>
-                        <View style={styles.button}>            
+                        <View style={styles.button}>
+                        <Image source={require("../../../assets/panmae.png")} style={{width: 45, height: 15, opacity:0, marginBottom:16}}/>            
                             {currentUserLike ? (
                                 <Ionicons name ={selled===true?'':'heart'} color = {"#F15F5F"} size = {30}/>
                                 ) : (
@@ -140,10 +141,6 @@ const styles = StyleSheet.create({
         flexDirection:'row',
     },
     panmae:{
-        //backgroundColor: '#888',
-        //borderRadius : 3,
-        //width: 50,
-        //height: 18,
         alignItems: 'center',
         justifyContent: 'center'
     }
