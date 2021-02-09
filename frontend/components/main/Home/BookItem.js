@@ -107,9 +107,11 @@ const BookItem = ({
                                 </TouchableOpacity>)
                             }
                             {
-                                selled===true?<View style={styles.panmae}><Text>판매완료</Text></View>:<Text></Text>
+                                selled===true?<View><Image source={require("../../../assets/panmae.png")} style={{width: 45, height: 15}}/></View>:<Text></Text>
                             }
                         </View>
+                        
+
                     </View>
                 </TouchableOpacity>
            </View>
@@ -161,10 +163,10 @@ const styles = StyleSheet.create({
         flexDirection:'row',
     },
     panmae:{
-        backgroundColor: '#888',
-        borderRadius : 3,
-        width: 50,
-        height: 18,
+        //backgroundColor: '#888',
+        //borderRadius : 3,
+        //width: 50,
+        //height: 18,
         alignItems: 'center',
         justifyContent: 'center'
     }
