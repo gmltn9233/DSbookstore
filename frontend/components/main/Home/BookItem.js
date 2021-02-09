@@ -76,7 +76,7 @@ const BookItem = ({
                     </View>
                     <View alignItems='flex-end' flex={1} marginRight={3}>
                         <View style={styles.button}>
-                        <Image source={require("../../../assets/panmae.png")} style={{width: 45, height: 15, opacity:0, marginBottom:16}}/>            
+                        <Image source={require("../../../assets/panmae.png")} style={{width: 45, height: 15, opacity:0}}/>            
                             {currentUserLike ? (
                                 <Ionicons name ={selled===true?'':'heart'} color = {"#F15F5F"} size = {30}/>
                                 ) : (
@@ -85,7 +85,7 @@ const BookItem = ({
                                 </TouchableOpacity>)
                             }
                             {
-                                selled===true?<View><Image source={require("../../../assets/panmae.png")} style={{width: 45, height: 15, marginTop:40}}/></View>:<Text></Text>
+                                selled===true?<View><Image source={require("../../../assets/panmae.png")} style={{width: 45, height: 15}}/></View>:<Text></Text>
                             }
                         </View>
                         
