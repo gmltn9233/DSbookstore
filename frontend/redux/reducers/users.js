@@ -1,4 +1,4 @@
-import { USERS_POSTS_STATE_CHANGE, USERS_LIKES_STATE_CHANGE, CLEAR_DATA } from "../constants"
+import { USERS_POSTS_STATE_CHANGE, USERS_LIKES_STATE_CHANGE, USERS_POSTS_SELL_STATE_CHANGE,CLEAR_DATA } from "../constants"
 
 const initialState = {
   feed: [],
@@ -17,6 +17,15 @@ export const users = (state = initialState, action) => {
           feed: state.feed.map((post) =>
             post.id === action.postId
               ? { ...post, currentUserLike: action.currentUserLike }
+              : post
+          ),
+        };
+      case USERS_POSTS_SELL_STATE_CHANGE:
+        return {
+          ...state,
+          feed: state.feed.map((post) =>
+            post.id === action.postId
+              ? { ...post, selled: action.selled }
               : post
           ),
         };

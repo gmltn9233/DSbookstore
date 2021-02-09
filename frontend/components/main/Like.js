@@ -43,8 +43,8 @@ function Like(props) {
   const renderLikedItem = (item,index) => {
     return (
       <View style={{flexDirection:"row", borderBottomWidth:1, borderBottomColor:'lightgray',
-                    backgroundColor:item.selling===true?"#cfcfcf":'transparent',
-                    opacity:item.selling===true?0.5:1,}}>
+                    backgroundColor:item.selled===true?"#cfcfcf":'transparent',
+                    opacity:item.selled===true?0.5:1,}}>
         <LikeBookItem
           title={item.title}
           lecture={item.lecture}
@@ -57,10 +57,10 @@ function Like(props) {
           id={item.id}
           category={item.category}
           currentUserLike={item.currentUserLike}
-          selling={item.selling}
+          selled={item.selled}
         />
         <View style={styles.button}>
-          <Ionicons name = {item.selling===true?'':'heart'} color = {"#F15F5F"} size = {30}
+          <Ionicons name = {item.selled===true?'':'heart'} color = {"#F15F5F"} size = {30}
             onPress={() => {
               setPosts((prevItemState) =>
               prevItemState.filter((_item, _Index) => _Index !== index)
@@ -74,7 +74,7 @@ function Like(props) {
               prevItemState.filter((_item, _Index) => _Index !== index)
               );
             onDislikePress(item.id);
-            }}>{item.selling===true?'판매완료':''}</Text> 
+            }}>{item.selled===true?'판매완료':''}</Text> 
         </View>
       </View>
     );
@@ -82,7 +82,7 @@ function Like(props) {
   useEffect(() => {
     if (true) {
       props.feed.sort(function (x, y) {
-        return x.selling - y.selling;
+        return x.selled - y.selled;
       });
       let likePosts = props.feed.filter((post) => {
         if (post.currentUserLike) return post;

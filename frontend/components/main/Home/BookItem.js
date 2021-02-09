@@ -18,7 +18,7 @@ const BookItem = ({
   img,
   phone,
   category,
-  selling,
+  selled,
   currentUserLike
 }) => {
     
@@ -59,14 +59,14 @@ const BookItem = ({
 
         return (
             <View style={{ borderBottomColor:'lightgrey', borderBottomWidth:0.5}}>                
-                <TouchableOpacity style={{backgroundColor:selling===true?"#cfcfcf":'white',
-                                          opacity:selling===true?0.5:1,
+                <TouchableOpacity style={{backgroundColor:selled===true?"#cfcfcf":'white',
+                                          opacity:selled===true?0.5:1,
                                           borderBottomColor:'lightgrey',
                                           borderBottomWidth:0.5,
                                           alignItems: 'center',
                                           flexDirection: 'row',
                                           paddingLeft: 10,
-                                        }} onPress={() => setModalVisible(true)}disabled={selling===true?true:false}>
+                                        }} onPress={() => setModalVisible(true)}disabled={selled===true?true:false}>
                     <BookDetail
                         uid = {uid}
                         postId = {postId}
@@ -100,14 +100,14 @@ const BookItem = ({
                     <View alignItems='flex-end' flex={1} marginRight={3}>
                         <View style={styles.button}>            
                             {currentUserLike ? (
-                                <Ionicons name ={selling===true?'':'heart'} color = {"#F15F5F"} size = {30}/>
+                                <Ionicons name ={selled===true?'':'heart'} color = {"#F15F5F"} size = {30}/>
                                 ) : (
                                 <TouchableOpacity>
-                                        <Ionicons name ={selling===true?'':'heart'} color = {'lightgray'} size = {30} onPress={() => onLikePress(postId)} />
+                                        <Ionicons name ={selled===true?'':'heart'} color = {'lightgray'} size = {30} onPress={() => onLikePress(postId)} />
                                 </TouchableOpacity>)
                             }
                             {
-                                selling===true?<View style={styles.panmae}><Text>판매완료</Text></View>:<Text></Text>
+                                selled===true?<View style={styles.panmae}><Text>판매완료</Text></View>:<Text></Text>
                             }
                         </View>
                     </View>

@@ -1,4 +1,4 @@
-import { USER_STATE_CHANGE, USERS_POSTS_STATE_CHANGE, USERS_LIKES_STATE_CHANGE, CLEAR_DATA} from '../constants/index'
+import { USER_STATE_CHANGE, USERS_POSTS_STATE_CHANGE, USERS_POSTS_SELL_STATE_CHANGE,USERS_LIKES_STATE_CHANGE, CLEAR_DATA} from '../constants/index'
 import firebase from 'firebase'
 require('firebase/firestore')
 
@@ -39,6 +39,7 @@ export function fetchUsersPosts() {
         });
         for (let i = 0; i < posts.length; i++) {
           dispatch(fetchUsersLikes(posts[i].id));
+          dispatch(fetchUsersPostsSell(posts[i].id));
         }
         dispatch({ type: USERS_POSTS_STATE_CHANGE, posts});
       });
@@ -57,8 +58,21 @@ export function fetchUsersLikes(postId) {
                 if(snapshot.exists){
                     currentUserLike = true;
                 }
-
                 dispatch({ type: USERS_LIKES_STATE_CHANGE, postId, currentUserLike })
             })
     })
+}
+export function fetchUsersPostsSell(postId) {
+  return (dispatch, getState) => {
+    firebase
+      .firestore()
+      .collection("posts")
+      .doc(postId)
+      .onSnapshot((snapshot) => {
+        if (snapshot.exists) {
+          console.log(snapshot.data().selling)
+          dispatch({ type: USERS_POSTS_SELL_STATE_CHANGE, postId, selled : snapshot.data().selling });
+        }
+      });
+  };
 }

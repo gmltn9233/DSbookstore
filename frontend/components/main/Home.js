@@ -92,7 +92,7 @@ function Home(props) {
               img = {item.downloadURL}
               phone = {item.phoneNumber}
               category = {item.category}
-              selling={item.selling}
+              selled={item.selled}
               currentUserLike={item.currentUserLike}
            />
         )}
