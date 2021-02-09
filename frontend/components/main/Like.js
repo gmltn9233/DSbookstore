@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Button, View, Text, FlatList, RefreshControl } from "react-native";
+import { StyleSheet, Button, View, Text, FlatList, RefreshControl ,Image} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import {Header, Left, Body} from 'native-base'
 
@@ -60,7 +60,7 @@ function Like(props) {
           selled={item.selled}
         />
         <View style={styles.button}>
-          <Ionicons name = {item.selled===true?'':'heart'} color = {"#F15F5F"} size = {30}
+          <Ionicons name = {'heart'} color = {"#F15F5F"} size = {30}
             onPress={() => {
               setPosts((prevItemState) =>
               prevItemState.filter((_item, _Index) => _Index !== index)
@@ -68,13 +68,12 @@ function Like(props) {
             onDislikePress(item.id);
             }}
           />
-        
-          <Text onPress={() => {
-              setPosts((prevItemState) =>
-              prevItemState.filter((_item, _Index) => _Index !== index)
-              );
-            onDislikePress(item.id);
-            }}>{item.selled===true?'판매완료':''}</Text> 
+          {
+            item.selled===true?
+            <View>
+              <Image source={require("../../assets/panmae.png")} style={{width: 45, height: 15}}/>
+            </View>:<View/>
+          }
         </View>
       </View>
     );
