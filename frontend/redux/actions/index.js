@@ -70,7 +70,6 @@ export function fetchUsersPostsSell(postId) {
       .doc(postId)
       .onSnapshot((snapshot) => {
         if (snapshot.exists) {
-          console.log(snapshot.data().selling)
           dispatch({ type: USERS_POSTS_SELL_STATE_CHANGE, postId, selled : snapshot.data().selling });
         }
       });
