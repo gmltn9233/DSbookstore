@@ -4,7 +4,6 @@ import { Ionicons } from "@expo/vector-icons";
 import MyBookItem from "./Profile/MyBookItem";
 import * as MailComposer from 'expo-mail-composer';
 import {Header, Left, Body} from 'native-base'
-
 import firebase from 'firebase'
 require('firebase/firestore')
 import { connect } from 'react-redux'
@@ -101,9 +100,8 @@ function Profile(props) {
                 bookCondition={item.damage}
                 date = {Date(item.creation.seconds*1000)}
                 selling={item.selling}
-                id={item.postId}
+                id={item.id}
                 userid={item.userId}
-                id2={item.id}
               />
             )}
             ListHeaderComponent={<Text></Text>}

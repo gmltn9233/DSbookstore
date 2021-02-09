@@ -18,6 +18,7 @@ export default class BookScreen extends React.Component {
       btbc: "white",
       opacity: 1,
       ds: false,
+      sel:false,
     };
   }
 
@@ -30,15 +31,16 @@ export default class BookScreen extends React.Component {
   yalert = async() => {
     await dbFirebase.collection('posts').doc(this.props.id).update({
       selling:true
-  });
-    if (this.props.selling === true) {
+    });
+    if(this.state.sel===false){
       this.setState({
-        seg: 2,
-        backgroundColor: "#cfcfcf",
-        btbc:'transparent',
-        opacity: 0.5,
-        ds: true,
-      });
+        sel:true
+      })
+    }
+    else{
+      this.setState({
+        sel:false
+      })
     }
   };
 
@@ -67,8 +69,8 @@ export default class BookScreen extends React.Component {
             flexDirection: "row",
             borderBottomWidth: 0.7,
             borderColor: "lightgray",
-            backgroundColor: this.props.selling===true? "#cfcfcf":'white',
-            opacity: this.props.selling===true? 0.5:1,
+            backgroundColor: (this.props.selling===true||this.state.sel===true)? "#cfcfcf":'white',
+            opacity: (this.props.selling===true||this.state.sel===true)? 0.5:1,
           }}
         >
           <View>
@@ -89,7 +91,7 @@ export default class BookScreen extends React.Component {
             />
             <TouchableOpacity
               onPress={this.openModal.bind(this)}
-              disabled={this.props.selling===true? true:false}
+              disabled={(this.props.selling===true||this.state.sel===true)? true:false}
             >
               <Image style={styles.image} source={this.props.img} />
             </TouchableOpacity>
@@ -109,19 +111,19 @@ export default class BookScreen extends React.Component {
               </View>
             </View>
             <View style={styles.buttoncontent}>
-              <Segment style={{backgroundColor:this.props.selling===true? 'transparent':'white'}} >
-                <Button style={{backgroundColor: this.props.selling === false ? "#303D74" : 'white', borderColor: "#303D74"}}
-                  disabled={this.props.selling===false? true:false}
+              <Segment style={{backgroundColor:(this.props.selling===true||this.state.sel===true)? 'transparent':'white'}} >
+                <Button style={{backgroundColor: (this.props.selling===true||this.state.sel===true) ? "white" : '#303D74', borderColor: "#303D74"}}
+                  disabled={(this.props.selling===true||this.state.sel===true)? false:true}
                   first
-                  active={this.props.selling === true ? true : false}>
-                  <Text style={{ color: this.props.selling === false ? "white" : "#303D74" }}>  판매중  </Text>
+                  active={(this.props.selling===true||this.state.sel===true) ? true : false}>
+                  <Text style={{ color: (this.props.selling===true||this.state.sel===true) ? "#303D74" : "white" }}>  판매중  </Text>
                 </Button>
                 <Button last
-                  style={{backgroundColor: this.props.selling === true ? "#303D74" : 'white',borderColor: "#303D74"}}
-                  disabled={this.props.selling===true? true:false}
-                  active={this.props.selling === false ? true : false}
+                  style={{backgroundColor: (this.props.selling===true||this.state.sel===true) ? "#303D74" : 'white',borderColor: "#303D74"}}
+                  disabled={(this.props.selling===true||this.state.sel===true)? true:false}
+                  active={(this.props.selling===true||this.state.sel===true) ? false : true}
                   onPress={this.alertSave}>
-                  <Text style={{ color: this.props.selling === false ? "#303D74" : "white" }}>  판매완료  </Text>
+                  <Text style={{ color: (this.props.selling===true||this.state.sel===true) ? "white" : "#303D74" }}>  판매완료  </Text>
                 </Button>
               </Segment> 
             </View>
