@@ -89,7 +89,7 @@ export default class BookTab extends React.Component{
                     <View style={styles.Imgborder}>
                         <Image style={styles.bookImage} source = {this.props.img}/>
                     </View>
-                    <View style={{justifyContent:'center'}}>
+                    <View style={{justifyContent:'center', marginLeft: 10, flex:0.9}}>
                         <Text style={{fontSize: 20, marginBottom:10}}>{this.props.bookName}</Text> 
                             <View style={styles.sell}>
                                 <View style={styles.inforName}>
@@ -157,8 +157,9 @@ const styles = StyleSheet.create({
         color: '#888',
     },
     Imgborder:{
-        //borderWidth:3,
-        //borderColor:'#303D74',
+        marginLeft: 15,
+        alignItems: 'flex-start',
+        flex: 0.6,
     },
     sell:{
         flexDirection:'row'
@@ -226,7 +227,6 @@ const styles = StyleSheet.create({
         fontSize:15
     },
     Message:{
-        
         backgroundColor: '#303D74',
         alignItems:'center',
         justifyContent: 'center',

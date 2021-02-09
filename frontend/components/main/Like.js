@@ -43,7 +43,7 @@ function Like(props) {
   const renderLikedItem = (item,index) => {
     return (
       <View style={{flexDirection:"row", borderBottomWidth:1, borderBottomColor:'lightgray',
-                    backgroundColor:item.selling===true?"#cfcfcf":'white',
+                    backgroundColor:item.selling===true?"#cfcfcf":'transparent',
                     opacity:item.selling===true?0.5:1,}}>
         <LikeBookItem
           title={item.title}
@@ -68,12 +68,13 @@ function Like(props) {
             onDislikePress(item.id);
             }}
           />
+        
           <Text onPress={() => {
               setPosts((prevItemState) =>
               prevItemState.filter((_item, _Index) => _Index !== index)
               );
             onDislikePress(item.id);
-            }}>{item.selling===true?'판매완료':''}</Text>
+            }}>{item.selling===true?'판매완료':''}</Text> 
         </View>
       </View>
     );

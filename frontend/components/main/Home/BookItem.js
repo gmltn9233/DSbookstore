@@ -84,7 +84,7 @@ const BookItem = ({
                         currentUserLike={currentUserLike}
                       />
                     <Image style={styles.bookImage} source={{ uri: img }} />
-                    <View style={{ width:180,  flexDirection:'column'}}>
+                    <View style={{ width:170,  flexDirection:'column'}}>
                         <Text style={styles.bookDescribeTitle}>{bookName}</Text>
                         <View style={styles.icontext}>
                             <View>
@@ -97,17 +97,19 @@ const BookItem = ({
                             </View>
                         </View>
                     </View>
-                    <View style={styles.button}>            
+                    <View alignItems='flex-end' flex={1} marginRight={3}>
+                        <View style={styles.button}>            
                             {currentUserLike ? (
-                                <Ionicons name ={selling===true?'':'heart'} color = {"#F15F5F"} size = {30} />
+                                <Ionicons name ={selling===true?'':'heart'} color = {"#F15F5F"} size = {30}/>
                                 ) : (
                                 <TouchableOpacity>
                                         <Ionicons name ={selling===true?'':'heart'} color = {'lightgray'} size = {30} onPress={() => onLikePress(postId)} />
                                 </TouchableOpacity>)
                             }
                             {
-                                selling===true?<Text>판매완료</Text>:<Text></Text>
+                                selling===true?<View style={styles.panmae}><Text>판매완료</Text></View>:<Text></Text>
                             }
+                        </View>
                     </View>
                 </TouchableOpacity>
            </View>
@@ -152,10 +154,19 @@ const styles = StyleSheet.create({
     button:{
         paddingRight:5,
         alignItems:'flex-end',
-        flex:0.9,
+        justifyContent:'center',
+        flex:1,
     },
     icontext:{
         flexDirection:'row',
+    },
+    panmae:{
+        backgroundColor: '#888',
+        borderRadius : 3,
+        width: 50,
+        height: 18,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });
 

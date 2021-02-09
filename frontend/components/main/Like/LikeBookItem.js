@@ -69,7 +69,7 @@ export default class BookItem extends React.Component {
         <TouchableOpacity style={{alignItems: "center",
                                   flexDirection: "row",
                                   paddingLeft: 10,
-                                  backgroundColor:this.props.selling===true?"#cfcfcf":'white',
+                                  backgroundColor:this.props.selling===true?'transparent':'transparent',
                                   opacity:this.props.selling===true?0.5:1,
                                 }}
           onPress={this.openModal.bind(this)}
@@ -89,7 +89,7 @@ export default class BookItem extends React.Component {
             currentUserLike={this.props.currentUserLike}
           />
           <Image style={styles.bookImage} source={this.props.img}/>
-          <View style={{ width:180,  flexDirection:'column'}}>
+          <View style={{ width:170,  flexDirection:'column'}}>
             <Text style={styles.bookDescribeTitle}>{this.props.title}</Text>
             <View style={styles.icontext}>
               <View>

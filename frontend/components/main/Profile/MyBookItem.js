@@ -112,11 +112,11 @@ export default class BookScreen extends React.Component {
             </View>
             <View style={styles.buttoncontent}>
               <Segment style={{backgroundColor:(this.props.selling===true||this.state.sel===true)? 'transparent':'white'}} >
-                <Button style={{backgroundColor: (this.props.selling===true||this.state.sel===true) ? "white" : '#303D74', borderColor: "#303D74"}}
+                <Button first
+                  style={{backgroundColor: (this.props.selling===true||this.state.sel===true) ? "white" : '#303D74', borderColor: "#303D74"}}
                   disabled={(this.props.selling===true||this.state.sel===true)? false:true}
-                  first
                   active={(this.props.selling===true||this.state.sel===true) ? true : false}>
-                  <Text style={{ color: (this.props.selling===true||this.state.sel===true) ? "#303D74" : "white" }}>  판매중  </Text>
+                  <Text style={{ color: (this.props.selling===true||this.state.sel===true) ? "#303D74" : "white"}}>  판매중  </Text>
                 </Button>
                 <Button last
                   style={{backgroundColor: (this.props.selling===true||this.state.sel===true) ? "#303D74" : 'white',borderColor: "#303D74"}}
@@ -147,6 +147,7 @@ const styles = StyleSheet.create({
   bookcontent: {
     margin: 15,
     flexDirection: "column",
+    flex: 1,
   },
   textcontent: {
     flex: 1,
@@ -163,7 +164,7 @@ const styles = StyleSheet.create({
   },
   bookDescribeTitle: {
     fontSize: 20,
-    marginBottom: 20,
+    marginBottom: 10,
   },
   bookDescribe: {
     marginLeft: 10,
