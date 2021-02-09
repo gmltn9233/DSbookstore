@@ -60,7 +60,7 @@ function Like(props) {
           selling={item.selling}
         />
         <View style={styles.button}>
-          <Ionicons name = 'heart' color = {"#F15F5F"} size = {30}
+          <Ionicons name = {item.selling===true?'':'heart'} color = {"#F15F5F"} size = {30}
             onPress={() => {
               setPosts((prevItemState) =>
               prevItemState.filter((_item, _Index) => _Index !== index)
@@ -68,6 +68,12 @@ function Like(props) {
             onDislikePress(item.id);
             }}
           />
+          <Text onPress={() => {
+              setPosts((prevItemState) =>
+              prevItemState.filter((_item, _Index) => _Index !== index)
+              );
+            onDislikePress(item.id);
+            }}>{item.selling===true?'판매완료':''}</Text>
         </View>
       </View>
     );

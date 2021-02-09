@@ -97,14 +97,17 @@ const BookItem = ({
                             </View>
                         </View>
                     </View>
-                    <View style={styles.button}>
+                    <View style={styles.button}>            
                             {currentUserLike ? (
-                                <Ionicons name = 'heart' color = {"#F15F5F"} size = {30} />
+                                <Ionicons name ={selling===true?'':'heart'} color = {"#F15F5F"} size = {30} />
                                 ) : (
                                 <TouchableOpacity>
-                                        <Ionicons name = 'heart' color = {'lightgray'} size = {30} onPress={() => onLikePress(postId)} />
-                                </TouchableOpacity>
-                            )}
+                                        <Ionicons name ={selling===true?'':'heart'} color = {'lightgray'} size = {30} onPress={() => onLikePress(postId)} />
+                                </TouchableOpacity>)
+                            }
+                            {
+                                selling===true?<Text>판매완료</Text>:<Text></Text>
+                            }
                     </View>
                 </TouchableOpacity>
            </View>
