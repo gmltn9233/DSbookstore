@@ -26,6 +26,7 @@ function Home(props) {
 
   const handleRefresh = () => {
     setrefreshing(refreshing == true);
+
   };
 
   useEffect(() => {

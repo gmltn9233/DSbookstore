@@ -42,7 +42,9 @@ function Like(props) {
   }
   const renderLikedItem = (item,index) => {
     return (
-      <View flexDirection="row" borderBottomWidth={1} borderBottomColor={'lightgray'}>
+      <View style={{flexDirection:"row", borderBottomWidth:1, borderBottomColor:'lightgray',
+                    backgroundColor:item.selling===true?"#cfcfcf":'white',
+                    opacity:item.selling===true?0.5:1,}}>
         <LikeBookItem
           title={item.title}
           lecture={item.lecture}
@@ -55,6 +57,7 @@ function Like(props) {
           id={item.id}
           category={item.category}
           currentUserLike={item.currentUserLike}
+          selling={item.selling}
         />
         <View style={styles.button}>
           <Ionicons name = 'heart' color = {"#F15F5F"} size = {30}

@@ -66,9 +66,14 @@ export default class BookItem extends React.Component {
   render() {
     return (
       <View>
-        <TouchableOpacity style={styles.ItemStyle}
+        <TouchableOpacity style={{alignItems: "center",
+                                  flexDirection: "row",
+                                  paddingLeft: 10,
+                                  backgroundColor:this.props.selling===true?"#cfcfcf":'white',
+                                  opacity:this.props.selling===true?0.5:1,
+                                }}
           onPress={this.openModal.bind(this)}
-          disabled={this.state.ds}>
+          disabled={this.props.selling===true?true:false}>
           <BookDetail
             visible={this.state.modalVisible}
             closeModal={this.closeModal.bind(this)}
