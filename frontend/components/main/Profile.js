@@ -38,7 +38,7 @@ function Profile(props) {
         await MailComposer.isAvailableAsync();
         console.log("help-outline");
         MailComposer.composeAsync({
-          recipients:['dskminj@naver.com'],
+          recipients:['martini19ds@gmail.com'],
           subject:'데사책방문의',
           body:'문의내용'
         });
