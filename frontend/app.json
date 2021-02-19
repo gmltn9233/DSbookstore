@@ -2,7 +2,7 @@
   "expo": {
     "name": "DSbookstore",
     "slug": "DSbookstore",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/appstore.png",
     "updates": {
@@ -21,10 +21,6 @@
     "android": {
       "package":"com.martini.DSbookstore",
       "versionCode":1,
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/playstore.png",
-        "backgroundColor": "#303D74"
-      }
     },
     "web": {
       "favicon": "./assets/favicon.png"

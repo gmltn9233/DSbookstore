@@ -141,8 +141,9 @@ function Add({ navigation, fetchUsersPosts, fetchUser,clearData }) {
 
             <TextInput
               style={styles.textForm}
-              placeholder={"도서명"}
+              placeholder={"도서명 (20자 이내)"}
               onChangeText={(title) => setTitle(title)}
+              maxLength={20}
             />
 
             <TextInput
@@ -153,8 +154,9 @@ function Add({ navigation, fetchUsersPosts, fetchUser,clearData }) {
 
             <TextInput
               style={styles.textForm}
-              placeholder={"과목명  or  키워드"}
+              placeholder={"과목명  or  키워드 (10자 이내)"}
               onChangeText={(lecture) => setLecture(lecture)}
+              maxLength={10}
             />
 
             <TextInput
