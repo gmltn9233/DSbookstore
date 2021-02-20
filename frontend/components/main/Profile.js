@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, View, Text, Image, FlatList, Alert, Linking,} from "react-native";
+import { StyleSheet, View, Text, Image, FlatList, Linking,} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import MyBookItem from "./Profile/MyBookItem";
-import * as MailComposer from 'expo-mail-composer';
 import {Header, Left, Body} from 'native-base'
 import firebase from 'firebase'
 require('firebase/firestore')
@@ -33,19 +32,6 @@ function Profile(props) {
        </View>
       )
     }
-    const getemail = async() => {
-      try{
-        await MailComposer.isAvailableAsync();
-        console.log("help-outline");
-        MailComposer.composeAsync({
-          recipients:['martini19ds@gmail.com'],
-          subject:'데사책방문의',
-          body:'문의내용'
-        });
-      }catch(error){
-        Alert.alert("mail 기능 사용 불가", "ㅠ-ㅠ");
-      }
-    };
 
     if (user === null) {
       return (
@@ -98,7 +84,7 @@ function Profile(props) {
                 publisher={item.publisher}
                 category={item.category}
                 bookCondition={item.damage}
-                date = {Date(item.creation.seconds*1000)}
+                date = {(new Date(item.creation.seconds*1000)).toString()}
                 selling={item.selling}
                 id={item.id}
                 userid={item.userId}
@@ -124,9 +110,9 @@ function Profile(props) {
           </View>
           <View style={styles.bottomitem}>
             <Ionicons name = 'help-outline'  size = {23} sytle={{alignItems: 'center'}}
-              onPress={()=>getemail()}/>
+              onPress={()=>Linking.openURL('http://pf.kakao.com/_TTjxcK/chat')}/>
             <Text style={{fontSize: 13}, {alignItems: 'center'}}
-              onPress={()=>getemail()}>Q&A</Text>
+              onPress={()=>Linking.openURL('http://pf.kakao.com/_TTjxcK/chat')}>Q&A</Text>
           </View>
         </View>
       </View>
@@ -181,7 +167,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   back: {
-    //backgroundColor:'white',
     justifyContent: "center",
     alignItems: "center",
     height: 300,

@@ -29,6 +29,7 @@ const BookEdit = ({
     const [any, setany] = useState(false);
 
     const onSubmit = async() => {
+        setany(true);
          await dbFirebase.collection('posts').doc(postId).update({
              title:title,
              category:category,
@@ -39,10 +40,9 @@ const BookEdit = ({
              phoneNumber:phoneNumber,
       
          });
-        Alert.alert("수정되었습니다", "변경까지 약간의 시간이 소요됩니다.");
-        setany(true);
         closeModal();
         setany(false);
+        Alert.alert("수정되었습니다", "변경까지 약간의 시간이 소요됩니다.");
     }
     
 
@@ -117,7 +117,13 @@ const BookEdit = ({
                     value={phoneNumber}
                     />
                 </View>
-                <ActivityIndicator style={styles.button} size="large"  color="#d1d6e9" animating={any}/>
+                <ActivityIndicator
+                  style={styles.button}
+                  size="large"
+                  color="#d1d6e9"
+                  animating={false}
+                />
+                {any? <ActivityIndicator style={styles.button} size="large"  color="#d1d6e9" animating={any}/>:
                 <View style={styles.buttonclick}>
                     <Button
                         title="  등록  "
@@ -125,7 +131,7 @@ const BookEdit = ({
                         size="100"
                         onPress={onSubmit}
                     />
-                </View>
+                </View>}
                 </View>
             </ScrollView>
             </View>
