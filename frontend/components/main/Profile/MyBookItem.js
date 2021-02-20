@@ -77,6 +77,7 @@ export default class BookScreen extends React.Component {
           <View>
             <BookDetail
               uid = {this.props.uid}
+              postId = {this.props.id}
               visible={this.state.modalVisible}
               closeModal={this.closeModal.bind(this)}
               bookName={this.props.name}

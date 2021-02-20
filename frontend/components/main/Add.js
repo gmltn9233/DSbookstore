@@ -41,6 +41,7 @@ function Add({ navigation, fetchUsersPosts, fetchUser,clearData }) {
       image === null
     ) {
       Alert.alert("기입하지 않은 정보가 있습니다.");
+      setany(false);
       return;
     } else {
       uploadImage();
@@ -76,7 +77,7 @@ function Add({ navigation, fetchUsersPosts, fetchUser,clearData }) {
     const response = await fetch(uri);
     const blob = await response.blob();
     const task = firebase.storage().ref().child(childPath).put(blob);
-
+    
     const taskProgress = (snapshot) => {
       //console.log(`transferred: ${snapshot.bytesTransferred}`)
     };
@@ -118,7 +119,7 @@ function Add({ navigation, fetchUsersPosts, fetchUser,clearData }) {
       .then(alertDone());
   };
   if (hasGalleryPermission === false) {
-    return <Text>No access to Gallery</Text>;
+    return <Text>갤러리 권환이 필요합니다</Text>;
   }
 
   return (
@@ -141,8 +142,9 @@ function Add({ navigation, fetchUsersPosts, fetchUser,clearData }) {
 
             <TextInput
               style={styles.textForm}
-              placeholder={"도서명"}
+              placeholder={"도서명 (20자 이내)"}
               onChangeText={(title) => setTitle(title)}
+              maxLength={20}
             />
 
             <TextInput
@@ -153,8 +155,9 @@ function Add({ navigation, fetchUsersPosts, fetchUser,clearData }) {
 
             <TextInput
               style={styles.textForm}
-              placeholder={"과목명  or  키워드"}
+              placeholder={"과목명  or  키워드 (10자 이내)"}
               onChangeText={(lecture) => setLecture(lecture)}
+              maxLength={10}
             />
 
             <TextInput
@@ -190,13 +193,19 @@ function Add({ navigation, fetchUsersPosts, fetchUser,clearData }) {
           </View>
           <Text style={{ color: "#a8a8a8"}}>
             주의 : 부적절한 게시글의 경우 삭제 될 수 있습니다.
-          </Text>
+          </Text><ActivityIndicator
+            style={styles.button}
+            size="large"
+            color="#d1d6e9"
+            animating={false}
+          />
+          {any?
           <ActivityIndicator
             style={styles.button}
             size="large"
             color="#d1d6e9"
             animating={any}
-          />
+          />:
           <View style={styles.buttonclick}>
             <Button
               title="  등록  "
@@ -204,7 +213,7 @@ function Add({ navigation, fetchUsersPosts, fetchUser,clearData }) {
               color="#303D74"
               size="100"
             />
-          </View>
+          </View>}
         </View>
       </ScrollView>
     </View>

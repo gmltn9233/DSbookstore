@@ -68,7 +68,7 @@ function Home(props) {
           <Ionicons name="search-outline" style={{ marginLeft: 10 }} />
           <Input
             style={{ marginLeft: 3 }}
-            placeholder="검색"
+            placeholder="책 이름 or 과목명 검색"
             value={text}
             onChangeText={(text) => setText(text)}
           />
@@ -88,7 +88,7 @@ function Home(props) {
               price = {item.price}
               publisher = {item.publisher}
               bookCondition = {item.damage}
-              date = {Date(item.creation.seconds*1000)}
+              date = {(new Date(item.creation.seconds*1000)).toString()}
               img = {item.downloadURL}
               phone = {item.phoneNumber}
               category = {item.category}
