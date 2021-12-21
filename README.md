@@ -10,9 +10,11 @@
 - 서비스 기간: 21년 4월 ~ 21년 10월 (현재 종료됨) 
 
 <p float="left">
-  <img src = "https://github.com/yeseoLee/DSbookstore/blob/main/Screenshots/appstore.png?raw=true" width="20%" height="20%">
   <img src = "https://github.com/yeseoLee/DSbookstore/blob/main/Screenshots/login.jpeg?raw=true" width="20%" height="20%">
   <img src = "https://github.com/yeseoLee/DSbookstore/blob/main/Screenshots/home.jpeg?raw=true" width="20%" height="20%">
   <img src = "https://github.com/yeseoLee/DSbookstore/blob/main/Screenshots/bookdetail.jpeg?raw=true" width="20%" height="20%">
+</p>
+<p float="left">
+  <img src = "https://github.com/yeseoLee/DSbookstore/blob/main/Screenshots/appstore.png?raw=true" width="20%" height="20%">
   <img src = "https://github.com/yeseoLee/DSbookstore/blob/main/Screenshots/profile.jpeg?raw=true" width="20%" height="20%">
 </p>
