@@ -10,9 +10,9 @@
 - 서비스 기간: 21년 4월 ~ 21년 10월 (현재 종료됨) 
 
 <p float="left">
-  <img src = "https://github.com/yeseoLee/DSbookstore/blob/main/Screenshots/appstore.png?raw=true" width="15%" height="15%">
-  <img src = "https://github.com/yeseoLee/DSbookstore/blob/main/Screenshots/login.png?raw=true" width="15%" height="15%">
-  <img src = "https://github.com/yeseoLee/DSbookstore/blob/main/Screenshots/home.png?raw=true" width="15%" height="15%">
-  <img src = "https://github.com/yeseoLee/DSbookstore/blob/main/Screenshots/bookdetail.png?raw=true" width="15%" height="15%">
-  <img src = "https://github.com/yeseoLee/DSbookstore/blob/main/Screenshots/profile.png?raw=true" width="15%" height="15%">
+  <img src = "https://github.com/yeseoLee/DSbookstore/blob/main/Screenshots/appstore.png?raw=true" width="30%" height="30%">
+  <img src = "https://github.com/yeseoLee/DSbookstore/blob/main/Screenshots/login.jpeg?raw=true" width="30%" height="30%">
+  <img src = "https://github.com/yeseoLee/DSbookstore/blob/main/Screenshots/home.jpeg?raw=true" width="30%" height="30%">
+  <img src = "https://github.com/yeseoLee/DSbookstore/blob/main/Screenshots/bookdetail.jpeg?raw=true" width="30%" height="30%">
+  <img src = "https://github.com/yeseoLee/DSbookstore/blob/main/Screenshots/profile.jpeg?raw=true" width="30%" height="30%">
 </p>
