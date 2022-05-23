@@ -19,6 +19,7 @@
 - 컴포넌트 분리, 상태관리 등 리엑트(네이티브) 핵심개념 적용
 - 좀 더 근거있는 의사결정 (기획단계와 어떤 기술을 적용할 것인지 뿐 아니라 구현단계에서도)
 
+
 <p float="left">
   <img src = "https://github.com/yeseoLee/DSbookstore/blob/main/Screenshots/appstore.png?raw=true" width="20%" height="20%">
   <img src = "https://github.com/yeseoLee/DSbookstore/blob/main/Screenshots/login.jpeg?raw=true" width="20%" height="20%">
